@@ -52,6 +52,8 @@ define(['model/purchaseModel'], function(purchaseModel) {
             }
         },
         create: function() {
+            console.log('Before Search: ');
+            
             if (App.Utils.eventExists(this.componentId + '-' +'instead-purchase-create')) {
                 Backbone.trigger(this.componentId + '-' + 'instead-purchase-create', {view: this});
             } else {
@@ -59,33 +61,6 @@ define(['model/purchaseModel'], function(purchaseModel) {
                 this.currentModel = new this.modelClass({componentId: this.componentId});
                 this._renderEdit();
                 Backbone.trigger(this.componentId + '-' + 'post-purchase-create', {view: this});
-            }
-        },
-        list: function(params,callback,context) {
-            if (params) {
-                var data = params.data;
-            }
-            if (App.Utils.eventExists(this.componentId + '-' +'instead-purchase-list')) {
-                Backbone.trigger(this.componentId + '-' + 'instead-purchase-list', {view: this, data: data});
-            } else {
-                Backbone.trigger(this.componentId + '-' + 'pre-purchase-list', {view: this, data: data});
-                var self = this;
-				if(!this.currentList){
-	                this.currentList = new this.listModelClass();
-	                if (this.pageSize) {
-						this.currentList.setPageSize(this.pageSize);
-					}
-				}
-                this.currentList.fetch({
-                    data: data,
-                    success: function(resp) {
-                        callback.call(context,{data: self.currentList, page: resp.state.currentPage, pages: resp.state.totalPages, totalRecords: resp.state.totalRecords});
-                        Backbone.trigger(self.componentId + '-' + 'post-purchase-list', {view: self});
-                    },
-                    error: function(mode, error) {
-                        Backbone.trigger(self.componentId + '-' + 'error', {event: 'purchase-list', view: self, error: error});
-                    }
-                });
             }
         },
         edit: function(params) {
@@ -192,8 +167,8 @@ define(['model/purchaseModel'], function(purchaseModel) {
 				}));
                 self.$el.slideDown("fast");
             });
-        },
-		setPage: function(page){
+        },        
+	setPage: function(page){
 		    this.currentList.state.currentPage = page;
 		},
         setPageSize: function(pageSize){

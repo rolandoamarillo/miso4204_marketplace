@@ -38,7 +38,13 @@ define(['model/_shoppingCartItemModel'], function() {
             if(validationMessage.length>0){
                return validationMessage;
             }
-        }
+        },
+        defaults: {
+                 'image' : '',
+		 'quantity' : '' ,  
+		 'unitPrice' : '' ,  
+		 'name' : '' ,  
+		 'productshoppingcartitemId' : ''        }
 
     });
 

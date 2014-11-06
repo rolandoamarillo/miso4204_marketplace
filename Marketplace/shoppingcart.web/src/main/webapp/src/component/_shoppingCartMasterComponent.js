@@ -52,10 +52,12 @@ define(['controller/selectionController', 'model/cacheModel', 'model/shoppingCar
                         Backbone.trigger(self.componentId + '-' + 'error', {event: 'shoppingCart-master-save', view: self, error: error});
                     }
                 });
-			    if (this.postInit) {
-					this.postInit();
-				}
+			    
+                            
             });
+            if (this.postInit) {
+		this.postInit();
+            }
         },
         render: function(domElementId){
 			if (domElementId) {

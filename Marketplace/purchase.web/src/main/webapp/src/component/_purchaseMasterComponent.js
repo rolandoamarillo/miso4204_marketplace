@@ -14,7 +14,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/purchaseMas
             
             this.childComponents = [];
 			
-			this.initializeChildComponents();
+	    this.initializeChildComponents();
             
             Backbone.on(this.masterComponent.componentId + '-post-purchase-create', function(params) {
                 self.renderChilds(params);
