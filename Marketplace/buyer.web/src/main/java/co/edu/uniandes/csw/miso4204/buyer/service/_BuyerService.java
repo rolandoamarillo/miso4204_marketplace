@@ -45,11 +45,16 @@ import co.edu.uniandes.csw.miso4204.buyer.logic.api.IBuyerLogicService;
 import co.edu.uniandes.csw.miso4204.buyer.logic.dto.BuyerDTO;
 import co.edu.uniandes.csw.miso4204.buyer.logic.dto.BuyerPageDTO;
 
+import co.edu.uniandes.csw.miso4204.buyer.master.logic.api.IBuyerMasterLogicService;
+import co.edu.uniandes.csw.miso4204.buyer.master.logic.dto.BuyerMasterDTO;
 
 public abstract class _BuyerService {
 
 	@Inject
 	protected IBuyerLogicService buyerLogicService;
+        
+        @Inject
+        protected IBuyerMasterLogicService buyerMasterLogicService;
 	
 	@POST
 	public BuyerDTO createBuyer(BuyerDTO buyer){
@@ -71,6 +76,12 @@ public abstract class _BuyerService {
 	@Path("{id}")
 	public BuyerDTO getBuyer(@PathParam("id") Long id){
 		return buyerLogicService.getBuyer(id);
+	}
+        
+        @GET
+	@Path("{id}/{address}")
+	public BuyerMasterDTO getMasterBuyer(@PathParam("id") Long id, @PathParam("address") String address){
+		return buyerMasterLogicService.getMasterBuyer(id);
 	}
 	
 	@PUT
