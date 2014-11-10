@@ -1,0 +1,24 @@
+.breadcrumb{
+    margin: 10px 0 10px 0;    
+}
+
+.twoColumns>div{
+    display: inline-block;
+    width: 45%;
+    margin: 0 2.5% 0 0;
+    border: solid 1px #000;
+    border-radius: 15px;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.twoColumns>div .title{
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.twoColumns>div:last-child{
+    float: right;
+    margin-right: 0 !important;
+}

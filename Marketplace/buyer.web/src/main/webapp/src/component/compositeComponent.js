@@ -22,7 +22,7 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             this.buyerComponent.addGlobalAction({
                 name: 'Windows',
                 icon: 'glyphicon-user',
-                displayName: 'Windows_1',
+                displayName: 'Windows',
                 show: true,
                 menu: 'utils'
             },
@@ -52,7 +52,7 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
         windows: function() {       
                   
             hello.init({ 
-                'windows' : '00000000401357CD'          
+                'windows' : '00000000401357CD'                
             },
             {
                scope : 'email',
@@ -62,13 +62,15 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
 	
 	 //call user information, for the given network
 	 hello('windows').login().then(function(){
+             //alert("You are signed in to Windows");
                 hello('windows').api('/me').then(function(response){       
                     $("#username").val(response.email);
                     $("#email").val(response.email);
-                    $("#name").val(response.name);
+                    $("#name").val(response.email);
                     $("#firstName").val(response.first_name);
                     $("#lastName").val(response.last_name);
                     $("#gender").val(response.gender);
+                     //alert(response.email+", "+response.first_name+", "+response.last_name+", "+response.gender);
                 });
             }, function(e){
                 alert("Error al Autenticar: " + e.error.message);

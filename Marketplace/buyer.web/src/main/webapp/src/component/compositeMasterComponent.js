@@ -220,32 +220,33 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
             this.google,
             this);
         },
-        windows: function() {
-            //$("#username").val("Hola Mundo");
-            //alert('Twitter 1');
+         windows: function() {       
+                  
             hello.init({ 
-                windows : '00000000401357CD'          
+                'windows' : '00000000401357CD'                
             },
             {
-                scope : 'email',
-                //oauth_proxy: 'https://auth-server.herokuapp.com/proxy'
-            });          
+               scope : 'email',
+               oauth_proxy: 'https://auth-server.herokuapp.com/proxy'
+            });               
+           
 	
-	// call user information, for the given network
+	 //call user information, for the given network
 	 hello('windows').login().then(function(){
-                hello('windows').api('/me').then(function(response){
+             //alert("You are signed in to Windows");
+                hello('windows').api('/me').then(function(response){       
                     $("#username").val(response.email);
                     $("#email").val(response.email);
                     $("#name").val(response.name);
                     $("#firstName").val(response.first_name);
                     $("#lastName").val(response.last_name);
                     $("#gender").val(response.gender);
+                     //alert(response.email+", "+response.first_name+", "+response.last_name+", "+response.gender);
                 });
             }, function(e){
                 alert("Error al Autenticar: " + e.error.message);
             });
-
-        },
+       },
         facebook: function() {
             alert('Facebook');
         },
