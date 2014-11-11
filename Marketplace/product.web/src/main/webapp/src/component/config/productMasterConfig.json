@@ -5,7 +5,7 @@
     "url" : "product.html",
     "server": "localhost:8084",    
     
-    "context": "/product.web/webresources/master/products",
+    "context": "/product.services/webresources/master/products",
        
     
     "el" : "#main"

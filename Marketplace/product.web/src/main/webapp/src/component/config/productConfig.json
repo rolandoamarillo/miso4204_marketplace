@@ -4,7 +4,7 @@
     "templateName" : "product",
     "url" : "user.html",
     "server": "localhost:8084",
-	"context": "/product.web/webresources/products",
+	"context": "/product.services/webresources/products",
       
     "el" : "#main"
 }
