@@ -6,7 +6,7 @@
     "server": "localhost:8080",
     "server": "localhost:8080",
     
-    "context": "/purchase.web/webresources/master/purchases",
+    "context": "/purchase.services/webresources/master/purchases",
        
     
     "el" : "#main"
