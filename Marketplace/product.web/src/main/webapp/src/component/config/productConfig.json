@@ -3,7 +3,7 @@
     "name" : "product",
     "templateName" : "product",
     "url" : "user.html",
-    "server": "localhost:8080",
+    "server": "localhost:8084",
 	"context": "/product.web/webresources/products",
       
     "el" : "#main"
