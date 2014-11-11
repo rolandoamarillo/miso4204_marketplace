@@ -8,6 +8,5 @@
     
     "context": "/shoppingcart.web/webresources/master/shopping_carts",
        
-    
     "el" : "#main"
 }

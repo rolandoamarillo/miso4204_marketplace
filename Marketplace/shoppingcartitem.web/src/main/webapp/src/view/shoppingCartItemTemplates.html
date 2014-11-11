@@ -8,7 +8,7 @@
 		<label for="quantity">Quantity</label>
     	<input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter value" value="<%= shoppingCartItem.get('quantity') %>"/>	
 		</div>
-		<!--<div class="form-group" >
+		<div class="form-group" >
 		<label for="unitPrice">Unit Price</label>
     	<input type="text" class="form-control" id="unitPrice" name="unitPrice" placeholder="Enter value" value="<%= shoppingCartItem.get('unitPrice') %>"/>	
 		</div>
@@ -18,9 +18,9 @@
 		</div>
 		<div class="form-group" >
  
-			<label for="productshoppingcartitemidId">Productshoppingcartitem Id</label>
+			<label for="productshoppingcartitemidId">Productshoppingcartitem Id</label> 
             <select class="form-control" id="productshoppingcartitemId" name="productshoppingcartitemId">
-			  <option value="">None</option>-->
+			  <option value="">None</option>
             <% productShoppingCartItem.each(function(productshoppingcartitemid) { %> 
               <option value="<%=productshoppingcartitemid.get('id')%>" <% if(shoppingCartItem.get('productshoppingcartitemId')==productshoppingcartitemid.get('id')) {%>selected<%}%> ><%=productshoppingcartitemid.get('name')%></option>
             <% }); %>                
