@@ -32,11 +32,11 @@ define(['component/_rewardComponent'], function() {
             this.toolbarComponent.addButton({
                  name: 'alert',
                  icon: 'glyphicon-certificate',
-                displayName: 'Acumular Puntos',
+                displayName: 'Get a reward',
                 show: true,
                 menu: 'utils'
             },
-            function(){alert("Se han acumulado los XXX puntos");},
+            function(){alert("You have got XXX points!!!");},
             this);
 			
         }
