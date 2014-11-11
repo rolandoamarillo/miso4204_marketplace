@@ -77,7 +77,25 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             });
        },
         facebook: function() {
-            alert('Facebook');
+            hello.init({
+                'facebook' : '597983760329002'
+            },
+            {
+                scope : 'email',
+                oauth_proxy: 'https://auth-server.herokuapp.com/proxy'
+            });
+            hello('facebook').login().then(function(){
+                hello('facebook').api('/me').then(function(response){
+                    $("#username").val(response.email);
+                    $("#email").val(response.email);
+                    $("#name").val(response.name);
+                    $("#firstName").val(response.first_name);
+                    $("#lastName").val(response.last_name);
+                    $("#gender").val(response.gender);
+                });
+            }, function(e){
+                alert("Error al Autenticar: " + e.error.message);
+            });
         },
         google: function() {
             hello.init({

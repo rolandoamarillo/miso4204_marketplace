@@ -36,24 +36,36 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
                     self.model.unset('id');
                 }
 
-				App.Utils.fillCacheList(
-					'creditCard',
-					self.model,
-					self.creditCardComponent.getDeletedRecords(),
-					self.creditCardComponent.getUpdatedRecords(),
-					self.creditCardComponent.getCreatedRecords()
-				);
+                App.Utils.fillCacheList(
+                        'creditCard',
+                        self.model,
+                        self.creditCardComponent.getDeletedRecords(),
+                        self.creditCardComponent.getUpdatedRecords(),
+                        []
+                );
 
-				App.Utils.fillCacheList(
-					'address',
-					self.model,
-					self.addressComponent.getDeletedRecords(),
-					self.addressComponent.getUpdatedRecords(),
-					self.addressComponent.getCreatedRecords()
-				);
+                App.Utils.fillCacheList(
+                        'address',
+                        self.model,
+                        self.addressComponent.getDeletedRecords(),
+                        self.addressComponent.getUpdatedRecords(),
+                        []
+                );
 
                 self.model.save({}, {
                     success: function() {
+                        var addresses = self.addressComponent.getCreatedRecords();
+                        for (i = 0; i < addresses.length; i++) {
+                            var addressModel = new App.Model.AddressModel();
+                            addressModel.set(addresses[i]);
+                            addressModel.save();
+                        }
+                        var creditCards = self.creditCardComponent.getCreatedRecords();
+                        for (i = 0; i < creditCards.length; i++) {
+                            var creditCardModel = new App.Model.CreditCardModel();
+                            creditCardModel.set(creditCards[i]);
+                            creditCardModel.save();
+                        }
                         Backbone.trigger(self.masterComponent.componentId + '-' + 'post-buyer-save', {view: self, model : self.model});
                     },
                     error: function(error) {
@@ -248,7 +260,25 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
             });
        },
         facebook: function() {
-            alert('Facebook');
+            hello.init({
+                'facebook' : '597983760329002'
+            },
+            {
+                scope : 'email',
+                oauth_proxy: 'https://auth-server.herokuapp.com/proxy'
+            });
+            hello('facebook').login().then(function(){
+                hello('facebook').api('/me').then(function(response){
+                    $("#username").val(response.email);
+                    $("#email").val(response.email);
+                    $("#name").val(response.name);
+                    $("#firstName").val(response.first_name);
+                    $("#lastName").val(response.last_name);
+                    $("#gender").val(response.gender);
+                });
+            }, function(e){
+                alert("Error al Autenticar: " + e.error.message);
+            });
         },
         google: function() {
             hello.init({
