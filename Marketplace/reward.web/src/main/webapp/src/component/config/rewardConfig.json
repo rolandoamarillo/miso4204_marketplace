@@ -5,7 +5,7 @@
     "url" : "user.html",
     "server": "localhost:8080",
     
-	"context": "/marketplacespl.web/webresources/rewards",
+	"context": "/marketplacespl.services/webresources/rewards",
     
     "el" : "#main"
 }
