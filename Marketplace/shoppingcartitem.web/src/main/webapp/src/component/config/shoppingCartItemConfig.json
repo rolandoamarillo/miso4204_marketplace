@@ -4,7 +4,7 @@
     "templateName" : "shoppingCartItem",
     "url" : "user.html",
     "server": "localhost:8080",
-	"context": "/shoppingcartitem.web/webresources/shopping_cart_items",
+	"context": "/shoppingcartitem.services/webresources/shopping_cart_items",
       
     "el" : "#main"
 }
