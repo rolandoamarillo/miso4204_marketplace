@@ -89,7 +89,7 @@ define(['model/buyerModel', 'delegate/buyerDelegate'], function(buyerModel) {
                 });
             }
         },
-        edit: function(params) {
+        editOLD: function(params) {
             var id = params.id;
             var data = params.data;
             if (App.Utils.eventExists(this.componentId + '-' +'instead-buyer-edit')) {
@@ -108,7 +108,7 @@ define(['model/buyerModel', 'delegate/buyerDelegate'], function(buyerModel) {
                 });
             }
         },
-        editOLD: function(params) {
+        edit: function(params) {
             var id = params.id;
             var data = params.data;
             if (App.Utils.eventExists(this.componentId + '-' +'instead-buyer-edit')) {
