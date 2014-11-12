@@ -62,23 +62,6 @@
             <artifactId>guava</artifactId>
             <version>17.0</version>
         </dependency>
-        <dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>shoppingcart.service.subsystem</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-		<dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>buyer.web</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-		<dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>shoppingcartitem.web</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
+       
     </dependencies> 
 </project>

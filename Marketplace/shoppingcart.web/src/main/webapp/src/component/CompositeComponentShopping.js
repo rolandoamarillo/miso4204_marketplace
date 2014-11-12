@@ -1,5 +1,5 @@
 define(['component/shoppingCartMasterComponent', 'component/productComponent'], function (ShoppingCartMasterComponent, cartCp) {
-    App.Component.CompositeComponent = App.Component.BasicComponent.extend({
+    App.Component.CompositeComponentShopping = App.Component.BasicComponent.extend({
         initialize: function () {
             this.componentId = App.Utils.randomInteger();
             this.name = "MarketPlace";
@@ -100,5 +100,5 @@ define(['component/shoppingCartMasterComponent', 'component/productComponent'], 
             }
         }
     });
-    return App.Component.CompositeComponent;
+    return App.Component.CompositeComponentShopping;
 });
