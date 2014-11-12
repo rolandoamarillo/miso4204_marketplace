@@ -4,7 +4,7 @@
     "templateName" : "bonus",
     "url" : "user.html",
     "server": "localhost:8080",
-	"context": "/bonus.web/webresources/bonuss",
+	"context": "/bonus.services/webresources/bonuss",
       
     "el" : "#main"
 }
