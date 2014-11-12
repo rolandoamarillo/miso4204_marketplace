@@ -4,7 +4,7 @@
     "templateName" : "score",
     "url" : "user.html",
     "server": "localhost:8080",
-	"context": "/score.web/webresources/scores",
+	"context": "/score.services/webresources/scores",
       
     "el" : "#main"
 }
