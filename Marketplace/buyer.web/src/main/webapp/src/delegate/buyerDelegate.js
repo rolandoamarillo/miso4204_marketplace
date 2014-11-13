@@ -33,6 +33,15 @@ define(['delegate/_buyerDelegate'], function() {
             $.get("/buyer.web/webresources/buyers/" + id + "/address", function(data) {
                 callback(data);
             });
+         },
+        searchPurchases: function(id, callback) {
+            var data = {};
+            data.nombre = 'David';
+            data.producto = 'Eso';
+            callback(data);
+            /*$.get("/buyer.services/webresources/buyers/" + id + "/purchases", function(data) {
+                callback(data);
+            });*/
          }
     });
 });

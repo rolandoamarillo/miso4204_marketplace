@@ -11,6 +11,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
             
             this.masterComponent = new BuyerComponent();
             this.masterComponent.initialize();
+            this.delegate = new App.Delegate.BuyerDelegate();
             
             this.childComponents = [];
 			
@@ -190,35 +191,39 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
 			}
 		},
                 setupBuyerComponent: function() {
-            this.masterComponent.addGlobalAction({
-                name: 'Windows',
-                icon: 'glyphicon-user',
-                displayName: 'Windows',
-                show: true,
-                menu: 'utils'
-            },
-            this.windows,
-            this);
-            
-            this.masterComponent.addGlobalAction({
-                name: 'Facebook',
-                icon: 'glyphicon-user',
-                displayName: 'Facebook',
-                show: true,
-                menu: 'utils'
-            },
-            this.facebook,
-            this);
-            
-            this.masterComponent.addGlobalAction({
-                name: 'Google',
-                icon: 'glyphicon-user',
-                displayName: 'Google',
-                show: true,
-                menu: 'utils'
-            },
-            this.google,
-            this);
+                    var self = this;
+                    Backbone.on('buyerForm-getPurchases', function(params) {
+                        self.compras(params);
+                    });
+                    this.masterComponent.addGlobalAction({
+                        name: 'Windows',
+                        icon: 'glyphicon-user',
+                        displayName: 'Windows',
+                        show: true,
+                        menu: 'utils'
+                    },
+                    this.windows,
+                    this);
+
+                    this.masterComponent.addGlobalAction({
+                        name: 'Facebook',
+                        icon: 'glyphicon-user',
+                        displayName: 'Facebook',
+                        show: true,
+                        menu: 'utils'
+                    },
+                    this.facebook,
+                    this);
+
+                    this.masterComponent.addGlobalAction({
+                        name: 'Google',
+                        icon: 'glyphicon-user',
+                        displayName: 'Google',
+                        show: true,
+                        menu: 'utils'
+                    },
+                    this.google,
+                    this);
         },
          windows: function() {       
                   
@@ -287,6 +292,11 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
                 });
             }, function(e){
                 alert("Error al Autenticar: " + e.error.message);
+            });
+        },
+        compras: function(params) {
+            this.delegate.searchPurchases(params.id, function(data) {
+                alert('Compras del Usuario: ' + data.nombre + ' - ' + data.producto);
             });
         }
     });

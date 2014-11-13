@@ -6,6 +6,7 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             this.name = "BuyerIntegration";
             this.buyerComponent = new BuyerComponent();
             this.buyerComponent.initialize();
+            this.delegate = new App.Delegate.BuyerDelegate();
             this.setupBuyerComponent();
         },
         render: function(domElementId){
@@ -19,6 +20,11 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             this.buyerComponent.render(this.buyerElement);
         },
         setupBuyerComponent: function() {
+            var self = this;
+            Backbone.on('buyerForm-getPurchases', function(params) {
+                self.compras(params);
+            });
+            
             this.buyerComponent.addGlobalAction({
                 name: 'Windows',
                 icon: 'glyphicon-user',
@@ -116,6 +122,11 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
                 });
             }, function(e){
                 alert("Error al Autenticar: " + e.error.message);
+            });
+        },
+        compras: function(params) {
+            this.delegate.searchPurchases(params.id, function(data) {
+                alert('Compras del Usuario: ' + data.nombre + ' - ' + data.producto);
             });
         }
     });
