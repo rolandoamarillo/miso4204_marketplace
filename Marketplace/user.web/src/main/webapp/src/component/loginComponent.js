@@ -10,8 +10,13 @@ $(document).ready(function(){
    $("#btn-login").click(function(evento){
 	var username = document.getElementById("login-username").value;
 	var pass = document.getElementById("login-password").value;
-	var remeberMe = document.getElementById("login-remember").value;
-	var json = {userName: username, password: pass, remeberMe: remeberMe};
+	var rememberMe = document.getElementById("login-remember").value;
+	if (rememberMe === "on"){
+		rememberMe = "true";
+	}else{
+		rememberMe = "false";
+	}
+	var json = {userName: username, password: pass, rememberMe: rememberMe};
     $.ajax({
                 type: "POST",
                 url: "http://localhost:8084/user.services/webresources/auth/login",
