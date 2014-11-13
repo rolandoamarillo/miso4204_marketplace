@@ -3,8 +3,7 @@
     "name" : "bonus",
     "templateName" : "bonus",
     "url" : "user.html",
-    "server": "localhost:8080",
+    "server": "localhost:8084",
 	"context": "/bonus.services/webresources/bonuss",
-      
     "el" : "#main"
 }
