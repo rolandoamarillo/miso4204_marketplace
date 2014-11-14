@@ -34,11 +34,11 @@ define(['component/_CRUDComponent', 'model/bonusModel', 'controller/bonusControl
         configUI: function(){
         	this.listComponent.addColumn('name','Name');
         	this.listComponent.addColumn('description','Description');
-        	this.listComponent.addColumn('value','Value');
-        	this.listComponent.addColumn('status','Status');
+        	this.listComponent.addColumn('value','%');
+        	//this.listComponent.addColumn('status','Status');
         	this.listComponent.addColumn('date','Date');
         	this.listComponent.addColumn('expiration','Expiration');
-        	this.listComponent.addColumn('buyerId','Buyer Id');
+        	//this.listComponent.addColumn('buyerId','Buyer Id');
         }
     });
     return App.Component._BonusComponent;

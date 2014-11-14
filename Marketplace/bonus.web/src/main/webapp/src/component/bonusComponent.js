@@ -28,7 +28,9 @@
 define(['component/_bonusComponent'], function() {
     App.Component.BonusComponent = App.Component._BonusComponent.extend({
         postInit: function(){
-			
+			this.toolbarComponent.removeButton("refresh");
+                        this.toolbarComponent.removeButton("print");
+                        this.toolbarComponent.removeButton("search");
         }
     });
     return App.Component.BonusComponent;

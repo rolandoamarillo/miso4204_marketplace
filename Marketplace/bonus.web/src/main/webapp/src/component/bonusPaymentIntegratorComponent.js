@@ -16,8 +16,8 @@ define(['component/bonusComponent', 'component/paymentComponent'], function(bonu
         render: function(domElementId) {
 			if (domElementId) {
 				var rootElement = $("#"+domElementId)
-                                rootElement.append("<div id='main1' class='col-md-8'></div>");
-				rootElement.append("<div id='bonus' class='col-md-4'></div>");
+                                rootElement.append("<div id='main1' class='col-md-6'></div>");
+				rootElement.append("<div id='bonus' class='col-md-6'></div>");
 
 				this.paymentComponent.render("main1");
                                 this.bonusComponent.render("bonus");
