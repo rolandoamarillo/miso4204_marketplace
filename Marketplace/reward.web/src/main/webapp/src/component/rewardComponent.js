@@ -28,16 +28,6 @@
 define(['component/_rewardComponent'], function() {
     App.Component.RewardComponent = App.Component._RewardComponent.extend({
         postInit: function(){
-            this.toolbarComponent.removeButton("create");  
-            this.toolbarComponent.addButton({
-                 name: 'alert',
-                 icon: 'glyphicon-certificate',
-                displayName: 'Get a reward',
-                show: true,
-                menu: 'utils'
-            },
-            function(){alert("You have got XXX points!!!");},
-            this);
 			
         }
     });
