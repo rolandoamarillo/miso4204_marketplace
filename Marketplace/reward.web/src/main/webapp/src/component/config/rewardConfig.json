@@ -3,9 +3,9 @@
     "name" : "reward",
     "templateName" : "reward",
     "url" : "user.html",
-    "server": "localhost:8080",
+    "server": "localhost:8084",
     
-	"context": "/marketplacespl.services/webresources/rewards",
+	"context": "/reward.services/webresources/rewards",
     
     "el" : "#main"
 }
