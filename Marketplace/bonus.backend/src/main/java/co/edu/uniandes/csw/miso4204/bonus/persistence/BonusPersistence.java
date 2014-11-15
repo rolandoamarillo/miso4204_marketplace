@@ -50,13 +50,8 @@ public class BonusPersistence extends _BonusPersistence{
 		Query count = entityManager.createQuery("select count(u) from BonusEntity u");
 		Long regCount = 0L;
 		regCount = Long.parseLong(count.getSingleResult().toString());
-		//String q1 = "select u from BonusEntity u where u.date > " + minDate + " AND u.date < "+maxDate; 
-		String strQuery = " select * from BonusEntity WHERE (date between ? and ?) ";
-		Query q = entityManager.createNativeQuery(strQuery, BonusEntity.class);
-        q.setParameter(1, minDate);
-        q.setParameter(2, maxDate );
 		
-		//Query q = entityManager.createQuery("select u from BonusEntity u where u.date > " + minDate + " AND u.date < "+maxDate);
+		Query q = entityManager.createQuery("select u from BonusEntity u where u.date > " + minDate + " AND u.date < " + maxDate);
 		if (page != null && maxRecords != null) {
 		    q.setFirstResult((page-1)*maxRecords);
 		    q.setMaxResults(maxRecords);

@@ -4,30 +4,31 @@
  * and open the template in the editor.
  */
 
-define(['component/bonusComponent', 'component/paymentComponent'], function(bonusComponent, paymentComponent) {
-    App.Component.CompositeComponent = App.Component.BasicComponent.extend({
+define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bonusComponent, purchaseIntegratorMine) {
+    App.Component.BonusPaymentIntegratorComponent = App.Component.BasicComponent.extend({
         initialize: function() {
             this.componentId = App.Utils.randomInteger();
             this.name = "Bonus";
 
-            this.setupBonusComponent();
-            this.setupPaymentComponent();
+            //this.setupBonusComponent();
+            this.setupPurchaseIntegrator();
         },
         render: function(domElementId) {
+                        var self = this;
 			if (domElementId) {
 				var rootElement = $("#"+domElementId)
                                 rootElement.append("<div id='main1' class='col-md-6'></div>");
 				rootElement.append("<div id='bonus' class='col-md-6'></div>");
 
-				this.paymentComponent.render("main1");
-                                this.bonusComponent.render("bonus");
+				//this.purchaseIntegrator.render("main1");
+                                //this.bonusComponent.render("bonus");
 			}
         },
-        setupPaymentComponent: function() {
-            this.paymentComponent = new paymentComponent();
-            this.paymentComponent.initialize();
+        setupPurchaseIntegrator: function() {
+            this.purchaseIntegrator = new purchaseIntegratorMine();
+            this.purchaseIntegrator.initialize();
             //this.purchaseComponent.masterComponent.clearGlobalActions();
-            this.paymentComponent.setReadOnly(true);          
+            //this.purchaseIntegrator.setReadOnly(true);          
         },
         setupBonusComponent: function() {
             this.bonusComponent = new bonusComponent();
@@ -49,7 +50,7 @@ define(['component/bonusComponent', 'component/paymentComponent'], function(bonu
             
         }
     });
-    return App.Component.CompositeComponent;
+    return App.Component.BonusPaymentIntegratorComponent;
 });
 
 
