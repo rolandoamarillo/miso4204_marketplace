@@ -10,8 +10,9 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
             this.componentId = App.Utils.randomInteger();
             this.name = "Bonus";
 
-            //this.setupBonusComponent();
+            
             this.setupPurchaseIntegrator();
+            this.setupBonusComponent();
         },
         render: function(domElementId) {
                         var self = this;
@@ -21,7 +22,7 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
 				rootElement.append("<div id='bonus' class='col-md-6'></div>");
 
 				//this.purchaseIntegrator.render("main1");
-                                //this.bonusComponent.render("bonus");
+                                this.bonusComponent.render("bonus");
 			}
         },
         setupPurchaseIntegrator: function() {
@@ -48,7 +49,12 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
         applyBonus: function() {
 
             
+        },
+        initBillTemplate: function() {
+         
         }
+        
+
     });
     return App.Component.BonusPaymentIntegratorComponent;
 });
