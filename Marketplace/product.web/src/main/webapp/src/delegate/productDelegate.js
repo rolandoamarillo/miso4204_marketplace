@@ -31,9 +31,60 @@ define(['delegate/_productDelegate'], function() {
     App.Delegate.ProductDelegate = App.Delegate._ProductDelegate.extend({
         search: function(model, callback){
             $.ajax({
-                  url: '/purchase.services/products',
+                  url: '/product.services/products',
                   type: 'GET',
                   data: $.param(model),
+                  contentType: 'application/json'
+             }).done(_.bind(function(data) {
+                 console.log("_bind");
+                 callback.call(callback, data);
+             }, this)).error(_.bind(function(data) {
+                console.log("callback error");                 
+             }, this));
+        },
+        searchById: function(productId, callback){
+            $.ajax({
+                  url: '/product.services/products/' + productId,
+                  type: 'GET',
+                  data: {},
+                  contentType: 'application/json'
+             }).done(_.bind(function(data) {
+                 console.log("_bind");
+                 callback.call(callback, data);
+             }, this)).error(_.bind(function(data) {
+                console.log("callback error");                 
+             }, this));
+        },
+        insert: function(product, callback){
+            $.ajax({
+                  url: '/product.services/products',
+                  type: 'POST',
+                  data: product,
+                  contentType: 'application/json'
+             }).done(_.bind(function(data) {
+                 console.log("_bind");
+                 callback.call(callback, data);
+             }, this)).error(_.bind(function(data) {
+                console.log("callback error");                 
+             }, this));
+        },
+        update: function(product, callback){
+            $.ajax({
+                  url: '/product.services/products',
+                  type: 'PUT',
+                  data: product,
+                  contentType: 'application/json'
+             }).done(_.bind(function(data) {
+                 console.log("_bind");
+                 callback.call(callback, data);
+             }, this)).error(_.bind(function(data) {
+                console.log("callback error");                 
+             }, this));
+        }, searchByCategory: function(categoryId, callback){
+            $.ajax({
+                  url: '/product.services/products/category/' + categoryId,
+                  type: 'GET',
+                  data: {},
                   contentType: 'application/json'
              }).done(_.bind(function(data) {
                  console.log("_bind");
