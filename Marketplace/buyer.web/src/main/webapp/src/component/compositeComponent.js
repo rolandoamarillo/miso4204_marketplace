@@ -126,7 +126,7 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
         },
         compras: function(params) {
             this.delegate.searchPurchases(params.id, function(data) {
-                alert('Compras del Usuario: ' + data.nombre + ' - ' + data.producto);
+                alert('Compras del Usuario: ' + data[0].name + ' - ' + data[1].name);
             });
         }
     });
