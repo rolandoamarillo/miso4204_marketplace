@@ -46,8 +46,12 @@ public class BonusPersistence extends _BonusPersistence{
 	
 	@SuppressWarnings("unchecked")
 	public BonusPageDTO getBonussDate(Integer page, Integer maxRecords, String minDate, String maxDate) {
+            
+            minDate= minDate == null ? "0000/00/00" : minDate;
+            maxDate= maxDate == null ? "3333/33/33" : maxDate;
+            
 		entityManager.getTransaction().begin();
-		Query count = entityManager.createQuery("select count(u) from BonusEntity u");
+		Query count = entityManager.createQuery("select count(u) from BonusEntity u where u.date > " + minDate + " AND u.date < " + maxDate);
 		Long regCount = 0L;
 		regCount = Long.parseLong(count.getSingleResult().toString());
 		

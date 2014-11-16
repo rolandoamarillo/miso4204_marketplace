@@ -61,19 +61,17 @@
         </div>        
         <div class="form-group" >
             <label for="EndDate">End Date</label>
-            <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="bonusFinDate"  name="bonusFinDate" placeholder="Enter value" />
+            <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="bonusEndDate"  name="bonusEndDate" placeholder="Enter value" />
              <%= '<scr'+'ipt>' %>
         	$('#bonusEndDate').datepicker({autoclose:true});
              <%= '</scr'+'ipt>' %>
         </div>
-        <div class="form-group" >
-            <label for="bonusId">Id Bonus</label>
-            <input type="text" class="form-control" id="IdBonus" name="IdBonus" placeholder="Enter value" />	
-        </div>
-        <div class="form-group" >
-            <label for="productId">Id Producto</label>
-            <input type="text" class="form-control" id="IdProduct" name="IdProduct" placeholder="Enter value" />
-        </div>
+       
     </form>
+    <button id="<%= componentId%>-bonus-searchButton" 
+        onclick="Backbone.trigger('<%= componentId %>-bonus-searchBonus',{}); return false" 
+        type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-search"></span> Search
+    </button>
     </div>
 </script> 

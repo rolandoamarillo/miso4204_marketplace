@@ -39,14 +39,14 @@ define(['component/_bonusComponent'], function() {
 			},
 			this.showSearch,
 					this);
-			this.toolbarComponent.addButton({
-				name: 'searchBonus',
-				displayName: 'Search',
-				icon: 'glyphicon-search',
-				show: false
-			},
-			this.bonusSearch,
-					this);
+//			this.toolbarComponent.addButton({
+//				name: 'searchBonus',
+//				displayName: 'Search',
+//				icon: 'glyphicon-search',
+//				show: false
+//			},
+//			this.bonusSearch,
+//					this);
 			this.toolbarComponent.addButton({
 				name: 'cancel-search',
 				displayName: 'Cancel',
@@ -55,9 +55,9 @@ define(['component/_bonusComponent'], function() {
 			},
 			function() {
 				this.toolbarComponent.showButton('create');
-				this.toolbarComponent.showButton('search');
+				this.toolbarComponent.showButton('showsearch');
 				this.toolbarComponent.hideButton('cancel-search');
-				this.toolbarComponent.showButton('searchBonus');
+//				this.toolbarComponent.showButton('searchBonus');
 				this.toolbarComponent.render();
 				this.componentController.list(null, this.list, this);
 			},
@@ -67,19 +67,22 @@ define(['component/_bonusComponent'], function() {
 		showSearch: function() {
 			this.toolbarComponent.showButton('create');
 			this.toolbarComponent.hideButton('cancel-search');
-			this.toolbarComponent.showButton('searchBonus');
+                        this.toolbarComponent.hideButton('showsearch');
+//			this.toolbarComponent.showButton('searchBonus');
 			this.toolbarComponent.render();
 			this.componentController.list(null, this.list, this);
-
-		},
-		bonusSearch: function() {
-			this.toolbarComponent.showButton('create');
-			this.toolbarComponent.hideButton('cancel-search');
-			this.toolbarComponent.showButton('searchBonus');
-			this.toolbarComponent.render();
-			this.componentController.searchBonus();
+                        this.componentController.showSearch();
 
 		}
+//		bonusSearch: function() {
+//			this.toolbarComponent.showButton('create');
+//			this.toolbarComponent.hideButton('cancel-search');
+//                        this.toolbarComponent.hideButton('showsearch');
+//			this.toolbarComponent.showButton('searchBonus');
+//			this.toolbarComponent.render();
+//			this.componentController.searchBonus();
+//
+//		}
 		
 
 
