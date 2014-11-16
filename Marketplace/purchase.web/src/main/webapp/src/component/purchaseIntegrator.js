@@ -38,7 +38,7 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
         selectAddress: function(obj) {
             var selectedId = obj.id;
             this.selectedAddress = this.searchAddressById(selectedId);            
-            this.setupPaymentModeComponent();            
+            this.setupCreditCardComponent();            
         },
         
         searchAddressById: function(id){
@@ -51,7 +51,7 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
         },
         
         setupCreditCardComponent: function() {
-            this.creditCardComponent = new paymentModeCp();
+            this.creditCardComponent = new creditCardCp();
             this.creditCardComponent.initialize();            
             this.creditCardComponent.clearGlobalActions();
             this.creditCardComponent.clearRecordActions();            
@@ -131,6 +131,10 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
         },
         
         useBonus: function(){
+            
+        },
+        
+        cancel: function(){
             
         }
     });
