@@ -54,16 +54,16 @@
     <form role="form" id="<%= componentId %>-bonusSearchForm">
         <div class="form-group" >
             <label for="InitialDate">Initial</label>
-            <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="bonusIniDate"  name="bonusIniDate" placeholder="Enter value" />
+            <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="minDate"  name="minDate" placeholder="Enter value" />
                 <%= '<scr'+'ipt>' %>
-        	$('#bonusIniDate').datepicker({autoclose:true});
+        	$('#minDate').datepicker({autoclose:true});
         	<%= '</scr'+'ipt>' %>
         </div>        
         <div class="form-group" >
             <label for="EndDate">End Date</label>
-            <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="bonusEndDate"  name="bonusEndDate" placeholder="Enter value" />
+            <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="maxDate"  name="maxDate" placeholder="Enter value" />
              <%= '<scr'+'ipt>' %>
-        	$('#bonusEndDate').datepicker({autoclose:true});
+        	$('#maxDate').datepicker({autoclose:true});
              <%= '</scr'+'ipt>' %>
         </div>
        
@@ -74,4 +74,4 @@
             <span class="glyphicon glyphicon-search"></span> Search
     </button>
     </div>
-</script> 
+</script>

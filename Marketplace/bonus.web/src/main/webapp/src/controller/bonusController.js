@@ -28,14 +28,17 @@
 define(['controller/_bonusController', 'delegate/bonusDelegate'], function () {
     App.Controller.BonusController = App.Controller._BonusController.extend({
         postInit: function () {
+            var self = this;
             this.searchTemplate = _.template($('#bonusSearch').html());
             this.listFunction = this.list;
-            var self = this;
-            Backbone.on(this.componentId + '-' + 'bonus-searchBonus', function(params) {
-                self.searchBonus(params);
+            Backbone.on(this.componentId + '-' + 'bonus-searchBonus', function (call,cont) {
+                self.searchBonus(self.call,self.cont);
             });
+
         },
-        showSearch: function () {
+        search: function (callback,context) {
+            this.call = callback;
+            this.cont = context;
             if (App.Utils.eventExists(this.componentId + '-' + 'instead-bonus-search')) {
                 Backbone.trigger(this.componentId + '-' + 'instead-bonus-search', {view: this});
             } else {
@@ -45,36 +48,22 @@ define(['controller/_bonusController', 'delegate/bonusDelegate'], function () {
                 Backbone.trigger(this.componentId + '-' + 'post-bonus-search', {view: this});
             }
         },
-        searchBonus: function () {
+        _renderSearch: function () {
             var self = this;
-            this.setSearchList(true);
-            var model = $('#' + this.componentId + '-bonusSearchForm').serializeObject();
-            if (!this.searchModel) {
-                this.searchModel = model;
-            }
-            else {
-                if (model.bonusIniDate || model.bonusEndDate) {
-                    this.searchModel.bonusIniDate = model.bonusIniDate;
-                    this.searchModel.bonusEndDate = model.bonusEndDate;
-                }
-            }
-            this.searchModel.page = this.currentList.state.currentPage;
-            this.searchModel.maxRecords = this.pageSize;
-
-            var delegate = new App.Delegate.BonusDelegate();
-            console.log("llama delegate" + this.searchModel);
-            delegate.searchBonus(this.searchModel, function (data) {
-                self.currentList.reset(data.records);
-                var pages = Math.ceil(data.totalRecords / self.pageSize);
-                console.log("pages: " + pages);
-
-                //callback.call(context, {data: self.currentList, page: self.currentList.state.currentPage, pages: pages, totalRecords: data.totalRecords});
-            }, function (data) {
-                console.log("error dcs");
-                Backbone.trigger(self.componentId + '-' + 'error', {event: 'bonus-search', view: self, id: '', data: data, error: 'Error in bonus search'});
+            this.$el.slideUp("fast", function () {
+                self.$el.html(self.searchTemplate({componentId: self.componentId, bonus: self.currentModel}));
+                self.$el.slideDown("fast");
             });
-            console.log("Entro al search" + this.searchModel);
-
+        },
+//        postInit: function () {
+//            this.searchTemplate = _.template($('#bonusSearch').html());
+//            this.listFunction = this.list;
+//            var self = this;
+//            Backbone.on(this.componentId + '-' + 'bonus-searchBonus', function(params) {
+//                self.searchBonus(params);
+//            });
+//        },
+//        showSearch: function () {
 //            if (App.Utils.eventExists(this.componentId + '-' + 'instead-bonus-search')) {
 //                Backbone.trigger(this.componentId + '-' + 'instead-bonus-search', {view: this});
 //            } else {
@@ -83,13 +72,36 @@ define(['controller/_bonusController', 'delegate/bonusDelegate'], function () {
 //                this._renderSearch();
 //                Backbone.trigger(this.componentId + '-' + 'post-bonus-search', {view: this});
 //            }
-        },
-        _renderSearch: function () {
+//        },
+        searchBonus: function (callback,context) {
             var self = this;
-            this.$el.slideUp("fast", function () {
-                self.$el.html(self.searchTemplate({bonus: self.currentModel, componentId: self.componentId}));
-                self.$el.slideDown("fast");
+            this.setSearchList(true);
+            var model = $('#' + this.componentId + '-bonusSearchForm').serializeObject();
+            if (!this.searchModel) {
+                this.searchModel = model;
+            }
+            else {
+                if (model.minDate || model.maxDate) {
+                    this.searchModel.minDate = model.minDate;
+                    this.searchModel.maxDate = model.maxDate;
+                }
+            }
+            this.searchModel.page = this.currentList.state.currentPage;
+            this.searchModel.maxRecords = this.pageSize;
+            
+            var delegate = new App.Delegate.BonusDelegate();
+            console.log("llama delegate" + this.searchModel);
+            delegate.searchBonus(this.searchModel, function (data) {
+                self.currentList.reset(data.records);
+                var pages = Math.ceil(data.totalRecords / self.pageSize);
+                console.log("pages: " + pages);
+
+               callback.call(context, {data: self.currentList, page: self.currentList.state.currentPage, pages: pages, totalRecords: data.totalRecords});
+            }, function (data) {
+                console.log("error dcs");
+                Backbone.trigger(self.componentId + '-' + 'error', {event: 'bonus-search', view: self, id: '', data: data, error: 'Error in bonus search'});
             });
+            console.log("Entro al search" + this.searchModel);
         },
         setSearchList: function (flag) {
             if (flag) {

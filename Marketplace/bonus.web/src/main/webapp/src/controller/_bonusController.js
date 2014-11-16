@@ -173,7 +173,12 @@ define(['model/bonusModel'], function(bonusModel) {
         _renderList: function() {
             var self = this;
             this.$el.slideUp("fast", function() {
-                self.$el.html(self.listTemplate({bonuss: self.currentList.models, componentId: self.componentId, showEdit : self.showEdit , showDelete : self.showDelete}));
+                self.$el.html(self.listTemplate({bonuss: self.currentList.models, componentId: self.componentId, showEdit : self.showEdit , showDelete : self.showDelete})
+                            + self.editTemplate({bonus: self.currentModel, componentId: self.componentId , showEdit : self.showEdit , showDelete : self.showDelete
+ 
+				    ,buyer: self.buyerComponent
+ 
+				}));
                 self.$el.slideDown("fast");
             });
         },

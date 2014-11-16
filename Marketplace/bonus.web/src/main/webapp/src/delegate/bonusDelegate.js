@@ -31,7 +31,7 @@ define(['delegate/_bonusDelegate'], function() {
         searchBonus: function(bonus, callback, callbackError) {
               console.log('llama servicio:');
               $.ajax({
-                  url: '/bonus.services/webresources/bonuss/search_Date',
+                  url: '/bonus.services/webresources/bonuss',
                   type: 'GET',
                   data: $.param(bonus),
                   contentType: 'application/json'
