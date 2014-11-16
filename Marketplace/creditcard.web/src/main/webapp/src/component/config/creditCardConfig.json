@@ -4,7 +4,7 @@
     "templateName" : "creditCard",
     "url" : "user.html",
     "server": "localhost:8080",
-	"context": "/creditcard.web/webresources/credit_cards",
+    "context": "/creditcard.services/webresources/credit_cards",
       
     "el" : "#main"
 }

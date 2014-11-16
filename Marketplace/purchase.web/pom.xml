@@ -21,14 +21,32 @@
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>purchaseitem.web</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>shoppingcart.services</artifactId>
+            <version>${project.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>shoppingcartitem.web</artifactId>
+            <artifactId>shoppingcart.web</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>address.services</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>creditcard.services</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>creditcard.web</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-define(['component/productComponent'], function(productCp) {
+define(['component/shoppingCartComponent'], function(shoppingCartCp) {
     App.Component.Bill = App.Component.BasicComponent.extend({
         initialize: function(options) {
             this.componentId = App.Utils.randomInteger();
@@ -16,14 +16,14 @@ define(['component/productComponent'], function(productCp) {
             if(options.paymentList){
                 this.paymentList = options.paymentList;
             }
-            this.setupProduct();
+            this.setupShoppingCart();
             this.loadData();
         },
         
-        setupProduct: function (){
-            this.productComponent = new productCp();
-            this.productComponent.initialize();
-            this.productComponent.toolbarComponent.display(false);
+        setupShoppingCart: function (){
+            this.shoppingCartComponent = new shoppingCartCp();
+            this.shoppingCartComponent.initialize();
+            this.shoppingCartComponent.toolbarComponent.display(false);
         },
         
         loadData: function(){

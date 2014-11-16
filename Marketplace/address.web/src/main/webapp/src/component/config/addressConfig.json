@@ -3,7 +3,7 @@
     "name" : "address",
     "templateName" : "address",
     "url" : "user.html",
-    "server": "localhost:8084",
+    "server": "localhost:8080",
 	"context": "/address.services/webresources/addresss",
       
     "el" : "#main"
