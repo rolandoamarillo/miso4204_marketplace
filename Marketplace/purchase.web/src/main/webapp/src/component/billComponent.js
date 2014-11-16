@@ -39,7 +39,7 @@ define(['component/shoppingCartComponent'], function(shoppingCartCp) {
         
         
         render: function(parent){
-            this.productComponent.render('list');
+            this.shoppingCartComponent.render('list');
             $('#'+parent).append($('#bill').show());
         }
     });

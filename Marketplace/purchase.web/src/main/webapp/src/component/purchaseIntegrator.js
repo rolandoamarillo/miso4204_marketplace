@@ -82,10 +82,10 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
         },
         
         searchCreditCardById: function(id){
-            var paymentMode = this.paymentModeComponent.listComponent.listController.model.attributes.data;
-            for(var i = 0, l = paymentMode.length; i<l; i++){
-                if(paymentMode[i].id === id){
-                    return paymentMode[i];
+            var creditCard = this.creditCardComponent.listComponent.listController.model.attributes.data;
+            for(var i = 0, l = creditCard.length; i<l; i++){
+                if(creditCard[i].id === id){
+                    return creditCard[i];
                 }
             }
         },
