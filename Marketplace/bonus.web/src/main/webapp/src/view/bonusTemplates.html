@@ -48,4 +48,32 @@
 		</div>
     </form>
     </div>
+</script>
+<script type="text/template" id="bonusSearch">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-bonusSearchForm">
+        <div class="form-group" >
+            <label for="InitialDate">Initial</label>
+            <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="bonusIniDate"  name="bonusIniDate" placeholder="Enter value" />
+                <%= '<scr'+'ipt>' %>
+        	$('#bonusIniDate').datepicker({autoclose:true});
+        	<%= '</scr'+'ipt>' %>
+        </div>        
+        <div class="form-group" >
+            <label for="EndDate">End Date</label>
+            <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="bonusFinDate"  name="bonusFinDate" placeholder="Enter value" />
+             <%= '<scr'+'ipt>' %>
+        	$('#bonusEndDate').datepicker({autoclose:true});
+             <%= '</scr'+'ipt>' %>
+        </div>
+        <div class="form-group" >
+            <label for="bonusId">Id Bonus</label>
+            <input type="text" class="form-control" id="IdBonus" name="IdBonus" placeholder="Enter value" />	
+        </div>
+        <div class="form-group" >
+            <label for="productId">Id Producto</label>
+            <input type="text" class="form-control" id="IdProduct" name="IdProduct" placeholder="Enter value" />
+        </div>
+    </form>
+    </div>
 </script> 
