@@ -22,7 +22,7 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
                 icon: '',
                 displayName: 'Cancelar',
                 show: true
-            }, this.cancel(), this);
+            }, this.cancel, this);
             this.addressComponent.addRecordAction({
                 name: 'seleccionar',
                 icon: '',
@@ -60,7 +60,7 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
                 icon: '',
                 displayName: 'Cancelar',
                 show: true
-            }, this.cancel(), this);
+            }, this.cancel, this);
             this.creditCardComponent.addRecordAction({
                 name: 'seleccionar',
                 icon: '',
@@ -102,30 +102,6 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
             $('.breadcrumb').append('<li class="active">Confirm and Pay</li>');
         },
         
-        loadToolbar: function() {
-            this.toolbarComponent.addMenu({
-                name: 'actions',
-                displayName: 'Actions',
-                show: true
-            });
-
-            this.toolbarComponent.addButton({
-                name: 'pay',
-                icon: '',
-                displayName: 'Pay',
-                show: true
-            }, this.pay, this);
-
-            this.toolbarComponent.addButton({
-                name: 'bonus',
-                icon: '',
-                displayName: 'Use Bonus',
-                show: true
-            }, this.useBonus, this);
-            this.toolbarComponent.render();
-            console.log(this.toolbarComponent.el);
-        },
-        
         pay: function(){
             
         },
@@ -135,7 +111,7 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
         },
         
         cancel: function(){
-            
+            document.location.href="http://localhost:8080/purchase.web";
         }
     });
     return App.Component.PurchaseIntegrator;

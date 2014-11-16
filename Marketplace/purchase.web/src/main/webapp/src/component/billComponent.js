@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-define(['component/shoppingCartComponent'], function(shoppingCartCp) {
+define(['component/shoppingCartComponent', 'component/toolbarComponent' ], function(shoppingCartCp, toolbarCP) {
     App.Component.Bill = App.Component.BasicComponent.extend({
         initialize: function(options) {
             this.componentId = App.Utils.randomInteger();
@@ -16,6 +16,7 @@ define(['component/shoppingCartComponent'], function(shoppingCartCp) {
             if(options.paymentList){
                 this.paymentList = options.paymentList;
             }
+            this.toolbar();
             this.setupShoppingCart();
             this.loadData();
         },
@@ -36,11 +37,39 @@ define(['component/shoppingCartComponent'], function(shoppingCartCp) {
 //            $('#payNumber').val(this.paymentList.attributes);
 //            $('#payPoints').val(this.paymentList.attributes);
         },
-        
-        
+                
         render: function(parent){
             this.shoppingCartComponent.render('list');
             $('#'+parent).append($('#bill').show());
+        },
+        
+        toolbar: function(){
+            console.log("entro3");
+            this.toolbarComponent = new toolbarCP({componentId: "toolbar", name: "Confirm and Pay"});
+            console.log("entro1");
+            this.toolbarComponent.initialize({componentId: "toolbar", name: "Confirm and Pay"});
+            console.log(this.toolbarComponent.toolbarController.$el);
+            this.loadToolbar();
+            $('#toolbar').html(this.toolbarComponent.toolbarController.$el);
+            console.log("entro");
+        },
+        
+        
+        loadToolbar: function() {
+            this.toolbarComponent.addMenu({
+                name: 'actions',
+                displayName: 'Actions',
+                show: true
+            });
+
+            this.toolbarComponent.addButton({
+                name: 'pay',
+                icon: '',
+                displayName: 'Pay',
+                show: true
+            }, this.pay, this);
+            this.toolbarComponent.render();
+            console.log(this.toolbarComponent.el);
         }
     });
     
