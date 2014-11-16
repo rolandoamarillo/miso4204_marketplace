@@ -6,38 +6,47 @@
 
 
 
-$(document).ready(function(){
-   $("#btn-login").click(function(evento){
-	var username = document.getElementById("login-username").value;
-	var pass = document.getElementById("login-password").value;
-	var rememberMe = document.getElementById("login-remember").value;
-	if (rememberMe === "on"){
-		rememberMe = "true";
-	}else{
-		rememberMe = "false";
-	}
-	var json = {userName: username, password: pass, rememberMe: rememberMe};
-    $.ajax({
-                type: "POST",
-                url: "http://localhost:8084/user.services/webresources/auth/login",
-//                crossDomain: true,
-                dataType: 'json',
-				data : JSON.stringify(json),
-                contentType: "application/json"
-				}).done(_.bind(function(data) {
-                console.log(data);
-				alert('USUARIO AUTENTICADO');
-                
-               
-           }, this)).error(_.bind(function(data) {
-               console.log("data");
-			   alert('USUARIO NO AUTENTICADO : '+ username);
+$(document).ready(function () {
+    $("#btn-login").click(function (evento) {
+        var username = document.getElementById("login-username").value;
+        var pass = document.getElementById("login-password").value;
+        var rememberMe = document.getElementById("login-remember").value;
+        if (rememberMe === "on") {
+            rememberMe = "true";
+        } else {
+            rememberMe = "false";
+        }
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            var path = "; path=/";
+            document.cookie = cname + "=" + cvalue + "; " + expires + path ;
+        }
+        var json = {userName: username, password: pass, rememberMe: rememberMe};
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8084/user.services/webresources/auth/login",
+//          crossDomain: true,
+            dataType: 'json',
+            data: JSON.stringify(json),
+            contentType: "application/json"
+        }).done(_.bind(function (data) {
+            console.log(data);
+            alert('USUARIO AUTENTICADO');
+            setCookie("token", data, 1);
+            window.location.href = '../address.web';
+
+
+        }, this)).error(_.bind(function (data) {
+            console.log("data");
+            alert('USUARIO NO AUTENTICADO : ' + username);
 //			   window.location.href = '../Sport_web/error.html';
-               
-           }, this));
-       });  
-     
-   
+
+        }, this));
+    });
+
+
 });
 
 
