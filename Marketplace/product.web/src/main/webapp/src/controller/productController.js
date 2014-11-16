@@ -41,7 +41,8 @@ define(['controller/_productController','delegate/productDelegate'], function() 
              delegate.search(self.currentModel, function (data) {
                  self.currentList.reset(data.records);
                  callback.call(context,{data: self.currentList, page: 1, pages: 1, totalRecords: self.currentList.lenght})            }, function (data) {
-                 Backbone.trigger(self.componentId + '-' + 'error', {event: 'product-search', view: self, id: '', data: data, error: 'Error in product search'});            });
+                 Backbone.trigger(self.componentId + '-' + 'error', {event: 'product-search', view: self, id: '', data: data, error: 'Error in product search'});            
+             });
          },
         search: function() {
             if (App.Utils.eventExists(this.componentId + '-' +'instead-product-search')) {
