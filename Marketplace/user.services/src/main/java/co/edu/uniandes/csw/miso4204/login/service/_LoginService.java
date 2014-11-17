@@ -60,10 +60,10 @@ public abstract class _LoginService {
         String token = "Usuario y contraseña errado. Por favor, vuelva a intentarlo";
 
         try {
-            UserSessionDTO db = securityLogic.getUserSession(login.getId());
+            UserSessionDTO db = securityLogic.getUserSession(login.getUserName());
             if (db != null) {
                 if (db.getUserName().equals(login.getUserName()) && db.getPassword().equals(login.getPassword()) && db.getTenantID().equals(login.getTenantID())) {
-                    token = JsonWebToken.encode(login, "Ejemplo", JwtHashAlgorithm.HS256);
+                    token = JsonWebToken.encode(db, "Ejemplo", JwtHashAlgorithm.HS256);
                 }
             }
         } catch (Exception e) {
