@@ -37,6 +37,7 @@ import co.edu.uniandes.csw.miso4204.user.logic.dto.LoginDTO;
 import co.edu.uniandes.csw.miso4204.user.logic.dto.UserDTO;
 import co.edu.uniandes.csw.miso4204.user.logic.dto.UserPageDTO;
 import co.edu.uniandes.csw.miso4204.user.logic.ejb.UserLogicService;
+import com.google.gson.Gson;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -63,7 +64,7 @@ public abstract class _LoginService {
             UserSessionDTO db = securityLogic.getUserSession(login.getUserName());
             if (db != null) {
                 if (db.getUserName().equals(login.getUserName()) && db.getPassword().equals(login.getPassword()) && db.getTenantID().equals(login.getTenantID())) {
-                    token = JsonWebToken.encode(db, "Ejemplo", JwtHashAlgorithm.HS256);
+                    token = new Gson().toJson(JsonWebToken.encode(db, "Ejemplo", JwtHashAlgorithm.HS256));
                 }
             }
         } catch (Exception e) {

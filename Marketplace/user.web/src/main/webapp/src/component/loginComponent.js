@@ -23,7 +23,7 @@ $(document).ready(function () {
             var path = "; path=/";
             document.cookie = cname + "=" + cvalue + "; " + expires + path ;
         }
-        var json = {id:1, userName: username, password: pass, tenantID:"MP", levelAccess:"user" };
+        var json = {userName: username, password: pass, tenantID:"MP", levelAccess:"user"};
         $.ajax({
             type: "POST",
             url: "http://localhost:8084/user.services/webresources/auth/login",
