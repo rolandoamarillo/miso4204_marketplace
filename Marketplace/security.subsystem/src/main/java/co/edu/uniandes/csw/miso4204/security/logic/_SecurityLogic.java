@@ -28,6 +28,10 @@ public abstract class _SecurityLogic {
     public UserSessionDTO getUserSession(Long id) {
         return persistance.getUserSession(id);
     }
+    
+    public UserSessionDTO getUserSession(String userName) {
+        return persistance.getUserSession(userName);
+    }
 
     public void deleteUserSession(Long id) {
         persistance.deleteUserSession(id);

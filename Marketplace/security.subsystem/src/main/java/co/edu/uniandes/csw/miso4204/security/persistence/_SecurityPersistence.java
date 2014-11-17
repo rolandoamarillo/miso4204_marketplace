@@ -44,6 +44,24 @@ public abstract class _SecurityPersistence {
         return result;
     }
 
+    public UserSessionDTO getUserSession(String userName) {
+        UserSessionDTO result = null;
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("SELECT u FROM UserSessionEntity u WHERE u.userName = '"+userName+"'");
+            List<UserSessionEntity> records = query.getResultList();
+            if (!records.isEmpty()) {
+                result = UserSessionConverter.entity2PersistenceDTO(records.get(0));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            entityManager.getTransaction().commit();
+        }
+        return result;
+    }
+
     public void deleteUserSession(Long id) {
         entityManager.getTransaction().begin();
         UserSessionEntity entity = entityManager.find(UserSessionEntity.class, id);
