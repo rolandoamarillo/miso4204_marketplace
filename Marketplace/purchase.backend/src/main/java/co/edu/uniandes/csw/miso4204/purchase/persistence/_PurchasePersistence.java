@@ -39,6 +39,7 @@ import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchaseDTO;
 import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchasePageDTO;
 import co.edu.uniandes.csw.miso4204.purchase.persistence.converter.PurchaseConverter;
 import co.edu.uniandes.csw.miso4204.purchase.persistence.entity.PurchaseEntity;
+import java.util.Date;
 
 public abstract class _PurchasePersistence{
 
@@ -79,7 +80,7 @@ public abstract class _PurchasePersistence{
 		entityManager.getTransaction().commit();
 		return response;
 	}
-
+        
 	public PurchaseDTO getPurchase(Long id) {
 		entityManager.getTransaction().begin();
 		PurchaseDTO result = PurchaseConverter.entity2PersistenceDTO(entityManager.find(PurchaseEntity.class, id));
