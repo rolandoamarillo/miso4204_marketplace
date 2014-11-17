@@ -48,8 +48,8 @@ define(['component/_bonusComponent'], function() {
 					this);
 			this.toolbarComponent.addButton({
 				name: 'cancel-search',
-				displayName: 'Cancel',
-				icon: 'glyphicon-remove-sign',
+				displayName: 'Show all',
+				icon: 'glyphicon-list-alt',
 				show: false
 			},
 			function() {
