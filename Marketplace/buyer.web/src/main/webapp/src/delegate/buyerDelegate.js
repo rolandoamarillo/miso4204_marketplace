@@ -62,7 +62,7 @@ define(['delegate/_buyerDelegate'], function() {
             var response = {};
             response.totalRecords = 2;
             response.records = dataList;
-            callback(response);
+            callback(dataList);
             
             /*$.get("/purchase.services/webresources/purchases/buyer/" + id, function(data) {
                 callback(data);

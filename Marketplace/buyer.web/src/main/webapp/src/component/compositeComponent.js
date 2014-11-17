@@ -1,5 +1,5 @@
-define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDComponent', 'controller/tabController', 'component/buyerComponent'],
- function(SelectionController, CacheModel, CRUDComponent, TabController, BuyerComponent) {
+define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDComponent', 'controller/tabController', 'component/buyerComponent', 'component/purchaseComponent'],
+ function(SelectionController, CacheModel, CRUDComponent, TabController, BuyerComponent, PurchaseComponent) {
     App.Component.CompositeComponent = App.Component.BasicComponent.extend({
         initialize: function() {
             this.componentId = App.Utils.randomInteger();
@@ -7,6 +7,7 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             this.buyerComponent = new BuyerComponent();
             this.buyerComponent.initialize();
             this.delegate = new App.Delegate.BuyerDelegate();
+            this.purchaseComponent = new PurchaseComponent();
             this.setupBuyerComponent();
         },
         render: function(domElementId){
@@ -125,8 +126,14 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             });
         },
         compras: function(params) {
+            var self = this;
             this.delegate.searchPurchases(params.id, function(data) {
-                alert('Compras del Usuario: ' + data[0].name + ' - ' + data[1].name);
+                self.purchaseComponent.initialize({cache: {data: data, mode: "memory"},pagination: false});
+                
+                var rootElementId = $("#main");
+                this.purchaseElement = this.componentId + "-purchase";
+                rootElementId.html("<div id='" + this.purchaseElement + "'></div>");
+                self.purchaseComponent.render(this.purchaseElement);
             });
         }
     });
