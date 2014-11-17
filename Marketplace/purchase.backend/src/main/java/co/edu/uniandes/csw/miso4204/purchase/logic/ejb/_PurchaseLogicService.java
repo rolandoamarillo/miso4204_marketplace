@@ -52,14 +52,6 @@ public abstract class _PurchaseLogicService {
 	public PurchasePageDTO getPurchases(Integer page, Integer maxRecords){
 		return persistance.getPurchases(page, maxRecords); 
 	}
-
-        public PurchasePageDTO getPurchasesSearch(Integer page, Integer maxRecords, String ini_date, String end_date, Long id_purchase){
-            return persistance.getPurchasesSearch(page, maxRecords, ini_date, end_date, id_purchase); 
-	}
-        
-        public PurchasePageDTO getPurchasesBuyer(Integer page, Integer maxRecords, Long id){
-            return persistance.getPurchasesBuyer(page, maxRecords, id); 
-	}
                 
 	public PurchaseDTO getPurchase(Long id){
 		return persistance.getPurchase(id); 

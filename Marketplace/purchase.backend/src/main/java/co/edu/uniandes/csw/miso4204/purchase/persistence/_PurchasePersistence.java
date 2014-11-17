@@ -80,55 +80,6 @@ public abstract class _PurchasePersistence{
 		entityManager.getTransaction().commit();
 		return response;
 	}
-
-        @SuppressWarnings("unchecked")
-	public PurchasePageDTO getPurchasesBuyer(Integer page, Integer maxRecords, Long id) {
-		entityManager.getTransaction().begin();
-		Query count = entityManager.createQuery("select count(u) from PurchaseEntity u");
-		Long regCount = 0L;
-		regCount = Long.parseLong(count.getSingleResult().toString());
-		Query q = entityManager.createQuery("select u from PurchaseEntity u where u.buyerId =" + id + "");
-		if (page != null && maxRecords != null) {
-		    q.setFirstResult((page-1)*maxRecords);
-		    q.setMaxResults(maxRecords);
-		}
-		PurchasePageDTO response = new PurchasePageDTO();
-		response.setTotalRecords(regCount);
-		response.setRecords(PurchaseConverter.entity2PersistenceDTOList(q.getResultList()));
-		entityManager.getTransaction().commit();
-		return response;
-	}
-        
-        @SuppressWarnings("unchecked")
-	public PurchasePageDTO getPurchasesSearch(Integer page, Integer maxRecords, String ini_date, String end_date, Long id_purchase) {
-		entityManager.getTransaction().begin();
-		Query count = entityManager.createQuery("select count(u) from PurchaseEntity u");
-		Long regCount = 0L;
-		regCount = Long.parseLong(count.getSingleResult().toString());
-                
-                String qr = "select u from PurchaseEntity u where u.buyerId > 0 ";
-               
-                if(!ini_date.equals("") && !end_date.equals("")) {
-                    qr += " and u.purchaseDate >='" + ini_date + "' and u.purchaseDate <= '" + end_date + "'";
-		}
-        
-                if(id_purchase > 0)
-                {
-                    qr += " and u.Id = " + id_purchase + "";
-                }
-                
-                 Query q = entityManager.createQuery(qr);
-                
-                if (page != null && maxRecords != null) {
-		    q.setFirstResult((page-1)*maxRecords);
-		    q.setMaxResults(maxRecords);
-		}
-		PurchasePageDTO response = new PurchasePageDTO();
-		response.setTotalRecords(regCount);
-		response.setRecords(PurchaseConverter.entity2PersistenceDTOList(q.getResultList()));
-		entityManager.getTransaction().commit();
-		return response;
-	}
         
 	public PurchaseDTO getPurchase(Long id) {
 		entityManager.getTransaction().begin();
