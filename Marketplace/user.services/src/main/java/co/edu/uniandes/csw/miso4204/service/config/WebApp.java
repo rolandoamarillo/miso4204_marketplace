@@ -7,6 +7,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class WebApp extends ResourceConfig {
 	public WebApp(){
         packages("co.edu.uniandes.csw.miso4204.user.service");
-		packages("co.edu.uniandes.csw.miso4204.login.service");
+        packages("co.edu.uniandes.csw.miso4204.login.service");
     }
 }
