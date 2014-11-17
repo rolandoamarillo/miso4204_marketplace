@@ -43,6 +43,7 @@ import co.edu.uniandes.csw.miso4204.reward.persistence.entity.RewardEntity;
 
 public abstract class _RewardConverter {
 
+	private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 	public static RewardDTO entity2PersistenceDTO(RewardEntity entity){
 		if (entity != null) {
 			RewardDTO dto = new RewardDTO();
@@ -51,7 +52,9 @@ public abstract class _RewardConverter {
 					dto.setName(entity.getName());
 					dto.setPurchaseId(entity.getPurchaseId());
 					dto.setBuyerId(entity.getBuyerId());
-					dto.setDate(entity.getDate());
+					if(entity.getDate() != null){
+						dto.setDate(DATE_FORMAT.format(entity.getDate()));
+					}
 					dto.setTotalPoints(entity.getTotalPoints());
 			return dto;
 		}else{
@@ -72,7 +75,13 @@ public abstract class _RewardConverter {
 			
 					entity.setBuyerId(dto.getBuyerId());
 					
-					entity.setDate(dto.getDate());
+					try { 
+						if(dto.getDate() != null) {
+							entity.setDate(DATE_FORMAT.parse(dto.getDate()));
+						}
+				  } catch (Exception ex) {
+						Logger.getLogger(_RewardConverter.class.getName()).log(Level.SEVERE, null, ex);
+					}
 					
 					entity.setTotalPoints(dto.getTotalPoints());
 			

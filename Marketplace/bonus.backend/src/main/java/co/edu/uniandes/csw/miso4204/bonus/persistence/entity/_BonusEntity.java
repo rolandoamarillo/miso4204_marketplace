@@ -61,8 +61,10 @@ public abstract class _BonusEntity {
 	private Double value;
 	private String status;
 	private Long buyerId;
-	private String date;
-	private String expiration;
+	@Temporal(TemporalType.DATE)
+	private Date date;
+	@Temporal(TemporalType.DATE)
+	private Date expiration;
 
 	public Long getId(){
 		return id;
@@ -107,19 +109,19 @@ public abstract class _BonusEntity {
 		this.buyerId = buyerId;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public String getExpiration() {
+	public Date getExpiration() {
 		return expiration;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public void setExpiration(String expiration) {
+	public void setExpiration(Date expiration) {
 		this.expiration = expiration;
 	}
 }

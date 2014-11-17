@@ -60,7 +60,8 @@ public abstract class _RewardEntity {
 	private String name;
 	private Long purchaseId;
 	private Long buyerId;
-	private String date;
+	@Temporal(TemporalType.DATE)
+	private Date date;
 	private Integer totalPoints;
 
 	public Long getId(){
@@ -99,7 +100,7 @@ public abstract class _RewardEntity {
 		this.buyerId = buyerId;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
@@ -107,7 +108,7 @@ public abstract class _RewardEntity {
 		return totalPoints;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

@@ -68,6 +68,9 @@ public abstract class _RewardDTO {
 	
 	
 	private Integer totalPoints;
+	
+	
+	private Double value;
 
 
 
@@ -130,7 +133,13 @@ public abstract class _RewardDTO {
 	public void setTotalPoints(Integer totalPoints) {
 		this.totalPoints = totalPoints;
 	}
-	
-	
+
+	public Double getValue() {
+		return value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
 	
 }
