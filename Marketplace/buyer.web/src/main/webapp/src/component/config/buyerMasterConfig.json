@@ -6,7 +6,7 @@
     "server": "localhost:8080",
     "server": "localhost:8080",
     
-    "context": "/buyer.web/webresources/master/buyers",
+    "context": "/buyer.services/webresources/master/buyers",
        
     
     "el" : "#main"
