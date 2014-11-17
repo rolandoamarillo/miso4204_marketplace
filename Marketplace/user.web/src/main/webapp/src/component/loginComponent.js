@@ -23,7 +23,7 @@ $(document).ready(function () {
             var path = "; path=/";
             document.cookie = cname + "=" + cvalue + "; " + expires + path ;
         }
-        var json = {userName: username, password: pass, rememberMe: rememberMe};
+        var json = {id:1, userName: username, password: pass, tenantID:"MP", levelAccess:"user" };
         $.ajax({
             type: "POST",
             url: "http://localhost:8084/user.services/webresources/auth/login",
@@ -40,7 +40,7 @@ $(document).ready(function () {
 
         }, this)).error(_.bind(function (data) {
             console.log("data");
-            alert('USUARIO NO AUTENTICADO : ' + username);
+            alert('USUARIO NO AUTENTICADO : ' + data["responseText"]);
 //			   window.location.href = '../Sport_web/error.html';
 
         }, this));
