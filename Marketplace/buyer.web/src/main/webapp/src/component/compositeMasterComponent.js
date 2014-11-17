@@ -296,7 +296,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
         },
         compras: function(params) {
             this.delegate.searchPurchases(params.id, function(data) {
-                alert('Compras del Usuario: ' + data[0].name + ' - ' + data[1].name);
+                alert('Compras del Usuario: ' + data.totalRecords + ' - ' + data.records[0].name + ' - ' + data.records[1].name);
             });
         }
     });

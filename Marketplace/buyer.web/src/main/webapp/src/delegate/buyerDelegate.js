@@ -59,10 +59,12 @@ define(['delegate/_buyerDelegate'], function() {
             data2.addressId = 1;
             dataList.push(data2);
             
-            console.log(dataList);
-            callback(dataList);
+            var response = {};
+            response.totalRecords = 2;
+            response.records = dataList;
+            callback(response);
             
-            /*$.get("/buyer.services/webresources/buyers/" + id + "/purchases", function(data) {
+            /*$.get("/purchase.services/webresources/purchases/buyer/" + id, function(data) {
                 callback(data);
             });*/
          }
