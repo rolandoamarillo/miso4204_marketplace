@@ -43,7 +43,7 @@ import co.edu.uniandes.csw.miso4204.bonus.persistence.entity.BonusEntity;
 
 public abstract class _BonusConverter {
 
-	private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+	private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
 	public static BonusDTO entity2PersistenceDTO(BonusEntity entity){
 		if (entity != null) {
 			BonusDTO dto = new BonusDTO();

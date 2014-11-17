@@ -45,26 +45,33 @@ public class BonusPersistence extends _BonusPersistence{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public BonusPageDTO getBonussDate(Integer page, Integer maxRecords, String minDate, String maxDate) {
+	public BonusPageDTO getBonussDate(String minDate, String maxDate,Integer page, Integer maxRecords) {
             
             minDate= minDate == null ? "0000/00/00" : minDate;
             maxDate= maxDate == null ? "3333/33/33" : maxDate;
-            
+            BonusPageDTO response = new BonusPageDTO();
+            try{
 		entityManager.getTransaction().begin();
-		Query count = entityManager.createQuery("select count(u) from BonusEntity u where u.date > " + minDate + " AND u.date < " + maxDate);
+		Query count = entityManager.createQuery("SELECT COUNT(u) FROM BonusEntity u WHERE u.date > '"+minDate+"' AND u.date < '"+maxDate+"'");
 		Long regCount = 0L;
 		regCount = Long.parseLong(count.getSingleResult().toString());
 		
-		Query q = entityManager.createQuery("select u from BonusEntity u where u.date > " + minDate + " AND u.date < " + maxDate);
+		Query q = entityManager.createQuery("SELECT u FROM BonusEntity u WHERE u.date > '"+ minDate +"' AND u.date < '"+ maxDate +"'");
 		if (page != null && maxRecords != null) {
 		    q.setFirstResult((page-1)*maxRecords);
 		    q.setMaxResults(maxRecords);
 		}
-		BonusPageDTO response = new BonusPageDTO();
 		response.setTotalRecords(regCount);
 		response.setRecords(BonusConverter.entity2PersistenceDTOList(q.getResultList()));
-		entityManager.getTransaction().commit();
-		return response;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            finally{
+                entityManager.getTransaction().commit();
+                
+            }    
+            return response;    
+		
 	}
 
 }

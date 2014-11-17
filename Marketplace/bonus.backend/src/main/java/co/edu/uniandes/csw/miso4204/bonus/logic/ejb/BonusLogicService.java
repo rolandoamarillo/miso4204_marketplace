@@ -39,8 +39,8 @@ public class BonusLogicService extends _BonusLogicService {
 		persistance = new BonusPersistence();
 	}
 	
-	public BonusPageDTO getBonussDate(Integer page, Integer maxRecords, String minDate, String maxDate){
-		return persistance.getBonussDate(page, maxRecords,minDate,maxDate); 
+	public BonusPageDTO getBonussDate(String minDate, String maxDate,Integer page, Integer maxRecords){
+		return persistance.getBonussDate(minDate,maxDate,page, maxRecords); 
 	}
 	
 }

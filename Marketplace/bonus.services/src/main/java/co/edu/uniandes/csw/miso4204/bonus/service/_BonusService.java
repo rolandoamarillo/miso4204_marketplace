@@ -81,9 +81,9 @@ public abstract class _BonusService {
 
 	@Path("/search_Date")
 	@GET
-	public BonusPageDTO getBonussDate(@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords,
-								@QueryParam("minDate") String minDate, @QueryParam("maxDate") String maxDate ){
-		return bonusLogicService.getBonussDate(page, maxRecords, minDate, maxDate);
+	public BonusPageDTO getBonussDate(@QueryParam("minDate") String minDate, @QueryParam("maxDate") String maxDate,
+                @QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords ){
+		return bonusLogicService.getBonussDate(minDate, maxDate,page, maxRecords);
 	}
 	
 }
