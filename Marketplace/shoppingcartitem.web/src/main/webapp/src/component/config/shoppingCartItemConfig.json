@@ -3,7 +3,7 @@
     "name" : "shoppingCartItem",
     "templateName" : "shoppingCartItem",
     "url" : "user.html",
-    "server": "localhost:8080",
+    "server": "localhost:8084",
 	"context": "/shoppingcartitem.services/webresources/shopping_cart_items",
       
     "el" : "#main"

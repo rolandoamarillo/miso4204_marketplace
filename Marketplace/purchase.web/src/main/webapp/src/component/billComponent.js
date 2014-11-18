@@ -16,6 +16,10 @@ define(['component/shoppingCartComponent', 'component/toolbarComponent' ], funct
             if(options.paymentList){
                 this.paymentList = options.paymentList;
             }
+            if(options.purchaseIntegrator){
+                this.purchaseIntegrator = options.purchaseIntegrator;
+            }
+            
             this.toolbar();
             this.setupShoppingCart();
             this.loadData();
@@ -67,7 +71,7 @@ define(['component/shoppingCartComponent', 'component/toolbarComponent' ], funct
                 icon: '',
                 displayName: 'Pay',
                 show: true
-            }, this.pay, this);
+            }, this.purchaseIntegrator.pay, this);
             this.toolbarComponent.render();
             console.log(this.toolbarComponent.el);
         }

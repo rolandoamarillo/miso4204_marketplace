@@ -47,7 +47,6 @@ public abstract class _WishListConverter {
 		if (entity != null) {
 			WishListDTO dto = new WishListDTO();
 					dto.setId(entity.getId());
-					dto.setName(entity.getName());
 					dto.setBuyerId(entity.getBuyerId());
 			return dto;
 		}else{
@@ -60,7 +59,6 @@ public abstract class _WishListConverter {
 			WishListEntity entity=new WishListEntity();
 					entity.setId(dto.getId());
 			
-					entity.setName(dto.getName());
 			
 					entity.setBuyerId(dto.getBuyerId());
 			
