@@ -151,7 +151,7 @@ define(['model/productModel'], function(productModel) {
             }    
                 listReady();
             };
-				App.Utils.getComponentList('categoryComponent',listDataReady,'categoryComponent');
+//				App.Utils.getComponentList('categoryComponent',listDataReady,'categoryComponent');
         },
         save: function() {
             var self = this;
@@ -184,7 +184,7 @@ define(['model/productModel'], function(productModel) {
             this.$el.slideUp("fast", function() {
                 self.$el.html(self.editTemplate({product: self.currentModel, componentId: self.componentId , showEdit : self.showEdit , showDelete : self.showDelete
  
-				    ,category: self.categoryComponent
+//				    ,category: self.categoryComponent
  
 				}));
                 self.$el.slideDown("fast");

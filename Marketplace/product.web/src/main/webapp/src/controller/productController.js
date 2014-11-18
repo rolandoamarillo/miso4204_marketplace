@@ -60,7 +60,7 @@ define(['controller/_productController','delegate/productDelegate'], function() 
             this.$el.slideUp("fast", function() {
                 self.$el.html(self.searchTemplate({product: self.currentModel, componentId: self.componentId , showEdit : self.showEdit , showDelete : self.showDelete
  
-				    ,category: self.categoryComponent
+//				    ,category: self.categoryComponent
  
 				}));
                 self.$el.slideDown("fast");
