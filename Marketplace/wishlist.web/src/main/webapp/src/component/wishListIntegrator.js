@@ -62,18 +62,7 @@ function (wishListMasterCp, shoppingCartCp)
             this.wishListMasterComponent.whishListItemComponent.disableEdit();
             this.wishListMasterComponent.hideChilds();
         },
-        addItem: function (params) {
-//            this.wishListMasterComponent.addItems([{productId: params.id}]);
-//            this.wishListMasterComponent.masterComponent.save();
-//            this.render();
-            var a = this.shoppingCartItemComponent;
-            a.each(function(productshoppingcartitemid){
-                alert();
-                if(params.id===productshoppingcartitemid.get('id')) {
-                    alert(productshoppingcartitemid.get('name'));
-                }
-            });
-        
+        addItem: function (params) {      
             this.wishListMasterComponent.addItems([{productId: params.id}]);
             this.render();
             this.wishListMasterComponent.whishListItemComponent.listComponent.render();

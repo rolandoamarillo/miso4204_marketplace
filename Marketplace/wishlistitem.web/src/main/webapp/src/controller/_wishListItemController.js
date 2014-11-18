@@ -233,9 +233,7 @@ define(['model/wishListItemModel'], function(wishListItemModel) {
 			return updatedArray;
 		},
 		addRecords: function(objArray){
-                    alert('agregando');
 			if (Array.isArray(objArray)) {
-                            alert('agregandoArray');
 				for (var idx in objArray) {
 					var newModel = this.currentList.push(objArray[idx]);
 					if (newModel.setCacheList) {
@@ -244,13 +242,11 @@ define(['model/wishListItemModel'], function(wishListItemModel) {
 					}
 				}
 			}else{
-                            alert('agregandoNOArray1');
 				if (typeof(objArray)==="object") {
 					var newModel = this.currentList.push(objArray);
 					if (newModel.setCacheList) {
 						newModel.setCacheList(this.currentList);
 						newModel.save({}, {});
-                                                alert('agregandp');
 					}
 				}
 			}
