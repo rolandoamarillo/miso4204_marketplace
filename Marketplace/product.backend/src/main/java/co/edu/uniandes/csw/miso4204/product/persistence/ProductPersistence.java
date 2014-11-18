@@ -33,6 +33,7 @@ package co.edu.uniandes.csw.miso4204.product.persistence;
 import co.edu.uniandes.csw.miso4204.product.logic.dto.ProductDTO;
 import co.edu.uniandes.csw.miso4204.product.logic.dto.ProductPageDTO;
 import co.edu.uniandes.csw.miso4204.product.persistence.converter.ProductConverter;
+import co.edu.uniandes.csw.miso4204.product.persistence.entity.ProductEntity;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -77,7 +78,9 @@ public class ProductPersistence extends _ProductPersistence{
                                             Integer firstRecord) 
         {
                 // Armar la sentencia SQL
-                String sqlStatement = " select u from ProductEntity u ";
+            
+            
+                String sqlStatement = " select u.id, u.name, u.description, u.price, u.categoryId from ProductEntity u ";
                 if (feature != null) {
                     sqlStatement += " , ProductFeatureEntity pf " +
                                     " where u.id = pf.productid " +
@@ -103,7 +106,7 @@ public class ProductPersistence extends _ProductPersistence{
                
 		entityManager.getTransaction().begin();
 
-                Query q = entityManager.createQuery(sqlStatement);
+                Query q = entityManager.createNativeQuery(sqlStatement, ProductEntity.class);
 		if (firstRecord != null && maxRecords != null && firstRecord.compareTo(new Integer(0))>0) {
 		    q.setFirstResult(firstRecord);
 		    q.setMaxResults(maxRecords);
