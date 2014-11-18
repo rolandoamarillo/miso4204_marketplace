@@ -3,8 +3,8 @@
     "name" : "picture",
     "templateName" : "picture",
     "url" : "user.html",
-    "server": "localhost:8080",
-	"context": "/picture.web/webresources/pictures",
+    "server": "localhost:8084",
+	"context": "/picture.services/webresources/pictures",
       
     "el" : "#main"
 }
