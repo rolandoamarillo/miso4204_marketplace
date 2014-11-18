@@ -73,7 +73,7 @@ public abstract class _LoginService {
             UserSessionDTO db = securityLogic.getUserSession(login.getUserName());
             if (db != null) {
                 if (db.getUserName().equals(login.getUserName()) && db.getPassword().equals(login.getPassword()) && db.getTenantID().equals(login.getTenantID())) {
-                    token = new Gson().toJson(JsonWebToken.encode(db, "Ejemplo", JwtHashAlgorithm.HS256));
+                    token = new Gson().toJson(JsonWebToken.encode(db, "localhost", JwtHashAlgorithm.HS256));
                 }
             }
         } catch (Exception e) {
