@@ -48,10 +48,15 @@ public class RewardPersistence extends _RewardPersistence{
 	@Override
 	public RewardDTO createReward(RewardDTO reward) {
 		if(reward.getValue() != null) {
-			reward.setPoints(Integer.valueOf(reward.getValue().intValue()%1000));
+			reward.setPoints(Integer.valueOf(reward.getValue().intValue()/1000));
 		}
-		RewardEntity entity=RewardConverter.persistenceDTO2Entity(reward);
 		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("SELECT U.totalPoints FROM RewardEntity u WHERE u.buyerId = "+reward.getBuyerId()+" ORDER BY u.date DESC").setMaxResults(1);
+		Integer accumulatedPoints = 0;
+		accumulatedPoints = Integer.parseInt(query.getSingleResult().toString());
+		System.out.println(accumulatedPoints);
+		reward.setTotalPoints(accumulatedPoints+reward.getPoints());
+		RewardEntity entity=RewardConverter.persistenceDTO2Entity(reward);
 		entityManager.persist(entity);
 		entityManager.getTransaction().commit();
 		return RewardConverter.entity2PersistenceDTO(entity);
