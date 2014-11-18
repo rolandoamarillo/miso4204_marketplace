@@ -15,15 +15,21 @@
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>wishlistitem.web</artifactId>
-            <version>${project.version}</version>
+            <groupId>co.edu.uniandes.csw.miso4204</groupId>
+            <artifactId>buyer.web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>buyer.web</artifactId>
-            <version>${project.version}</version>
+            <groupId>co.edu.uniandes.csw.miso4204</groupId>
+            <artifactId>wishlistitem.web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>co.edu.uniandes.csw.miso4204</groupId>
+            <artifactId>shoppingcartitem.web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
             <type>war</type>
         </dependency>
     </dependencies> 

@@ -56,7 +56,6 @@ public abstract class _WishListEntity {
 	@Id
 	@GeneratedValue(generator = "WishList")
 	private Long id;
-	private String name;
 	private Long buyerId;
 
 	public Long getId(){
@@ -66,13 +65,7 @@ public abstract class _WishListEntity {
 	public void setId(Long id){
 		this.id = id;
 	}
-	public String getName(){
-		return name;
-	}
-	
-	public void setName(String name){
-		this.name = name;
-	}
+
 	public Long getBuyerId(){
 		return buyerId;
 	}

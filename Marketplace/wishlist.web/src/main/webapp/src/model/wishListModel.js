@@ -33,10 +33,10 @@ define(['model/_wishListModel'], function() {
  	validate: function(attrs,options)
         {
             var validationMessage = "";
-            if(!attrs.name)
-            {
-                validationMessage = "The name can't be empty.";
-            }
+//            if(!attrs.name)
+//            {
+//                validationMessage = "The name can't be empty.";
+//            }
             if(validationMessage.length>0){
                return validationMessage;
             }
