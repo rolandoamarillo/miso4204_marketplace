@@ -55,24 +55,6 @@ define(['controller/_bonusController', 'delegate/bonusDelegate'], function () {
                 self.$el.slideDown("fast");
             });
         },
-//        postInit: function () {
-//            this.searchTemplate = _.template($('#bonusSearch').html());
-//            this.listFunction = this.list;
-//            var self = this;
-//            Backbone.on(this.componentId + '-' + 'bonus-searchBonus', function(params) {
-//                self.searchBonus(params);
-//            });
-//        },
-//        showSearch: function () {
-//            if (App.Utils.eventExists(this.componentId + '-' + 'instead-bonus-search')) {
-//                Backbone.trigger(this.componentId + '-' + 'instead-bonus-search', {view: this});
-//            } else {
-//                Backbone.trigger(this.componentId + '-' + 'pre-bonus-search', {view: this});
-//                this.currentModel = new this.modelClass({componentId: this.componentId});
-//                this._renderSearch();
-//                Backbone.trigger(this.componentId + '-' + 'post-bonus-search', {view: this});
-//            }
-//        },
         searchBonus: function (callback,context) {
             var self = this;
             this.setSearchList(true);
