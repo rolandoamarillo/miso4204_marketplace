@@ -62,5 +62,9 @@ public abstract class _RewardLogicService {
 
 	public void updateReward(RewardDTO reward){
 	    persistance.updateReward(reward); 
-	}	
+	}
+	
+	public RewardDTO getAccumulatedPoints(Long id) {
+		return persistance.getAccumulatedPoints(id);
+	}
 }

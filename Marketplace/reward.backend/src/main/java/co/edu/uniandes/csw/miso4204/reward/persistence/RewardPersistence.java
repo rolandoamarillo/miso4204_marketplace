@@ -48,13 +48,26 @@ public class RewardPersistence extends _RewardPersistence{
 	@Override
 	public RewardDTO createReward(RewardDTO reward) {
 		if(reward.getValue() != null) {
-			reward.setPoints(Integer.valueOf(reward.getValue().intValue()%1000));
+			reward.setPoints(Integer.valueOf(reward.getValue().intValue()/1000));
 		}
-		RewardEntity entity=RewardConverter.persistenceDTO2Entity(reward);
 		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("SELECT u.totalPoints FROM RewardEntity u WHERE u.buyerId = "+reward.getBuyerId()+" ORDER BY u.date DESC").setMaxResults(1);
+		Integer accumulatedPoints = 0;
+		accumulatedPoints = Integer.parseInt(query.getSingleResult().toString());
+		reward.setTotalPoints(accumulatedPoints+reward.getPoints());
+		RewardEntity entity=RewardConverter.persistenceDTO2Entity(reward);
 		entityManager.persist(entity);
 		entityManager.getTransaction().commit();
 		return RewardConverter.entity2PersistenceDTO(entity);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public RewardDTO getAccumulatedPoints(Long id) {
+		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("SELECT u FROM RewardEntity u WHERE u.buyerId = "+id+" ORDER BY u.date DESC").setMaxResults(1);
+		RewardDTO result = RewardConverter.entity2PersistenceDTO((RewardEntity)query.getSingleResult());
+		entityManager.getTransaction().commit();
+		return result;
 	}
         
         

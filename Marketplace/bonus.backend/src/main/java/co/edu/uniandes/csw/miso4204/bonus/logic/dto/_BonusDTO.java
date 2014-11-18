@@ -71,6 +71,9 @@ public abstract class _BonusDTO {
 	
 	
 	private String expiration;
+	
+	
+	private Integer spentPoints;
 
 
 
@@ -141,6 +144,14 @@ public abstract class _BonusDTO {
  
 	public void setExpiration(String expiration) {
 		this.expiration = expiration;
+	}
+
+	public Integer getSpentPoints() {
+		return spentPoints;
+	}
+
+	public void setSpentPoints(Integer spentPoints) {
+		this.spentPoints = spentPoints;
 	}
 	
 }
