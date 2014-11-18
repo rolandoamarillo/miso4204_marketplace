@@ -65,6 +65,12 @@ public abstract class _BonusDTO {
 	
 
 	private Long buyerId;
+	
+	
+	private String date;
+	
+	
+	private String expiration;
 
 
 
@@ -119,6 +125,22 @@ public abstract class _BonusDTO {
  
 	public void setBuyerId(Long buyerid) {
 		this.buyerId = buyerid;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+ 
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
+	public String getExpiration() {
+		return expiration;
+	}
+ 
+	public void setExpiration(String expiration) {
+		this.expiration = expiration;
 	}
 	
 }

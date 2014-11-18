@@ -32,6 +32,7 @@ define([], function() {
 		 'points' : '' ,  
 		 'name' : '' ,  
 		 'date' : '' ,  
+		 'totalPoints' : '' ,  
 		 'purchaseId' : '' ,  
 		 'buyerId' : ''        },
         initialize: function() {
