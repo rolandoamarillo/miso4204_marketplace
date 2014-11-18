@@ -4,7 +4,7 @@
     "templateName" : "category",
     "url" : "user.html",
     "server": "localhost:8080",
-	"context": "/category.web/webresources/categorys",
+	"context": "/category.services/webresources/categorys",
       
     "el" : "#main"
 }
