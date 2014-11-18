@@ -95,4 +95,4 @@ define(['delegate/_productDelegate'], function() {
         }
     });
 });
-//Modificado por Sergio Rios
+//Modificado por Sergio Rios 20141117

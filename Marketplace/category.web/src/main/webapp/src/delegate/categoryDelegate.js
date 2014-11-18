@@ -96,4 +96,4 @@ define(['delegate/_categoryDelegate'], function() {
         }
     });
 });
-//Modificado por Sergio Rios
+//Modificado por Sergio Rios 20141117
