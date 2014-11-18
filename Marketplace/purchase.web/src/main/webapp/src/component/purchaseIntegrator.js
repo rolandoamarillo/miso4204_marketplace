@@ -94,7 +94,7 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
                         
             $('#main').html('');
             this.billComponent = new billCp();
-            this.billComponent.initialize({addressList:this.selectedAddress, paymentList:this.selectedPayment});
+            this.billComponent.initialize({addressList:this.selectedAddress, paymentList:this.selectedPayment, purchaseIntegrator:this});
             $('.breadcrumb').html('');
             this.billComponent.render('main');
             $('.breadcrumb').append('<li>Shopping Address</li>');
@@ -104,6 +104,77 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
         
         pay: function(){
             
+            // Obtenci{on de Fecha
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+                if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm < 10){
+                mm='0'+mm;
+            } 
+            var today = dd+'/'+mm+'/'+yyyy;
+            
+            // Definicion de la compra
+            var purchase = {
+                //id: '',
+                name:'purchase',
+                purchaseDate:today,
+                totalValue:0,
+                totalItems:0,
+                points:0,
+                buyerId:0,
+                addressId: this.purchaseIntegrator.selectedAddress.id
+            };
+
+            var purchaseMaster = {
+                id: 0,
+                purchaseEntity: {
+                    id: purchase.id,
+                    name:  purchase.name,
+                    purchaseDate: purchase.purchaseDate,
+                    totalValue: purchase.totalValue,
+                    totalItems:purchase.totalItems,
+                    points:purchase.points,
+                    buyerId:purchase.buyerId,
+                    addressId:purchase.addressId
+                },
+                createpurchaseItem: [
+                    {
+                        unitPrice :0,  
+                        quantity :0,  
+                        name :'purchaseItem',
+                        productId:'' 
+                    }
+                ],
+                createpayment:[{
+                        value:purchase.totalValue,
+                        tokenBank:'',
+                        name:'payment',
+                        creditcardId:this.purchaseIntegrator.selectedPayment.id,
+                        paymentmodeId:''
+                }]
+            };
+             
+            $.ajax({
+                url: 'http://localhost:8080/purchase.services/webresources/master/purchases/',
+                type: 'POST',
+                data: JSON.stringify(purchaseMaster),
+                contentType: 'application/json'
+            }).done(_.bind(function(data) {
+                console.log("_bind"); //callback(data);
+                alert('COMPRA GUARDADA!!');    // Continuar con ciclo de compra
+                document.location.href="http://localhost:8080/purchase.web";
+            }, this)).error(_.bind(function(data) {
+                console.log("callback error"); //callback(data);
+                alert('ERROR REALIZANDO LA COMPRA - INTENTE MAS TARDE'); // Continuar con ciclo de compra
+                document.location.href="http://localhost:8080/purchase.web";
+            }, this));
+            
+           
         },
         
         useBonus: function(){
