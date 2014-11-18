@@ -35,19 +35,13 @@ define(['controller/_productController','delegate/productDelegate'], function() 
         },
         productSearch: function (callback,context) {
              var self = this;
-             var model = $('#' + this.componentId + '-productForm').serializeObject();
+             var model = $('#' + this.componentId + '-userForm').serializeObject();
              this.currentModel.set(model);
              var delegate = new App.Delegate.ProductDelegate();
-             delegate.search(self.currentModel, 
-                 function (data) {
-                   self.currentList.reset(data.records);
-                    callback.call(context,{data: self.currentList, page: 1, pages: 1, totalRecords: self.currentList.lenght})            
-                }
-                , function (data) {
-                    Backbone.trigger(self.componentId + '-' + 'error', 
-                       {event: 'product-search', view: self, id: '', data: data, error: 'Error in product search'});            
-                  }
-              );
+             delegate.search(self.currentModel, function (data) {
+                 self.currentList.reset(data.records);
+                 callback.call(context,{data: self.currentList, page: 1, pages: 1, totalRecords: self.currentList.lenght})            }, function (data) {
+                 Backbone.trigger(self.componentId + '-' + 'error', {event: 'product-search', view: self, id: '', data: data, error: 'Error in product search'});            });
          },
         search: function() {
             if (App.Utils.eventExists(this.componentId + '-' +'instead-product-search')) {
@@ -65,7 +59,7 @@ define(['controller/_productController','delegate/productDelegate'], function() 
             this.$el.slideUp("fast", function() {
                 self.$el.html(self.searchTemplate({product: self.currentModel, componentId: self.componentId , showEdit : self.showEdit , showDelete : self.showDelete
  
-//				    ,category: self.categoryComponent
+				    ,category: self.categoryComponent
  
 				}));
                 self.$el.slideDown("fast");
