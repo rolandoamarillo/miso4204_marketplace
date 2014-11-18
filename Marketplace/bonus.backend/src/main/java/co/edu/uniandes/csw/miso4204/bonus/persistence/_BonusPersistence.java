@@ -42,7 +42,8 @@ import co.edu.uniandes.csw.miso4204.bonus.persistence.entity.BonusEntity;
 
 public abstract class _BonusPersistence{
 
-  	protected EntityManager entityManager;
+  protected EntityManager entityManager;
+	protected EntityManager entityManagerReward;
 	
 	public BonusDTO createBonus(BonusDTO bonus) {
 		BonusEntity entity=BonusConverter.persistenceDTO2Entity(bonus);
