@@ -78,5 +78,13 @@ public abstract class _RewardService {
 	public void updateReward(@PathParam("id") Long id, RewardDTO reward){
 		rewardLogicService.updateReward(reward);
 	}
+        
+        @GET
+        @Path("/search_Date")
+        public RewardPageDTO getRewardsDate(@QueryParam("minDate") String minDate, @QueryParam("maxDate") String maxDate,
+                @QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
+                return rewardLogicService.getRewardsDate(minDate,maxDate,page,maxRecords);
+        
+        }
 	
 }

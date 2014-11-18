@@ -47,8 +47,8 @@ public class BonusPersistence extends _BonusPersistence{
 	@SuppressWarnings("unchecked")
 	public BonusPageDTO getBonussDate(String minDate, String maxDate,Integer page, Integer maxRecords) {
             
-            minDate= minDate == null ? "0000/00/00" : minDate;
-            maxDate= maxDate == null ? "3333/33/33" : maxDate;
+            minDate= minDate.equals("") ? "0000/00/00" : minDate;
+            maxDate= maxDate.equals("") ? "3333/33/33" : maxDate;
             BonusPageDTO response = new BonusPageDTO();
             try{
 		entityManager.getTransaction().begin();
