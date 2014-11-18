@@ -54,7 +54,7 @@ public class ProductPersistence extends _ProductPersistence{
                                             String strMaxRecords, 
                                             String strFirstRecord) 
         {
-               return this.getProducts(category, feature, null, null, 
+               return this.getProductsSearch(category, feature, null, null, 
                                        searchText, 
                                        new Integer(strMaxRecords), 
                                        new Integer(strFirstRecord));
@@ -66,10 +66,10 @@ public class ProductPersistence extends _ProductPersistence{
                                             Integer maxRecords, 
                                             Integer firstRecord) 
         {
-               return this.getProducts(category, feature, null, null, searchText, maxRecords, firstRecord);
+               return this.getProductsSearch(category, feature, null, null, searchText, maxRecords, firstRecord);
         }
 
-        public List<ProductDTO> getProducts(Long category, 
+        public List<ProductDTO> getProductsSearch(Long category, 
                                             Long feature, 
                                             Double minPrice,
                                             Double maxPrice,
@@ -104,7 +104,7 @@ public class ProductPersistence extends _ProductPersistence{
                     sqlStatement += " and lower(u.description) like '%" + searchText.trim().toLowerCase() + "%' ";
                 }
                
-		entityManager.getTransaction().begin();
+		//entityManager.getTransaction().begin();
 
                 Query q = entityManager.createNativeQuery(sqlStatement, ProductEntity.class);
 		if (firstRecord != null && maxRecords != null && firstRecord.compareTo(new Integer(0))>0) {
@@ -112,7 +112,7 @@ public class ProductPersistence extends _ProductPersistence{
 		    q.setMaxResults(maxRecords);
 		}        
 		List<ProductDTO> result = ProductConverter.entity2PersistenceDTOList(q.getResultList());
-		entityManager.getTransaction().commit();
+		//entityManager.getTransaction().commit();
 		return result;
         }
 }

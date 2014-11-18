@@ -43,20 +43,22 @@ import co.edu.uniandes.csw.miso4204.product.logic.ejb.ProductLogicService;
 import co.edu.uniandes.csw.miso4204.product.logic.dto.ProductDTO;
 
 @Path("/products")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ProductService extends _ProductService {
     
     @GET
-    @Path("/search")
-    public List<ProductDTO> getProducts(
+    @Path("search")
+    public List<ProductDTO> getProductsSearch(
             @QueryParam("categoryId") Long categoryId,
             @DefaultValue("0") @QueryParam("min_price") Double minPrice,
-            @DefaultValue("" + Double.MAX_VALUE) @QueryParam("max_price") Double maxPrice,
+            @DefaultValue("" + 999999999) @QueryParam("max_price") Double maxPrice,
             @QueryParam("feature") Long feature,
             @QueryParam("searchText") String searchText,
-            @DefaultValue("" + Integer.MAX_VALUE) @QueryParam("max_records") Integer maxRecords,
+            @DefaultValue("" + 999999999) @QueryParam("max_records") Integer maxRecords,
             @DefaultValue("0") @QueryParam("first_record") Integer firstRecord) {
         
-        return productLogicService.getProducts(categoryId, 
+        return productLogicService.getProductsSearch(categoryId, 
                                                feature,
                                                minPrice,
                                              maxPrice,

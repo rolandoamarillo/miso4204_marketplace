@@ -39,11 +39,11 @@ public class ProductLogicService extends _ProductLogicService {
         persistance = new ProductPersistence();
     }
 
-    public List<ProductDTO> getProducts(Long category, Long feature, Double minPrice,
+    public List<ProductDTO> getProductsSearch(Long category, Long feature, Double minPrice,
             Double maxPrice, String searchText,
             Integer maxRecords, Integer firstRecord) {
 
-        return persistance.getProducts(category, feature, minPrice,
+        return persistance.getProductsSearch(category, feature, minPrice,
                 maxPrice, searchText, maxRecords, firstRecord);
     }
 }
