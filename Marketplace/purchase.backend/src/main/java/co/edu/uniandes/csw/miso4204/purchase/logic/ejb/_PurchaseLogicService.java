@@ -35,6 +35,7 @@ import java.util.List;
 import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchaseDTO;
 import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchasePageDTO;
 import co.edu.uniandes.csw.miso4204.purchase.persistence.PurchasePersistence;
+import java.util.Date;
 
 public abstract class _PurchaseLogicService {
 
@@ -51,7 +52,7 @@ public abstract class _PurchaseLogicService {
 	public PurchasePageDTO getPurchases(Integer page, Integer maxRecords){
 		return persistance.getPurchases(page, maxRecords); 
 	}
-
+                
 	public PurchaseDTO getPurchase(Long id){
 		return persistance.getPurchase(id); 
 	}

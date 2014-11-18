@@ -11,6 +11,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
             
             this.masterComponent = new BuyerComponent();
             this.masterComponent.initialize();
+            this.delegate = new App.Delegate.BuyerDelegate();
             
             this.childComponents = [];
 			
@@ -41,7 +42,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
                         self.model,
                         self.creditCardComponent.getDeletedRecords(),
                         self.creditCardComponent.getUpdatedRecords(),
-                        []
+                        self.creditCardComponent.getCreatedRecords()
                 );
 
                 App.Utils.fillCacheList(
@@ -49,23 +50,11 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
                         self.model,
                         self.addressComponent.getDeletedRecords(),
                         self.addressComponent.getUpdatedRecords(),
-                        []
+                        self.addressComponent.getCreatedRecords()
                 );
 
                 self.model.save({}, {
                     success: function() {
-                        var addresses = self.addressComponent.getCreatedRecords();
-                        for (i = 0; i < addresses.length; i++) {
-                            var addressModel = new App.Model.AddressModel();
-                            addressModel.set(addresses[i]);
-                            addressModel.save();
-                        }
-                        var creditCards = self.creditCardComponent.getCreatedRecords();
-                        for (i = 0; i < creditCards.length; i++) {
-                            var creditCardModel = new App.Model.CreditCardModel();
-                            creditCardModel.set(creditCards[i]);
-                            creditCardModel.save();
-                        }
                         Backbone.trigger(self.masterComponent.componentId + '-' + 'post-buyer-save', {view: self, model : self.model});
                     },
                     error: function(error) {
@@ -202,35 +191,39 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
 			}
 		},
                 setupBuyerComponent: function() {
-            this.masterComponent.addGlobalAction({
-                name: 'Windows',
-                icon: 'glyphicon-user',
-                displayName: 'Windows',
-                show: true,
-                menu: 'utils'
-            },
-            this.windows,
-            this);
-            
-            this.masterComponent.addGlobalAction({
-                name: 'Facebook',
-                icon: 'glyphicon-user',
-                displayName: 'Facebook',
-                show: true,
-                menu: 'utils'
-            },
-            this.facebook,
-            this);
-            
-            this.masterComponent.addGlobalAction({
-                name: 'Google',
-                icon: 'glyphicon-user',
-                displayName: 'Google',
-                show: true,
-                menu: 'utils'
-            },
-            this.google,
-            this);
+                    var self = this;
+                    Backbone.on('buyerForm-getPurchases', function(params) {
+                        self.compras(params);
+                    });
+                    this.masterComponent.addGlobalAction({
+                        name: 'Windows',
+                        icon: 'glyphicon-user',
+                        displayName: 'Windows',
+                        show: true,
+                        menu: 'utils'
+                    },
+                    this.windows,
+                    this);
+
+                    this.masterComponent.addGlobalAction({
+                        name: 'Facebook',
+                        icon: 'glyphicon-user',
+                        displayName: 'Facebook',
+                        show: true,
+                        menu: 'utils'
+                    },
+                    this.facebook,
+                    this);
+
+                    this.masterComponent.addGlobalAction({
+                        name: 'Google',
+                        icon: 'glyphicon-user',
+                        displayName: 'Google',
+                        show: true,
+                        menu: 'utils'
+                    },
+                    this.google,
+                    this);
         },
          windows: function() {       
                   
@@ -261,7 +254,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
        },
         facebook: function() {
             hello.init({
-                'facebook' : '597983760329002'
+                'facebook' : '751100841593326'
             },
             {
                 scope : 'email',
@@ -299,6 +292,11 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
                 });
             }, function(e){
                 alert("Error al Autenticar: " + e.error.message);
+            });
+        },
+        compras: function(params) {
+            this.delegate.searchPurchases(params.id, function(data) {
+                alert('Compras del Usuario: ' + data.totalRecords + ' - ' + data.records[0].name + ' - ' + data.records[1].name);
             });
         }
     });

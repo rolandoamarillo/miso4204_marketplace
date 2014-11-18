@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-define(['component/addressComponent', 'component/paymentModeComponent', 'component/productComponent', 'component/billComponent'], function(adressCp, paymentModeCp, productCp, billCp) {
+define(['component/addressComponent', 'component/creditCardComponent', 'component/billComponent'], function(adressCp, creditCardCp, billCp) {
     App.Component.PurchaseIntegrator = App.Component.BasicComponent.extend({
         initialize: function() {
             this.componentId = App.Utils.randomInteger();
@@ -17,6 +17,12 @@ define(['component/addressComponent', 'component/paymentModeComponent', 'compone
             this.addressComponent.initialize();
             this.addressComponent.clearGlobalActions();
             this.addressComponent.clearRecordActions();
+            this.addressComponent.addGlobalAction({
+                name: 'cancelar',
+                icon: '',
+                displayName: 'Cancelar',
+                show: true
+            }, this.cancel, this);
             this.addressComponent.addRecordAction({
                 name: 'seleccionar',
                 icon: '',
@@ -32,7 +38,7 @@ define(['component/addressComponent', 'component/paymentModeComponent', 'compone
         selectAddress: function(obj) {
             var selectedId = obj.id;
             this.selectedAddress = this.searchAddressById(selectedId);            
-            this.setupPaymentModeComponent();            
+            this.setupCreditCardComponent();            
         },
         
         searchAddressById: function(id){
@@ -44,45 +50,46 @@ define(['component/addressComponent', 'component/paymentModeComponent', 'compone
             }
         },
         
-        setupPaymentModeComponent: function() {
-            this.paymentModeComponent = new paymentModeCp();
-            this.paymentModeComponent.initialize();            
-            this.paymentModeComponent.clearGlobalActions();
-            this.paymentModeComponent.clearRecordActions();
-            this.paymentModeComponent.addRecordAction({
+        setupCreditCardComponent: function() {
+            this.creditCardComponent = new creditCardCp();
+            this.creditCardComponent.initialize();            
+            this.creditCardComponent.clearGlobalActions();
+            this.creditCardComponent.clearRecordActions();            
+            this.creditCardComponent.addGlobalAction({
+                name: 'cancelar',
+                icon: '',
+                displayName: 'Cancelar',
+                show: true
+            }, this.cancel, this);
+            this.creditCardComponent.addRecordAction({
                 name: 'seleccionar',
                 icon: '',
                 displayName: 'Seleccionar',
                 show: true
             },
-            _.bind(function(evt){ this.selectPaymentMode(evt); }, this), this);
+            _.bind(function(evt){ this.selectCreditCard(evt); }, this), this);
             $('#main').html('');
-            this.paymentModeComponent.render('main');
+            this.creditCardComponent.render('main');
             $('.breadcrumb').html('');
             $('.breadcrumb').append('<li>Shopping Address</li>');
-            $('.breadcrumb').append('<li class="active">Payment Mode</li>');
+            $('.breadcrumb').append('<li class="active">Credit Card</li>');
         },
         
-        selectPaymentMode: function(obj) {
+        selectCreditCard: function(obj) {
             var selectedId = obj.id;
-            this.selectedPayment = this.searchPaymentModeById(selectedId);  
+            this.selectedPayment = this.searchCreditCardById(selectedId);  
             this.initBillTemplate();
         },
         
-        searchPaymentModeById: function(id){
-            var paymentMode = this.paymentModeComponent.listComponent.listController.model.attributes.data;
-            for(var i = 0, l = paymentMode.length; i<l; i++){
-                if(paymentMode[i].id === id){
-                    return paymentMode[i];
+        searchCreditCardById: function(id){
+            var creditCard = this.creditCardComponent.listComponent.listController.model.attributes.data;
+            for(var i = 0, l = creditCard.length; i<l; i++){
+                if(creditCard[i].id === id){
+                    return creditCard[i];
                 }
             }
         },
-        
-        setupProductComponent: function() {
-            this.productComponent = new productCp();
-            this.productComponent.initialize();
-        },
-        
+                
         initBillTemplate: function(){
                         
             $('#main').html('');
@@ -91,32 +98,8 @@ define(['component/addressComponent', 'component/paymentModeComponent', 'compone
             $('.breadcrumb').html('');
             this.billComponent.render('main');
             $('.breadcrumb').append('<li>Shopping Address</li>');
-            $('.breadcrumb').append('<li>Payment Mode</li>');
+            $('.breadcrumb').append('<li>Credit Card</li>');
             $('.breadcrumb').append('<li class="active">Confirm and Pay</li>');
-        },
-        
-        loadToolbar: function() {
-            this.toolbarComponent.addMenu({
-                name: 'actions',
-                displayName: 'Actions',
-                show: true
-            });
-
-            this.toolbarComponent.addButton({
-                name: 'pay',
-                icon: '',
-                displayName: 'Pay',
-                show: true
-            }, this.pay, this);
-
-            this.toolbarComponent.addButton({
-                name: 'bonus',
-                icon: '',
-                displayName: 'Use Bonus',
-                show: true
-            }, this.useBonus, this);
-            this.toolbarComponent.render();
-            console.log(this.toolbarComponent.el);
         },
         
         pay: function(){
@@ -125,6 +108,10 @@ define(['component/addressComponent', 'component/paymentModeComponent', 'compone
         
         useBonus: function(){
             
+        },
+        
+        cancel: function(){
+            document.location.href="http://localhost:8080/purchase.web";
         }
     });
     return App.Component.PurchaseIntegrator;

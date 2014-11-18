@@ -3,7 +3,7 @@
     "name" : "buyer",
     "templateName" : "buyer",
     "url" : "user.html",
-    "server": "localhost:8084",
+    "server": "localhost:8080",
 	"context": "/buyer.services/webresources/buyers",
       
     "el" : "#main"
