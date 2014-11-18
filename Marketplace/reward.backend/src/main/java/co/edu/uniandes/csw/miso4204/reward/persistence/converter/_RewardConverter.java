@@ -43,7 +43,7 @@ import co.edu.uniandes.csw.miso4204.reward.persistence.entity.RewardEntity;
 
 public abstract class _RewardConverter {
 
-	private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+	private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
 	public static RewardDTO entity2PersistenceDTO(RewardEntity entity){
 		if (entity != null) {
 			RewardDTO dto = new RewardDTO();
