@@ -67,7 +67,7 @@ public abstract class _PurchaseService {
 	public PurchasePageDTO getPurchases(@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords){
 		return purchaseLogicService.getPurchases(page, maxRecords);
 	}
-	
+        
 	@GET
 	@Path("{id}")
 	public PurchaseDTO getPurchase(@PathParam("id") Long id){

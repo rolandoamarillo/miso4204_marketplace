@@ -62,12 +62,6 @@
             <artifactId>guava</artifactId>
             <version>17.0</version>
         </dependency>
-        <dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>picture.service.subsystem</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
  	
     </dependencies> 
 </project>

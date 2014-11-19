@@ -3,8 +3,8 @@
     "name" : "purchaseItem",
     "templateName" : "purchaseItem",
     "url" : "user.html",
-    "server": "localhost:8080",
-	"context": "/purchaseitem.web/webresources/purchase_items",
+    "server": "localhost:8084",
+	"context": "/purchaseitem.services/webresources/purchase_items",
       
     "el" : "#main"
 }

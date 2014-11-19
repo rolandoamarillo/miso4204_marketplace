@@ -54,15 +54,15 @@
     <div class="form-group">
     <form role="form" id="<%= componentId %>-purchaseSearchForm">
         <div class="form-group" >
-            <label for="InitialDate">Initial</label>
-            <input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="purchaseIniDate"  name="purchaseIniDate" placeholder="Enter value" />
+            <label for="InitialDate">Initial Date</label>
+            <input type="text" data-converter="date" data-date-format="yyyy-mm-dd" class="form-control" id="purchaseIniDate"  name="purchaseIniDate" placeholder="Enter value" />
                 <%= '<scr'+'ipt>' %>
         	$('#purchaseIniDate').datepicker({autoclose:true});
         	<%= '</scr'+'ipt>' %>
         </div>        
         <div class="form-group" >
             <label for="FinalDate">Final Date</label>
-            <input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="purchaseFinDate"  name="purchaseFinDate" placeholder="Enter value" />
+            <input type="text" data-converter="date" data-date-format="yyyy-mm-dd" class="form-control" id="purchaseFinDate"  name="purchaseFinDate" placeholder="Enter value" />
              <%= '<scr'+'ipt>' %>
         	$('#purchaseFinDate').datepicker({autoclose:true});
              <%= '</scr'+'ipt>' %>
@@ -70,10 +70,6 @@
         <div class="form-group" >
             <label for="purchaseId">Id Purchase</label>
             <input type="text" class="form-control" id="IdPurchase" name="IdPurchase" placeholder="Enter value" />	
-        </div>
-        <div class="form-group" >
-            <label for="productId">Id Producto</label>
-            <input type="text" class="form-control" id="IdProduct" name="IdProduct" placeholder="Enter value" />
         </div>
     </form>
     </div>

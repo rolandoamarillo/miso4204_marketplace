@@ -5,8 +5,14 @@
     <input type="hidden" name="id" value="<%= wishListItem.id %>"/>
     <% }%>
 		<div class="form-group" >
-		<label for="name">Name</label>
-    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= wishListItem.get('name') %>"/>	
+ 
+			<label for="productidId">Product Id</label> 
+            <select class="form-control" id="productId" name="productId">
+			  <option value="">None</option>
+            <% product.each(function(productid) { %> 
+              <option value="<%=productid.get('id')%>" <% if(wishListItem.get('productId')==productid.get('id')) {%>selected<%}%> ><%=productid.get('name')%></option>
+            <% }); %>                
+            </select>  
 		</div>
     </form>
     </div>

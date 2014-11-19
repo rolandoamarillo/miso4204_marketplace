@@ -18,10 +18,9 @@
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>category.service.subsystem</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
         </dependency>
  	
     </dependencies> 

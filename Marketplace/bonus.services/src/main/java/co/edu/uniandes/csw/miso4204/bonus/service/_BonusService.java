@@ -78,5 +78,12 @@ public abstract class _BonusService {
 	public void updateBonus(@PathParam("id") Long id, BonusDTO bonus){
 		bonusLogicService.updateBonus(bonus);
 	}
+
+	@Path("/search_Date")
+	@GET
+	public BonusPageDTO getBonussDate(@QueryParam("minDate") String minDate, @QueryParam("maxDate") String maxDate,
+                @QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords ){
+		return bonusLogicService.getBonussDate(minDate, maxDate,page, maxRecords);
+	}
 	
 }

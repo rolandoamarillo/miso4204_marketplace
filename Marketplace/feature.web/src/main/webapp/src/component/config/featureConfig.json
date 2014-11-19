@@ -3,8 +3,8 @@
     "name" : "feature",
     "templateName" : "feature",
     "url" : "user.html",
-    "server": "localhost:8080",
-	"context": "/feature.web/webresources/features",
+    "server": "localhost:8084",
+	"context": "/feature.services/webresources/features",
       
     "el" : "#main"
 }

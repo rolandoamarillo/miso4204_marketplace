@@ -3,8 +3,8 @@
     "name" : "wishList",
     "templateName" : "wishList",
     "url" : "user.html",
-    "server": "localhost:8080",
-	"context": "/wishlist.web/webresources/wish_lists",
+    "server": "localhost:8084",
+	"context": "/wishlist.services/webresources/wish_lists",
       
     "el" : "#main"
 }

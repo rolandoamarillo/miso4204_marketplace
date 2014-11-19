@@ -3,6 +3,8 @@
     <form role="form" id="<%= componentId %>-buyerForm">
     <% if(buyer.id) {%>
     <input type="hidden" name="id" value="<%= buyer.id %>"/>
+    <a class="btn btn-default" onclick="Backbone.trigger('buyerForm-getPurchases', {id: <%= buyer.id %> }); return false" style="float: right;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Consultar Compras</a>
+    <br/>
     <% }%>
 		<div class="form-group" >
 		<label for="username">Username</label>

@@ -3,8 +3,8 @@
     "name" : "paymentMode",
     "templateName" : "paymentMode",
     "url" : "user.html",
-    "server": "localhost:8080",
-	"context": "/paymentmode.web/webresources/payment_modes",
+    "server": "localhost:8084",
+	"context": "/paymentmode.services/webresources/payment_modes",
       
     "el" : "#main"
 }

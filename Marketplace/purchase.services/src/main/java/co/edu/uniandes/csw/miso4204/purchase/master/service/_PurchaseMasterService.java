@@ -68,5 +68,4 @@ public abstract class _PurchaseMasterService {
     public void updatePurchase(@PathParam("id") Long id, PurchaseMasterDTO purchase) {
         purchaseMasterLogicService.updateMasterPurchase(purchase);
     }
-
 }

@@ -2,6 +2,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
  'component/wishListItemComponent'],
  function(SelectionController, CacheModel, WishListMasterModel, CRUDComponent, TabController, WishListComponent,
  whishListItemComponent) {
+ 
     App.Component._WishListMasterComponent = App.Component.BasicComponent.extend({
         initialize: function() {
             var self = this;
@@ -29,6 +30,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
                 Backbone.trigger(uComponent.componentId + '-' + 'error', {event: 'wishList-master-save', view: self, message: error});
             });
             Backbone.on(this.masterComponent.componentId + '-instead-wishList-save', function(params) {
+                alert('alvanda');
                 self.model.set('wishListEntity', params.model);
                 if (params.model) {
                     self.model.set('id', params.model.id);
@@ -57,6 +59,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
 				}
             });
         },
+
         render: function(domElementId){
 			if (domElementId) {
 				var rootElementId = $("#"+domElementId);
