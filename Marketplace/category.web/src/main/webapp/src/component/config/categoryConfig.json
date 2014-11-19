@@ -3,7 +3,7 @@
     "name" : "category",
     "templateName" : "category",
     "url" : "user.html",
-    "server": "localhost:8080",
+    "server": "localhost:8084",
 	"context": "/category.services/webresources/categorys",
       
     "el" : "#main"
