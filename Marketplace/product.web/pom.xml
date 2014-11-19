@@ -6,8 +6,8 @@
     <artifactId>product.web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <dependencies>
-    	
+    <dependencies>    	    	        
+    	<!-- embedded glassfish 3.1.2 --> 
 		<dependency>
             <groupId>co.edu.uniandes.csw</groupId>
             <artifactId>crudmaker.web</artifactId>

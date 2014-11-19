@@ -40,11 +40,14 @@ import co.edu.uniandes.csw.miso4204.user.logic.ejb.UserLogicService;
 import com.google.gson.Gson;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import static javax.ws.rs.HttpMethod.OPTIONS;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,6 +58,12 @@ public abstract class _LoginService {
     @Autowired
     protected SecurityLogic securityLogic;
 
+    @Path("/login")
+    @OPTIONS
+    public Response cors(@javax.ws.rs.core.Context HttpHeaders requestHeaders) {
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS").header("Access-Control-Allow-Headers", "AUTHORIZATION, content-type, accept,x_rest_user").build();
+    }
+
     @POST
     @Path("/login")
     public Response login(UserSessionDTO login) {
@@ -64,13 +73,13 @@ public abstract class _LoginService {
             UserSessionDTO db = securityLogic.getUserSession(login.getUserName());
             if (db != null) {
                 if (db.getUserName().equals(login.getUserName()) && db.getPassword().equals(login.getPassword()) && db.getTenantID().equals(login.getTenantID())) {
-                    token = new Gson().toJson(JsonWebToken.encode(db, "Ejemplo", JwtHashAlgorithm.HS256));
+                    token = new Gson().toJson(JsonWebToken.encode(db, "localhost", JwtHashAlgorithm.HS256));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Response.ok().entity(token).build();
+        return Response.ok().header("Access-Control-Allow-Origin", "*").entity(token).build();
     }
 
     public SecurityLogic getSecurityLogic() {
