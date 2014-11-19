@@ -43,8 +43,21 @@ public class SecurityFilter extends AuthenticatingFilter{
 
     @Override
     protected boolean onAccessDenied(ServletRequest sr, ServletResponse sr1) throws Exception {
-        
-        return executeLogin(sr, sr1);
+        HttpServletRequest httpRequest = WebUtils.toHttp(sr);
+        HttpServletResponse httpResponse = WebUtils.toHttp(sr1);
+		String httpMethod = httpRequest.getMethod();
+		if ("OPTIONS".equalsIgnoreCase(httpMethod)) {
+                        httpResponse.addHeader("Access-Control-Allow-Origin", "*");
+                        httpResponse.addHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+                        httpResponse.addHeader("Access-Control-Allow-Headers","X-Requested-With,Origin,Content-Type, Accept, x_rest_user");
+			return true;
+		} else {
+			httpResponse.addHeader("Access-Control-Allow-Origin", "*");
+                        httpResponse.addHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+                        httpResponse.addHeader("Access-Control-Allow-Headers","X-Requested-With,Origin,Content-Type, Accept, x_rest_user"); 
+                        return executeLogin(sr, sr1);
+		}
+       
     } 
     
 }
