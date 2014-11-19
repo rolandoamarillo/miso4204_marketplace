@@ -18,7 +18,7 @@ public class VerifyToken {
     public UserSessionDTO getDataUser(String token) {
 
         try {
-            String userToken = JsonWebToken.decode(token, "Ejemplo", true);
+            String userToken = JsonWebToken.decode(token, "localhost", true);
             Gson gson = new GsonBuilder().serializeNulls().create();
             UserSessionDTO res = gson.fromJson(userToken, UserSessionDTO.class);
             return res;
