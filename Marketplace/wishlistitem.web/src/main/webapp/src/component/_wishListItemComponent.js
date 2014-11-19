@@ -34,7 +34,7 @@ define(['component/_CRUDComponent', 'model/wishListItemModel', 'controller/wishL
         listModelClass: App.Model.WishListItemList,
         controller : App.Controller.WishListItemController,
         configUI: function(){
-        	this.listComponent.addColumn('name','Name');
+                this.listComponent.addColumn('productId','Product Id');
         }
     });
     return App.Component._WishListItemComponent;

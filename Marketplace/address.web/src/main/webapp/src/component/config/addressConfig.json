@@ -5,6 +5,5 @@
     "url" : "user.html",
     "server": "localhost:8084",
 	"context": "/address.services/webresources/addresses",
-      
     "el" : "#main"
 }

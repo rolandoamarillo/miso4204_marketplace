@@ -43,6 +43,7 @@ import co.edu.uniandes.csw.miso4204.bonus.persistence.entity.BonusEntity;
 
 public abstract class _BonusConverter {
 
+	private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
 	public static BonusDTO entity2PersistenceDTO(BonusEntity entity){
 		if (entity != null) {
 			BonusDTO dto = new BonusDTO();
@@ -52,6 +53,12 @@ public abstract class _BonusConverter {
 					dto.setValue(entity.getValue());
 					dto.setStatus(entity.getStatus());
 					dto.setBuyerId(entity.getBuyerId());
+					if(entity.getDate() != null){
+						dto.setDate(DATE_FORMAT.format(entity.getDate()));
+					}
+					if(entity.getExpiration() != null){
+						dto.setExpiration(DATE_FORMAT.format(entity.getExpiration()));
+					}
 			return dto;
 		}else{
 			return null;
@@ -72,6 +79,22 @@ public abstract class _BonusConverter {
 					entity.setStatus(dto.getStatus());
 			
 					entity.setBuyerId(dto.getBuyerId());
+					
+					try { 
+						if(dto.getDate() != null) {
+							entity.setDate(DATE_FORMAT.parse(dto.getDate()));
+						}
+				  } catch (Exception ex) {
+						Logger.getLogger(_BonusConverter.class.getName()).log(Level.SEVERE, null, ex);
+					}
+					
+					try { 
+						if(dto.getExpiration() != null) {
+							entity.setExpiration(DATE_FORMAT.parse(dto.getExpiration()));
+						}
+				  } catch (Exception ex) {
+						Logger.getLogger(_BonusConverter.class.getName()).log(Level.SEVERE, null, ex);
+					}
 			
 			return entity;
 		}else {

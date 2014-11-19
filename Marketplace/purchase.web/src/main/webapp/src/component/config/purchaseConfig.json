@@ -4,7 +4,7 @@
     "templateName" : "purchase",
     "url" : "user.html",
     "server": "localhost:8080",
-	"context": "/purchase.web/webresources/purchases",
+	"context": "/purchase.services/webresources/purchases",
       
     "el" : "#main"
 }
