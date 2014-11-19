@@ -7,18 +7,18 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/datepicker.css">
         <script>
-            loadComponents = [
+            loadComponents = [            
             {
                     name: 'component/scoreComponent', 
                     render: true,
                     domElementId: 'main'
-            },
+            },           
             {
-                    name: 'component/productScoreComponent', 
+                    name: 'component/purchaseScoreComponent', 
                     render: true,
                     domElementId: 'main'
-            }           
-            ];
+            }
+            ];                               
         </script>
         <script src="./js/vendor/jquery-1.9.1.js"></script>
         <script src="./js/vendor/bootstrap.min.js"></script>
@@ -36,6 +36,7 @@
     <body>
         <div class="container">
             <div id="main" ></div>
+            <div id="ScoreMain"></div>
         </div>
     </body>
 </html>
