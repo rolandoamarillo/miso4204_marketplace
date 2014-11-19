@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>co.edu.uniandes.csw.miso4204</groupId>
+    <name>product.web</name>
+    <artifactId>product.web</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+<<<<<<< HEAD
+    <dependencies>    	    	        
+=======
+    <dependencies>
+    	
+>>>>>>> catalog
+		<dependency>
+            <groupId>co.edu.uniandes.csw</groupId>
+            <artifactId>crudmaker.web</artifactId>
+            <version>1.1.5</version>
+            <type>war</type>
+<<<<<<< HEAD
+        </dependency>        
+=======
+        </dependency>
+        
+>>>>>>> catalog
+    </dependencies> 
+</project>

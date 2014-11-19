@@ -35,5 +35,11 @@
             <artifactId>feature.backend</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>co.edu.uniandes.csw.miso4204</groupId>
+      <artifactId>product.backend</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <type>jar</type>
+    </dependency>
+  </dependencies>
 </project>

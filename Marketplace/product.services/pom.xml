@@ -33,7 +33,8 @@
             <groupId>co.edu.uniandes.csw.miso4204</groupId>
             <artifactId>product.backend</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+		 <type>jar</type>
+		</dependency>
         
         <!-- Jersey -->
         <dependency>
