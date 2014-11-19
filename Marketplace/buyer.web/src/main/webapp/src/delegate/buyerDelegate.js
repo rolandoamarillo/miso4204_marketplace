@@ -35,38 +35,9 @@ define(['delegate/_buyerDelegate'], function() {
             });
          },
         searchPurchases: function(id, callback) {
-            var dataList = [];
-            
-            var data1 = {};
-            data1.id = 1;
-            data1.name = "P1";
-            data1.purchaseDate = "16/11/2014";
-            data1.totalValue = 12000;
-            data1.totalItems = 5;
-            data1.points = 5;
-            data1.buyerId = id;
-            data1.addressId = 1;
-            dataList.push(data1);
-            
-            var data2 = {};
-            data2.id = 2;
-            data2.name = "P2";
-            data2.purchaseDate = "16/11/2014";
-            data2.totalValue = 15000;
-            data2.totalItems = 2;
-            data2.points = 2;
-            data2.buyerId = id;
-            data2.addressId = 1;
-            dataList.push(data2);
-            
-            var response = {};
-            response.totalRecords = 2;
-            response.records = dataList;
-            callback(dataList);
-            
-            /*$.get("/purchase.services/webresources/purchases/buyer/" + id, function(data) {
+            $.get("/purchase.services/webresources/purchases/buyer/" + id, function(data) {
                 callback(data);
-            });*/
+            });
          }
     });
 });
