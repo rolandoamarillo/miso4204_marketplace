@@ -43,8 +43,7 @@ define(['delegate/_productDelegate'], function() {
                  console.log("callback error");                 
              }, this));
         },
-        
-        searchById: function(productId, callback){
+        searchById: function(productId, callback, callbackError){
             $.ajax({
                   url: '/product.services/products/' + productId,
                   type: 'GET',
@@ -54,10 +53,11 @@ define(['delegate/_productDelegate'], function() {
                  console.log("_bind");
                  callback.call(callback, data);
              }, this)).error(_.bind(function(data) {
-                console.log("callback error");                 
+                console.log("callback error");         
+				callbackError(data);
              }, this));
         },
-        insert: function(product, callback){
+        insert: function(product, callback, callbackError){
             $.ajax({
                   url: '/product.services/products',
                   type: 'POST',
@@ -67,10 +67,11 @@ define(['delegate/_productDelegate'], function() {
                  console.log("_bind");
                  callback.call(callback, data);
              }, this)).error(_.bind(function(data) {
-                console.log("callback error");                 
+                console.log("callback error");           
+				callbackError(data);
              }, this));
         },
-        update: function(product, callback){
+        update: function(product, callback, callbackError){
             $.ajax({
                   url: '/product.services/products',
                   type: 'PUT',
@@ -80,9 +81,11 @@ define(['delegate/_productDelegate'], function() {
                  console.log("_bind");
                  callback.call(callback, data);
              }, this)).error(_.bind(function(data) {
-                console.log("callback error");                 
+                console.log("callback error");           
+				callbackError(data);
              }, this));
-        }, searchByCategory: function(categoryId, callback){
+        }, 
+		searchByCategory: function(categoryId, callback, callbackError){
             $.ajax({
                   url: '/product.services/products/category/' + categoryId,
                   type: 'GET',
@@ -93,6 +96,7 @@ define(['delegate/_productDelegate'], function() {
                  callback.call(callback, data);
              }, this)).error(_.bind(function(data) {
                 console.log("callback error");                 
+				callbackError(data);
              }, this));
         }
     });
