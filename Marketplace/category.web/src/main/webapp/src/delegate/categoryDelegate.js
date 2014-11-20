@@ -95,7 +95,7 @@ define(['delegate/_categoryDelegate'], function() {
                  console.log("_bind");
                  callback.call(callback, data);
              }, this)).error(_.bind(function(data) {
-                console.log("callback error");   
+                console.log("callback error");                 
 				callbackError(data);
              }, this));
         }
