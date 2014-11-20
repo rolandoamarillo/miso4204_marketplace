@@ -192,9 +192,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
 		},
                 setupBuyerComponent: function() {
                     var self = this;
-                    Backbone.on('buyerForm-getPurchases', function(params) {
-                        self.compras(params);
-                    });
+                    
                     this.masterComponent.addGlobalAction({
                         name: 'Windows',
                         icon: 'glyphicon-user',
@@ -292,11 +290,6 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
                 });
             }, function(e){
                 alert("Error al Autenticar: " + e.error.message);
-            });
-        },
-        compras: function(params) {
-            this.delegate.searchPurchases(params.id, function(data) {
-                alert('Compras del Usuario: ' + data.totalRecords + ' - ' + data.records[0].name + ' - ' + data.records[1].name);
             });
         }
     });
