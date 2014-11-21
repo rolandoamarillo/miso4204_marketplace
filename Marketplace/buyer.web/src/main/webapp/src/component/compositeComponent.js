@@ -6,6 +6,7 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             this.name = "BuyerIntegration";
             this.buyerComponent = new BuyerComponent();
             this.buyerComponent.initialize();
+            this.delegate = new App.Delegate.BuyerDelegate();
             this.setupBuyerComponent();
         },
         render: function(domElementId){
@@ -19,6 +20,8 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             this.buyerComponent.render(this.buyerElement);
         },
         setupBuyerComponent: function() {
+            var self = this;
+            
             this.buyerComponent.addGlobalAction({
                 name: 'Windows',
                 icon: 'glyphicon-user',
@@ -78,7 +81,7 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
        },
         facebook: function() {
             hello.init({
-                'facebook' : '597983760329002'
+                'facebook' : '751100841593326'
             },
             {
                 scope : 'email',

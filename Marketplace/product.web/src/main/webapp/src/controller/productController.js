@@ -31,7 +31,7 @@ define(['controller/_productController','delegate/productDelegate'], function() 
     App.Controller.ProductController = App.Controller._ProductController.extend({
         postInit: function(){
 	    //Escribir en este servicio las instrucciones que desea ejecutar al inicializar el componente
-	    this.searchTemplate = _.template($('#productSearch').html());
+	    this.searchTemplate = _.template($('#productSearch').html());            
         },
         productSearch: function (callback,context) {
              var self = this;

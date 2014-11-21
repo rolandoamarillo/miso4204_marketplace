@@ -42,7 +42,7 @@ import co.edu.uniandes.csw.miso4204.reward.persistence.entity.RewardEntity;
 
 public abstract class _RewardPersistence{
 
-  	protected EntityManager entityManager;
+  protected EntityManager entityManager;
 	
 	public RewardDTO createReward(RewardDTO reward) {
 		RewardEntity entity=RewardConverter.persistenceDTO2Entity(reward);

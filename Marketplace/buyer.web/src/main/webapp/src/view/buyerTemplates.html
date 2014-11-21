@@ -3,6 +3,8 @@
     <form role="form" id="<%= componentId %>-buyerForm">
     <% if(buyer.id) {%>
     <input type="hidden" name="id" value="<%= buyer.id %>"/>
+    <a class="btn btn-default" onclick="Backbone.trigger('buyerForm-getPurchases', {id: <%= buyer.id %> }); return false" style="float: right;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Consultar Compras</a>
+    <br/>
     <% }%>
 		<div class="form-group" >
 		<label for="username">Username</label>
@@ -44,6 +46,37 @@
 		<label for="name">Name</label>
     	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= buyer.get('name') %>"/>	
 		</div>
+    </form>
+    </div>
+</script> 
+
+<script type="text/template" id="buyerPurchases">
+    <div class="form-group">
+    <form role="form">
+    
+    <table class="table table-striped" style="margin-bottom: 0;">
+    <thead>
+    <tr>
+    <th>Name</th>
+    <th>Purchase Date</th>
+    <th>Total Value</th>
+    <th>Total Items</th>
+    <th>Points</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(data, function(item) { %>
+        <tr>
+        <td><%= item.name %></td>
+        <td><%= item.purchaseDate %></td>
+        <td><%= item.totalValue %></td>
+        <td><%= item.totalItems %></td>
+        <td><%= item.points %></td>
+        </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    
     </form>
     </div>
 </script> 

@@ -4,11 +4,6 @@
     <% if(wishList.id) {%>
     <input type="hidden" name="id" value="<%= wishList.id %>"/>
     <% }%>
-		<div class="form-group" >
-		<label for="name">Name</label>
-    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= wishList.get('name') %>"/>	
-		</div>
-		<div class="form-group" >
  
 			<label for="buyeridId">Buyer Id</label> 
             <select class="form-control" id="buyerId" name="buyerId">

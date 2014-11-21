@@ -62,6 +62,15 @@ public abstract class _RewardDTO {
 	
 
 	private Long buyerId;
+	
+	
+	private String date;
+	
+	
+	private Integer totalPoints;
+	
+	
+	private Double value;
 
 
 
@@ -107,6 +116,30 @@ public abstract class _RewardDTO {
  
 	public void setBuyerId(Long buyerid) {
 		this.buyerId = buyerid;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public Integer getTotalPoints() {
+		return totalPoints;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public void setTotalPoints(Integer totalPoints) {
+		this.totalPoints = totalPoints;
+	}
+
+	public Double getValue() {
+		return value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
 	}
 	
 }

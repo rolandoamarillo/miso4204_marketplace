@@ -3,8 +3,8 @@
     "name" : "category",
     "templateName" : "category",
     "url" : "user.html",
-    "server": "localhost:8080",
-	"context": "/category.web/webresources/categorys",
+    "server": "localhost:8084",
+	"context": "/category.services/webresources/categorys",
       
     "el" : "#main"
 }

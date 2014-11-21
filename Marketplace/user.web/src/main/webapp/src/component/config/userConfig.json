@@ -3,8 +3,7 @@
     "name" : "user",
     "templateName" : "user",
     "url" : "user.html",
-    "server": "localhost:8080",
-	"context": "/user.web/webresources/users",
-      
+    "server": "localhost:8084",
+    "context": "http://localhost:8084/user.services/webresources/users",
     "el" : "#main"
 }

@@ -52,7 +52,7 @@ public abstract class _WishListItemDTO {
 	private Long id;
 	
 
-	private String name;
+	private Long productId;
 
 
 
@@ -65,12 +65,13 @@ public abstract class _WishListItemDTO {
 	}
 
 
-	public String getName() {
-		return name;
-	}
- 
-	public void setName(String name) {
-		this.name = name;
-	}
+
+        public Long getProductId() {
+            return productId;
+        }
+
+        public void setProductId(Long productId) {
+            this.productId = productId;
+        }
 	
 }

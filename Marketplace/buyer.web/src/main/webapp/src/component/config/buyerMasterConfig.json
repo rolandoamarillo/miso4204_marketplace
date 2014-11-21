@@ -3,11 +3,8 @@
     "name" : "buyer",
     "templateName" : "buyer",
     "url" : "buyer.html",
-    "server": "localhost:8080",
-    "server": "localhost:8080",
-    
-    "context": "/buyer.web/webresources/master/buyers",
-       
+    "server": "localhost:8084",
+    "context": "/buyer.services/webresources/master/buyers",
     
     "el" : "#main"
 }

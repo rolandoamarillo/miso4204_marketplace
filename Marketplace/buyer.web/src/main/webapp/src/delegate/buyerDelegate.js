@@ -33,6 +33,33 @@ define(['delegate/_buyerDelegate'], function() {
             $.get("/buyer.web/webresources/buyers/" + id + "/address", function(data) {
                 callback(data);
             });
+         },
+        searchPurchases: function(id, callback) {
+            var token = getCookie("token");
+            $.ajax({
+                type: 'GET',
+                url:"/purchase.services/webresources/purchases/buyer/" + id,
+                headers: { 'X_REST_USER': token },
+                success: function(data, textStatus, request){
+                     callback(data);
+                },
+                error: function (request, textStatus, errorThrown) {
+                     alert("Error al obtener Compras del Usuario...");
+                }
+            });
          }
     });
+    
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ')
+                c = c.substring(1);
+            if (c.indexOf(name) != -1)
+                return c.substring(name.length, c.length);
+        }
+        return "";
+    }
 });

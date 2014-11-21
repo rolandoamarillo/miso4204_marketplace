@@ -138,6 +138,21 @@ define(['model/wishListItemModel'], function(wishListItemModel) {
                 });
             }
         },
+        _loadRequiredComponentsData: function (callBack) {
+            var self = this;
+            var listReady = _.after(1, function () {
+                callBack();
+            });
+            var listDataReady = function (componentName, model, aliasModel) {
+                if (aliasModel) {
+                    self[aliasModel] = model;
+                } else {
+                    self[componentName] = model;
+                }
+                listReady();
+            };
+            App.Utils.getComponentList('productComponent', listDataReady, 'productComponent');
+        },
         save: function() {
             var self = this;
             var model = $('#' + this.componentId + '-wishListItemForm').serializeObject();
@@ -168,7 +183,7 @@ define(['model/wishListItemModel'], function(wishListItemModel) {
             var self = this;
             this.$el.slideUp("fast", function() {
                 self.$el.html(self.editTemplate({wishListItem: self.currentModel, componentId: self.componentId , showEdit : self.showEdit , showDelete : self.showDelete
- 
+                    ,product: self.productComponent
 				}));
                 self.$el.slideDown("fast");
             });
@@ -235,6 +250,7 @@ define(['model/wishListItemModel'], function(wishListItemModel) {
 					}
 				}
 			}
+                        alert('sali');
 			
 		},
 		updateRecord: function(record){

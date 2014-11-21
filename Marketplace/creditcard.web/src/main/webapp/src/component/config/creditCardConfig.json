@@ -3,8 +3,8 @@
     "name" : "creditCard",
     "templateName" : "creditCard",
     "url" : "user.html",
-    "server": "localhost:8080",
-	"context": "/creditcard.web/webresources/credit_cards",
+    "server": "localhost:8084",
+    "context": "/creditcard.services/webresources/credit_cards",
       
     "el" : "#main"
 }

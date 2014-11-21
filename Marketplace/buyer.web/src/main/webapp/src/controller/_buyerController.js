@@ -35,6 +35,7 @@ define(['model/buyerModel', 'delegate/buyerDelegate'], function(buyerModel) {
             this.showEdit = true;
             this.showDelete = true;
             this.editTemplate = _.template($('#buyer').html());
+            this.purchaseTemplate = _.template($('#buyerPurchases').html());
             this.delegate = new App.Delegate.BuyerDelegate();
             if (!options || !options.componentId) {
                 this.componentId = _.random(0, 100) + "";
@@ -51,6 +52,15 @@ define(['model/buyerModel', 'delegate/buyerDelegate'], function(buyerModel) {
             if(self.postInit){
             	self.postInit(options);
             }
+            Backbone.on('buyerForm-getPurchases', function(params) {
+                self.compras(params);
+            });
+        },
+        compras: function(params) {
+            var self = this;
+            this.delegate.searchPurchases(params.id, function(data) {
+                self.$el.html(self.purchaseTemplate({data: data.records}));
+            });
         },
         create: function() {
             if (App.Utils.eventExists(this.componentId + '-' +'instead-buyer-create')) {
@@ -89,7 +99,7 @@ define(['model/buyerModel', 'delegate/buyerDelegate'], function(buyerModel) {
                 });
             }
         },
-        edit: function(params) {
+        editOLD: function(params) {
             var id = params.id;
             var data = params.data;
             if (App.Utils.eventExists(this.componentId + '-' +'instead-buyer-edit')) {
@@ -108,7 +118,7 @@ define(['model/buyerModel', 'delegate/buyerDelegate'], function(buyerModel) {
                 });
             }
         },
-        editOLD: function(params) {
+        edit: function(params) {
             var id = params.id;
             var data = params.data;
             if (App.Utils.eventExists(this.componentId + '-' +'instead-buyer-edit')) {
