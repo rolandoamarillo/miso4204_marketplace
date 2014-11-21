@@ -160,18 +160,18 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
             };
              
             $.ajax({
-                url: 'http://localhost:8080/purchase.services/webresources/master/purchases/',
+                url: '/purchase.services/webresources/master/purchases/',
                 type: 'POST',
                 data: JSON.stringify(purchaseMaster),
                 contentType: 'application/json'
             }).done(_.bind(function(data) {
                 console.log("_bind"); //callback(data);
                 alert('COMPRA GUARDADA!!');    // Continuar con ciclo de compra
-                document.location.href="http://localhost:8080/purchase.web";
+                document.location.href="/purchase.web";
             }, this)).error(_.bind(function(data) {
                 console.log("callback error"); //callback(data);
                 alert('ERROR REALIZANDO LA COMPRA - INTENTE MAS TARDE'); // Continuar con ciclo de compra
-                document.location.href="http://localhost:8080/purchase.web";
+                document.location.href="/purchase.web";
             }, this));
             
            
