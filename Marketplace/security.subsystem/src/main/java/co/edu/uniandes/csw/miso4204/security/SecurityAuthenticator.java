@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.miso4204.security;
 
+import static co.edu.uniandes.csw.miso4204.security.SecurityRealm.REALM;
 import co.edu.uniandes.csw.miso4204.security.jwt.JwtToken;
 import co.edu.uniandes.csw.miso4204.security.jwt.api.VerifyToken;
 import co.edu.uniandes.csw.miso4204.security.logic.SecurityLogic;
@@ -14,8 +15,10 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.Authenticator;
+import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 
 /**
  *
