@@ -3,8 +3,8 @@
     "name" : "address",
     "templateName" : "address",
     "url" : "user.html",
-    "server": "localhost:8084",
-	"context": "/address.services/webresources/addresss",
+    "server": "localhost:8080",
+	"context": "/address.web/webresources/addresses",
       
     "el" : "#main"
 }
