@@ -6,18 +6,14 @@ define(['component/shoppingCartMasterComponent', 'component/productComponent'], 
             this.setupProductComponent();
             this.setupCartMasterComponent();
         }, render: function (domElementId) {
-
-
             if (domElementId) {
-
                 var rootElement
                         = $("#" + domElementId)
-
-                rootElement.append("<div id='main1' class='col-md-8'></div>");
+                rootElement.append("<div id='main' class='col-md-8'></div>");
                 rootElement.append("<div id='cart' class='col-md-4'></div>");
                 $("#cart").append("<div id='master'></div>");
                 $("#cart").append("<div id='items'></div>");
-                this.productComponent.render("main1");
+                this.productComponent.render("main");
                 this.cartMasterComponent.renderMaster('master');
                 this.cartMasterComponent.masterComponent.create();
                 this.cartMasterComponent.masterComponent.listComponent.display(false);
@@ -89,15 +85,7 @@ define(['component/shoppingCartMasterComponent', 'component/productComponent'], 
             this.render();
             this.cartMasterComponent.shoppingCartItemComponent.listComponent.render();
         }, buy: function () {
-            if (this.cartMasterComponent.shoppingCartItemComponent.length > 0)
-            {
-                this.cartMasterComponent.masterComponent.save();
-            }
-            else
-            {
-                console.log('Agrega productos al carrito');
-                Backbone.trigger(this.cartMasterComponent.masterComponent.componentId + '-error', {event: 'shoppingCart-master-save', view: this.cartMasterComponent.masterComponent, message: 'Debes agregar al menos un producto al carrito'});
-            }
+           document.location.href="http://localhost:8084/purchase.web";
         }
     });
     return App.Component.CompositeComponentShopping;
