@@ -31,6 +31,12 @@ define(['component/_productComponent'], function() {
     App.Component.ProductComponent = App.Component._ProductComponent.extend({
         postInit: function(){
             this.listComponent.enableMultipleSelection(true);
+            
+            // Galeria
+  	    //App.Utils.loadTemplate('gallery');
+	    //this.listComponent.setTemplate('gallery-template');
+            // fin Galeria
+            
              this.toolbarComponent.addButton({
                  name: 'exec-search',
                  displayName: 'Search',
