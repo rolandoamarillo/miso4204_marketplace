@@ -32,12 +32,140 @@ package co.edu.uniandes.csw.miso4204.shoppingcart.persistence;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import co.edu.uniandes.csw.miso4204.shoppingcart.logic.dto.ShoppingCartDTO;
+import co.edu.uniandes.csw.miso4204.shoppingcart.logic.dto.ShoppingCartPageDTO;
+
+
 
 public class ShoppingCartPersistence extends _ShoppingCartPersistence{
+    
+    private EntityManagerFactory emf;
 
-	public ShoppingCartPersistence(){
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ShoppingCartPU");
-		entityManager = emf.createEntityManager();
-	}
+    public ShoppingCartPersistence(){
+        emf = Persistence.createEntityManagerFactory("ShoppingCartPU");
+    }
+     
+    public void getEntityManager() {
+        co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO addressS = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
+        String tenant = addressS.getTenantID();
+        Map<String, Object> emProperties = new HashMap<String, Object>();
+        emProperties.put("eclipselink.tenant-id", tenant);//Asigna un valor al multitenant
+        entityManager = emf.createEntityManager(emProperties);
+    }
+        
+    @Override
+    public ShoppingCartDTO createShoppingCart(ShoppingCartDTO shoppingCart) {
+        ShoppingCartDTO shoppingcart2;
+        
+        try{
+            getEntityManager();
+            shoppingcart2 = super.createShoppingCart(shoppingCart);
+            
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            shoppingcart2 = null;
+        }
+        finally{
+            if (entityManager.isOpen()){
+                entityManager.close();
+            }
+        }
+        return shoppingcart2;
+    }
+	
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<ShoppingCartDTO> getShoppingCarts() {
+        ArrayList<ShoppingCartDTO> list;
+        try{
+            getEntityManager();
+            list = super.getShoppingCarts();
+            
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            list = null;
+        }
+        finally{
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+	return list;	
+    }
+    @Override
+    @SuppressWarnings("unchecked")
+    public ShoppingCartPageDTO getShoppingCarts(Integer page, Integer maxRecords) {
+        ShoppinCartPageDTO pages;
+        try{
+            getEntityManager();
+            pages = super.getShoppingCarts(page, maxRecords);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            pages = null;
+        }
+        finally{
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return pages
+    }
+    @Override
+    public ShoppingCartDTO getShoppingCart(Long id) {
+        ShoppingCartDto shoppingcart;
+        try{
+            getEntityManager();
+            shoppingcart = super.getShoppingCart(id);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            shoppingcat = null;
+        }
+        finally{
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return shoppingcart;
+
+    }
+    @Override
+    public void deleteShoppingCart(Long id) {
+        try{
+            getEntityManager();
+            super.deleteShoppingCart(id);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+    }
+    
+    @Override
+    public void updateShoppingCart(ShoppingCartDTO detail) {
+        try{
+            getEntityManager();
+            super.updateShoppingCart(detail);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+    }
 
 }
