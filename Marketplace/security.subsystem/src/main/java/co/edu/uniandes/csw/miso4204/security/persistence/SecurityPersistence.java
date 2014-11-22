@@ -13,10 +13,10 @@ import javax.persistence.Persistence;
  * @author estudiante
  */
 public class SecurityPersistence extends _SecurityPersistence{
-    
+        
     public SecurityPersistence(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("SecurityPU");
-        entityManager = emf.createEntityManager();
+        emf = Persistence.createEntityManagerFactory("SecurityPU");
+        
     }
     
 }
