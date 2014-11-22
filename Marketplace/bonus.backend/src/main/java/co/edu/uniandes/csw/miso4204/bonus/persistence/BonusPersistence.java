@@ -54,7 +54,7 @@ public class BonusPersistence extends _BonusPersistence{
     public BonusPersistence(){
 		emf = Persistence.createEntityManagerFactory("BonusPU");
 //		entityManager = emf.createEntityManager();
-		//emfReward = Persistence.createEntityManagerFactory("RewardPU");
+		emfReward = Persistence.createEntityManagerFactory("RewardPU");
 //		entityManagerReward = emfReward.createEntityManager();
 	}
 	   
@@ -65,14 +65,22 @@ public class BonusPersistence extends _BonusPersistence{
         emProperties.put("eclipselink.tenant-id", tenant);//Asigna un valor al multitenant
         entityManager = emf.createEntityManager(emProperties);
         }
+    public void getEntityManagerReward() {
+        co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO userS = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
+        String tenant = userS.getTenantID();
+        Map<String, Object> emProperties = new HashMap<String, Object>();
+        emProperties.put("eclipselink.tenant-id", tenant);//Asigna un valor al multitenant
+        entityManagerReward = emfReward.createEntityManager(emProperties);
+        }
     
 	@Override
 	public BonusDTO createBonus(BonusDTO bonus) {
             BonusEntity entity =BonusConverter.persistenceDTO2Entity(bonus);
             try {
                 getEntityManager();
+                getEntityManagerReward();
 
-		Query query = entityManager.createQuery("SELECT u FROM RewardEntity u WHERE u.buyerId = "+bonus.getBuyerId()+" ORDER BY u.date DESC").setMaxResults(1);
+		Query query = entityManagerReward.createQuery("SELECT u FROM RewardEntity u WHERE u.buyerId = "+bonus.getBuyerId()+" ORDER BY u.date DESC").setMaxResults(1);
 		RewardDTO resultActualUserPoints = RewardConverter.entity2PersistenceDTO((RewardEntity)query.getSingleResult());
 		if(resultActualUserPoints.getTotalPoints() >= bonus.getSpentPoints()) {
 			resultActualUserPoints.setTotalPoints(resultActualUserPoints.getTotalPoints() - bonus.getSpentPoints());
