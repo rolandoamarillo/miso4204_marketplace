@@ -1,5 +1,5 @@
-define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDComponent', 'controller/tabController', 'component/buyerComponent', 'component/purchaseComponent'],
- function(SelectionController, CacheModel, CRUDComponent, TabController, BuyerComponent, PurchaseComponent) {
+define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDComponent', 'controller/tabController', 'component/buyerComponent'],
+ function(SelectionController, CacheModel, CRUDComponent, TabController, BuyerComponent) {
     App.Component.CompositeComponent = App.Component.BasicComponent.extend({
         initialize: function() {
             this.componentId = App.Utils.randomInteger();
@@ -7,7 +7,6 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
             this.buyerComponent = new BuyerComponent();
             this.buyerComponent.initialize();
             this.delegate = new App.Delegate.BuyerDelegate();
-            this.purchaseComponent = new PurchaseComponent();
             this.setupBuyerComponent();
         },
         render: function(domElementId){
@@ -22,9 +21,6 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
         },
         setupBuyerComponent: function() {
             var self = this;
-            Backbone.on('buyerForm-getPurchases', function(params) {
-                self.compras(params);
-            });
             
             this.buyerComponent.addGlobalAction({
                 name: 'Windows',
@@ -123,17 +119,6 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
                 });
             }, function(e){
                 alert("Error al Autenticar: " + e.error.message);
-            });
-        },
-        compras: function(params) {
-            var self = this;
-            this.delegate.searchPurchases(params.id, function(data) {
-                self.purchaseComponent.initialize({cache: {data: data, mode: "memory"},pagination: false});
-                
-                var rootElementId = $("#main");
-                this.purchaseElement = this.componentId + "-purchase";
-                rootElementId.html("<div id='" + this.purchaseElement + "'></div>");
-                self.purchaseComponent.render(this.purchaseElement);
             });
         }
     });
