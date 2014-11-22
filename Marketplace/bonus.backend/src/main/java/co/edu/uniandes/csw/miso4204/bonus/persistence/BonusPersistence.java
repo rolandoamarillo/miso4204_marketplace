@@ -35,25 +35,44 @@ import co.edu.uniandes.csw.miso4204.bonus.logic.dto.BonusPageDTO;
 import co.edu.uniandes.csw.miso4204.bonus.persistence.converter.BonusConverter;
 import co.edu.uniandes.csw.miso4204.bonus.persistence.entity.BonusEntity;
 import co.edu.uniandes.csw.miso4204.reward.logic.dto.RewardDTO;
+import co.edu.uniandes.csw.miso4204.reward.logic.dto.RewardPageDTO;
 import co.edu.uniandes.csw.miso4204.reward.persistence.converter.RewardConverter;
 import co.edu.uniandes.csw.miso4204.reward.persistence.entity.RewardEntity;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import org.apache.shiro.SecurityUtils;
 
 public class BonusPersistence extends _BonusPersistence{
+    protected EntityManagerFactory emf;
+    protected EntityManagerFactory emfReward;
+    
 
-	public BonusPersistence(){
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("BonusPU");
-		entityManager = emf.createEntityManager();
-		EntityManagerFactory emfReward = Persistence.createEntityManagerFactory("RewardPU");
-		entityManagerReward = emfReward.createEntityManager();
+    public BonusPersistence(){
+		emf = Persistence.createEntityManagerFactory("BonusPU");
+//		entityManager = emf.createEntityManager();
+		//emfReward = Persistence.createEntityManagerFactory("RewardPU");
+//		entityManagerReward = emfReward.createEntityManager();
 	}
-	
+	   
+    public void getEntityManager() {
+        co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO userS = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
+        String tenant = userS.getTenantID();
+        Map<String, Object> emProperties = new HashMap<String, Object>();
+        emProperties.put("eclipselink.tenant-id", tenant);//Asigna un valor al multitenant
+        entityManager = emf.createEntityManager(emProperties);
+        }
+    
 	@Override
 	public BonusDTO createBonus(BonusDTO bonus) {
-		BonusEntity entity=BonusConverter.persistenceDTO2Entity(bonus);
-		Query query = entityManagerReward.createQuery("SELECT u FROM RewardEntity u WHERE u.buyerId = "+bonus.getBuyerId()+" ORDER BY u.date DESC").setMaxResults(1);
+            BonusEntity entity =BonusConverter.persistenceDTO2Entity(bonus);
+            try {
+                getEntityManager();
+
+		Query query = entityManager.createQuery("SELECT u FROM RewardEntity u WHERE u.buyerId = "+bonus.getBuyerId()+" ORDER BY u.date DESC").setMaxResults(1);
 		RewardDTO resultActualUserPoints = RewardConverter.entity2PersistenceDTO((RewardEntity)query.getSingleResult());
 		if(resultActualUserPoints.getTotalPoints() >= bonus.getSpentPoints()) {
 			resultActualUserPoints.setTotalPoints(resultActualUserPoints.getTotalPoints() - bonus.getSpentPoints());
@@ -66,8 +85,16 @@ public class BonusPersistence extends _BonusPersistence{
 			RewardEntity entityReward = entityManagerReward.merge(RewardConverter.persistenceDTO2Entity(resultActualUserPoints));
 			RewardConverter.entity2PersistenceDTO(entityReward);
 			entityManagerReward.getTransaction().commit();
-		}
-		return BonusConverter.entity2PersistenceDTO(entity);
+		}		
+            }catch(Exception e){
+             e.printStackTrace();
+            }finally{
+                if (entityManager.isOpen()) {
+                    entityManager.close();
+                }
+            }
+            return BonusConverter.entity2PersistenceDTO(entity);
+            
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -77,6 +104,7 @@ public class BonusPersistence extends _BonusPersistence{
             maxDate= maxDate.equals("") ? "3333/33/33" : maxDate;
             BonusPageDTO response = new BonusPageDTO();
             try{
+                getEntityManager();
 		entityManager.getTransaction().begin();
 		Query count = entityManager.createQuery("SELECT COUNT(u) FROM BonusEntity u WHERE u.date > '"+minDate+"' AND u.date < '"+maxDate+"'");
 		Long regCount = 0L;
@@ -95,9 +123,100 @@ public class BonusPersistence extends _BonusPersistence{
             finally{
                 entityManager.getTransaction().commit();
                 
+                if (entityManager.isOpen()) {
+                    entityManager.close();
+                }
+                
             }    
             return response;    
 		
 	}
+        
+    @Override
+    public List<BonusDTO> getBonuss() {
+        List<BonusDTO> listBonus;
+        
+        try {
+            getEntityManager();
+            listBonus = super.getBonuss();            
+        }catch (Exception e) {
+            e.printStackTrace();
+            listBonus = null;            
+        }finally {
+            if (entityManager.isOpen()) 
+                entityManager.close();            
+        }
+        
+        return listBonus;
+    }
+    
+    @Override
+    public BonusPageDTO getBonuss(Integer page, Integer maxRecords) {
+        
+    BonusPageDTO bonusPage2;
+    
+     try {
+            getEntityManager();
+            bonusPage2 = super.getBonuss(page, maxRecords);
+        } catch (Exception e) {
+            e.printStackTrace();
+            bonusPage2 = null;
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+     
+     return bonusPage2;
+    }
+    
+    @Override
+    public BonusDTO getBonus(Long id) {
+        BonusDTO bonus2;
+        
+        try {
+            getEntityManager();
+            bonus2 = super.getBonus(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            bonus2 = null;
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        
+        return bonus2;
+    }
+     
+    @Override
+    public void deleteBonus(Long id) {
+        
+        try {
+            getEntityManager();
+            super.deleteBonus(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }       
+    }
+    
+    @Override
+    public void updateBonus(BonusDTO detail) {
+        
+        try {
+           getEntityManager();
+           super.updateBonus(detail);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }        
+    }
 
 }
