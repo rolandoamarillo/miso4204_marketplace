@@ -33,8 +33,11 @@ define(['component/_productComponent'], function() {
             this.listComponent.enableMultipleSelection(true);
             
             // Galeria
-  	    //App.Utils.loadTemplate('gallery');
-	    //this.listComponent.setTemplate('gallery-template');
+            this.configuration = App.Utils.loadComponentConfiguration('product');
+            if (this.configuration.catalogVariant == 'gallery' ) {
+    	      App.Utils.loadTemplate('gallery');
+	      this.listComponent.setTemplate('gallery-template');  
+            }
             // fin Galeria
             
              this.toolbarComponent.addButton({
