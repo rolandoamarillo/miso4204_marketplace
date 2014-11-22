@@ -8,7 +8,7 @@ package co.edu.uniandes.csw.miso4204.security;
 import co.edu.uniandes.csw.miso4204.security.jwt.JwtToken;
 import co.edu.uniandes.csw.miso4204.security.jwt.api.VerifyToken;
 import co.edu.uniandes.csw.miso4204.security.logic.SecurityLogic;
-import co.edu.uniandes.csw.miso4204.security.logic.dto.UserSessionDTO;
+import co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -33,23 +33,23 @@ public class SecurityRealm extends AuthenticatingRealm{
         JwtToken authToken = (JwtToken) token;
         if (authToken.getToken() != null) { 
             //Descifrar token y establecer info de usuario
-            UserSessionDTO user = decodeUser(authToken.getToken());
+            UserDTO user = decodeUser(authToken.getToken());
             if (validarToken(user)) {
-                account = new SimpleAccount(user.getUserName(), user.getPassword(),ByteSource.Util.bytes(authToken.getToken()),REALM);       
+                account = new SimpleAccount(user.getUsername(), user.getPassword(),ByteSource.Util.bytes(authToken.getToken()),REALM);       
             }
         }
         return account;
     }
     
-    public UserSessionDTO decodeUser(String token){
+    public UserDTO decodeUser(String token){
         VerifyToken ver = new VerifyToken();
-        UserSessionDTO user = ver.getDataUser(token);
+        UserDTO user = ver.getDataUser(token);
         return user;
     }
 
-    public boolean validarToken(UserSessionDTO user) {
-        UserSessionDTO userRecord = securityLogic.getUserSession(user.getId());
-        return (userRecord.getUserName().equals(user.getUserName()) && userRecord.getPassword().equals(user.getPassword()));
+    public boolean validarToken(UserDTO user) {
+        UserDTO userRecord = securityLogic.getUserSession(user.getId());
+        return (userRecord.getUsername().equals(user.getUsername()) && userRecord.getPassword().equals(user.getPassword()));
     }
 
     public SecurityLogic getSecurityLogic() {

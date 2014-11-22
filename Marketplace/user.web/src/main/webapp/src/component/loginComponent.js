@@ -23,10 +23,10 @@ $(document).ready(function () {
             var path = "; path=/";
             document.cookie = cname + "=" + cvalue + "; " + expires + path ;
         }
-        var json = {userName: username, password: pass, tenantID: document.domain, levelAccess:"user"};
+        var json = {username: username, password: pass, tenantID: document.domain, levelAccess:"user"};
         $.ajax({
             type: "POST",
-            url: "http://localhost:8084/user.services/webresources/auth/login",
+            url: "http://172.24.100.31:8084/user.services/webresources/auth/login",
 //          crossDomain: true,
             dataType: 'json',
             data: JSON.stringify(json),

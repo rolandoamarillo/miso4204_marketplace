@@ -32,9 +32,9 @@ package co.edu.uniandes.csw.miso4204.login.service;
 import co.edu.uniandes.csw.miso4204.security.jwt.api.JsonWebToken;
 import co.edu.uniandes.csw.miso4204.security.jwt.api.JwtHashAlgorithm;
 import co.edu.uniandes.csw.miso4204.security.logic.SecurityLogic;
-import co.edu.uniandes.csw.miso4204.security.logic.dto.UserSessionDTO;
+import co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO;
 import co.edu.uniandes.csw.miso4204.user.logic.dto.LoginDTO;
-import co.edu.uniandes.csw.miso4204.user.logic.dto.UserDTO;
+
 import co.edu.uniandes.csw.miso4204.user.logic.dto.UserPageDTO;
 import co.edu.uniandes.csw.miso4204.user.logic.ejb.UserLogicService;
 import com.google.gson.Gson;
@@ -66,14 +66,14 @@ public abstract class _LoginService {
 
     @POST
     @Path("/login")
-    public Response login(UserSessionDTO login) {
+    public Response login(UserDTO login) {
         String token = "Usuario y contraseña errado. Por favor, vuelva a intentarlo";
 
         try {
-            UserSessionDTO db = securityLogic.getUserSession(login.getUserName());
+            UserDTO db = securityLogic.getUserSession(login.getUsername());
             if (db != null) {
-                if (db.getUserName().equals(login.getUserName()) && db.getPassword().equals(login.getPassword()) && db.getTenantID().equals(login.getTenantID())) {
-                    token = new Gson().toJson(JsonWebToken.encode(db, "localhost", JwtHashAlgorithm.HS256));
+                if (db.getUsername().equals(login.getUsername()) && db.getPassword().equals(login.getPassword()) && db.getTenantID().equals(login.getTenantID())) {
+                    token = new Gson().toJson(JsonWebToken.encode(db, "Un14nd3s2014@", JwtHashAlgorithm.HS256));
                 }
             }
         } catch (Exception e) {

@@ -5,9 +5,10 @@
  */
 package co.edu.uniandes.csw.miso4204.security.persistence;
 
-import co.edu.uniandes.csw.miso4204.security.logic.dto.UserSessionDTO;
-import co.edu.uniandes.csw.miso4204.security.persistence.converter.UserSessionConverter;
-import co.edu.uniandes.csw.miso4204.security.persistence.entity.UserSessionEntity;
+
+import co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO;
+import co.edu.uniandes.csw.miso4204.security.persistence.converter.UserConverter;
+import co.edu.uniandes.csw.miso4204.security.persistence.entity.UserEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -20,59 +21,59 @@ public abstract class _SecurityPersistence {
 
     protected EntityManager entityManager;
 
-    public UserSessionDTO createUserSession(UserSessionDTO user) {
-        UserSessionEntity entity = UserSessionConverter.persistenceDTO2Entity(user);
+    public UserDTO createUserSession(UserDTO user) {
+        UserEntity entity = UserConverter.persistenceDTO2Entity(user);
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
-        return UserSessionConverter.entity2PersistenceDTO(entity);
+        return UserConverter.entity2PersistenceDTO(entity);
     }
 
     @SuppressWarnings("unchecked")
-    public List<UserSessionDTO> getUserSessions() {
+    public List<UserDTO> getUserSessions() {
         entityManager.getTransaction().begin();
-        Query q = entityManager.createQuery("select u from UserSessionEntity u");
-        List<UserSessionDTO> result = UserSessionConverter.entity2PersistenceDTOList(q.getResultList());
+        Query q = entityManager.createQuery("select u from UserEntity u");
+        List<UserDTO> result = UserConverter.entity2PersistenceDTOList(q.getResultList());
         entityManager.getTransaction().commit();
         return result;
     }
 
-    public UserSessionDTO getUserSession(Long id) {
+    public UserDTO getUserSession(Long id) {
         entityManager.getTransaction().begin();
-        UserSessionDTO result = UserSessionConverter.entity2PersistenceDTO(entityManager.find(UserSessionEntity.class, id));
+        UserDTO result = UserConverter.entity2PersistenceDTO(entityManager.find(UserEntity.class, id));
         entityManager.getTransaction().commit();
         return result;
     }
 
-    public UserSessionDTO getUserSession(String userName) {
-        UserSessionDTO result = null;
+    public UserDTO getUserSession(String userName) {
+        UserDTO result = null;
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("SELECT u FROM UserSessionEntity u WHERE u.userName = '"+userName+"'");
-            List<UserSessionEntity> records = query.getResultList();
+            Query query = entityManager.createQuery("SELECT u FROM UserEntity u WHERE u.username = '"+userName+"'");
+            List<UserEntity> records = query.getResultList();
             if (!records.isEmpty()) {
-                result = UserSessionConverter.entity2PersistenceDTO(records.get(0));
+                result = UserConverter.entity2PersistenceDTO(records.get(0));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         finally{
-            entityManager.getTransaction().commit();
+            
         }
         return result;
     }
 
     public void deleteUserSession(Long id) {
         entityManager.getTransaction().begin();
-        UserSessionEntity entity = entityManager.find(UserSessionEntity.class, id);
+        UserEntity entity = entityManager.find(UserEntity.class, id);
         entityManager.remove(entity);
         entityManager.getTransaction().commit();
     }
 
-    public void updateUserSession(UserSessionDTO detail) {
+    public void updateUserSession(UserDTO detail) {
         entityManager.getTransaction().begin();
-        UserSessionEntity entity = entityManager.merge(UserSessionConverter.persistenceDTO2Entity(detail));
-        UserSessionConverter.entity2PersistenceDTO(entity);
+        UserEntity entity = entityManager.merge(UserConverter.persistenceDTO2Entity(detail));
+        UserConverter.entity2PersistenceDTO(entity);
         entityManager.getTransaction().commit();
     }
 
