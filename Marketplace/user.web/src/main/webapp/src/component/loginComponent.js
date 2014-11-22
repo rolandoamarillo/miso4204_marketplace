@@ -26,7 +26,7 @@ $(document).ready(function () {
         var json = {username: username, password: pass, tenantID: document.domain, levelAccess:"user"};
         $.ajax({
             type: "POST",
-            url: "http://172.24.100.31:8084/user.services/webresources/auth/login",
+            url: "http://localhost:8084/user.services/webresources/auth/login",
 //          crossDomain: true,
             dataType: 'json',
             data: JSON.stringify(json),

@@ -35,8 +35,6 @@ import org.eclipse.persistence.annotations.Multitenant;
 import org.eclipse.persistence.annotations.TenantDiscriminatorColumn;
 
 @Entity
-@Multitenant
-@TenantDiscriminatorColumn(name="tenantID")
 public class UserEntity extends _UserEntity {
  	
 }

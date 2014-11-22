@@ -18,7 +18,6 @@ import org.apache.shiro.authc.Authenticator;
 import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.subject.SimplePrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 
 /**
  *
@@ -26,19 +25,19 @@ import org.apache.shiro.util.ByteSource;
  */
 public class SecurityAuthenticator implements Authenticator {
 
-    
     private SecurityLogic securityLogic;
-    
 
     public AuthenticationInfo authenticate(AuthenticationToken at) throws AuthenticationException {
         JwtToken authToken = (JwtToken) at;
-        if (!authToken.getToken().equals("")) {
-            //Descifrar token y establecer info de usuario
-            UserDTO user = decodeUser(authToken.getToken());
-            if (validarToken(user)) {
-                SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo();
-                authenticationInfo.setPrincipals(new SimplePrincipalCollection(user, user.getUsername()));
-                return authenticationInfo;
+        if (authToken.getToken() != null) {
+            if (!authToken.getToken().equals("")) {
+                //Descifrar token y establecer info de usuario
+                UserDTO user = decodeUser(authToken.getToken());
+                if (validarToken(user)) {
+                    SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo();
+                    authenticationInfo.setPrincipals(new SimplePrincipalCollection(user, user.getUsername()));
+                    return authenticationInfo;
+                }
             }
         }
         throw new AccountException("Token invalido.");
@@ -58,9 +57,9 @@ public class SecurityAuthenticator implements Authenticator {
 
     public boolean validarToken(UserDTO user) {
         UserDTO userRecord = securityLogic.getUserSession(user.getId());
-        boolean result=false;
-        if(userRecord!=null){
-            result=(userRecord.getUsername().equals(user.getUsername()) && userRecord.getPassword().equals(user.getPassword()) && user.getTenantID().equals(userRecord.getTenantID()));
+        boolean result = false;
+        if (userRecord != null) {
+            result = (userRecord.getUsername().equals(user.getUsername()) && userRecord.getPassword().equals(user.getPassword()) && user.getTenantID().equals(userRecord.getTenantID()));
         }
         return result;
     }
@@ -72,6 +71,5 @@ public class SecurityAuthenticator implements Authenticator {
     public void setSecurityLogic(SecurityLogic securityLogic) {
         this.securityLogic = securityLogic;
     }
-
 
 }

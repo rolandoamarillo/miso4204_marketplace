@@ -66,6 +66,7 @@ public abstract class _UserEntity {
     private String gender;
     private String name;
     private String levelAccess;
+    private String tenantID;
 
     public Long getId() {
         return id;
@@ -155,4 +156,12 @@ public abstract class _UserEntity {
         this.levelAccess = levelAccess;
     }
 
+    public String getTenantID() {
+        return tenantID;
+    }
+
+    public void setTenantID(String tenantID) {
+        this.tenantID = tenantID;
+    }
+    
 }
