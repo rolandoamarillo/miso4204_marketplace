@@ -42,13 +42,13 @@ define([], function() {
           });
         },
         getDisplay: function(name) {
-            /*
-			 if(name=='categoryId'){  
+            
+	    if(name=='categoryId'){  
                  var value = App.Utils.getModelFromCache('categoryComponent',this.get('categoryId'));
                  if(value) 
                  return value.get('name');
-             }
-             */
+            }
+             
          return this.get(name);
         }
     });
