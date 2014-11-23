@@ -31,7 +31,7 @@ define(['delegate/_productDelegate'], function() {
     App.Delegate.ProductDelegate = App.Delegate._ProductDelegate.extend({
         search: function(model, callback, callbackError){
             $.ajax({
-                  url: '/product.services/webresources/products/search/',
+                  url: '/product.services/webresources/products/search',
                   type: 'GET',
                   data: $.param(model.toJSON()),
                   contentType: 'application/json'
