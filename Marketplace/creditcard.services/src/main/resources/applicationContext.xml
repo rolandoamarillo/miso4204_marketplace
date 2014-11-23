@@ -10,7 +10,7 @@
 
     <bean id="creditcardLogicService" class="co.edu.uniandes.csw.miso4204.creditcard.logic.ejb.CreditCardLogicService" />
     
-    <!-- Configuración de Seguridad -->
+    <!-- Configuracion de Seguridad -->
     <bean id="securityLogic" class="co.edu.uniandes.csw.miso4204.security.logic.SecurityLogic" />
     <bean id="securityRealm" class="co.edu.uniandes.csw.miso4204.security.SecurityRealm">
         <property name="securityLogic" ref="securityLogic"/>

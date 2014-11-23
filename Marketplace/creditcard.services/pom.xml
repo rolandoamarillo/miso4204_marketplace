@@ -81,6 +81,7 @@
             <artifactId>jersey-spring3</artifactId>
             <version>2.13</version>
         </dependency>
+        
         <dependency>
             <groupId>co.edu.uniandes.csw.miso4204</groupId>
             <artifactId>security.subsystem</artifactId>
