@@ -33,7 +33,9 @@
  <property name="filterChainDefinitions">
  <value>
  /webresources/Auth/** = anon
- /webresources/category/** = securityFilter
+ /webresources/categorys/** = securityFilter
+/webresources/category/** = securityFilter     
+/webresources/category* = securityFilter          
  </value>
  </property>
  </bean>    
