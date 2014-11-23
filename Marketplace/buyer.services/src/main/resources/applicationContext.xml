@@ -34,7 +34,8 @@
         <property name="filterChainDefinitions">
             <value>
                 /webresources/Auth/** = anon
-                /webresources/buyer/** = securityFilter
+                /webresources/buyers/** = securityFilter
+                /webresources/master/buyers/** = securityFilter
             </value>
         </property>
     </bean>
