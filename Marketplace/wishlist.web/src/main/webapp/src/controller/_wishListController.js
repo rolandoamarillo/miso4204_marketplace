@@ -89,6 +89,8 @@ define(['model/wishListModel'], function(wishListModel) {
             }
         },
         edit: function(params) {
+
+
             var id = params.id;
             var data = params.data;
             if (App.Utils.eventExists(this.componentId + '-' +'instead-wishList-edit')) {
@@ -156,6 +158,7 @@ define(['model/wishListModel'], function(wishListModel) {
         save: function() {
             var self = this;
             var model = $('#' + this.componentId + '-wishListForm').serializeObject();
+
             if (App.Utils.eventExists(this.componentId + '-' +'instead-wishList-save')) {
                 Backbone.trigger(this.componentId + '-' + 'instead-wishList-save', {view: this, model : model});
             } else {
@@ -171,6 +174,54 @@ define(['model/wishListModel'], function(wishListModel) {
                             }
                         });
             }
+        },
+        saveGenModel: function(params) {
+            var self = this;
+            var model = params;
+            if (App.Utils.eventExists(this.componentId + '-' +'instead-wishList-save')) {
+                Backbone.trigger(this.componentId + '-' + 'instead-wishList-save', {view: this, model : model});
+            } else {
+                Backbone.trigger(this.componentId + '-' + 'pre-wishList-save', {view: this, model : model});
+                this.currentModel.set(model);
+                this.currentModel.save({},
+                        {
+                            success: function(model) {
+                                Backbone.trigger(self.componentId + '-' + 'post-wishList-save', {model: self.currentModel});
+                            },
+                            error: function(model,response,options) {
+                                Backbone.trigger(self.componentId + '-' + 'error', {event: 'wishList-save', view: self, error: response});
+                            }
+                        });
+            }
+        },
+        searchWishListBuyer: function(callback,params) {
+            var delegate = new App.Delegate.WishListDelegate();
+            if (!this.searchModel) {
+		this.searchModel = {buyerId : params.buyerId};
+            } 
+            var listadoBuyer = delegate.searchWishListBuyer(
+                    this.searchModel, function (data) {
+
+                        callback(data);
+                    }, function (data) {
+                        console.log("error dcs");
+                        Backbone.trigger(self.componentId + '-' + 'error', {event: 'wishlist-search', view: self, id: '', data: data, error: 'Error in wishlist search'});
+                    });
+
+            //return listadoBuyer;
+        },
+        addToCart: function(callback,params) {
+            var delegate = new App.Delegate.WishListDelegate();
+            var listadoBuyer = delegate.addToCart(
+                    params, function (data) {
+
+                        callback(data);
+                    }, function (data) {
+                        console.log("error dcs");
+                        Backbone.trigger(self.componentId + '-' + 'error', {event: 'wishlist-search', view: self, id: '', data: data, error: 'Error in addToCart'});
+                    });
+
+            //return listadoBuyer;
         },
         _renderList: function() {
             var self = this;

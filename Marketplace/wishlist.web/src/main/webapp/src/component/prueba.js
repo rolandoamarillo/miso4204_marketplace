@@ -7,6 +7,10 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
         initialize: function() {
             //window.location = '/user.web/login.html';
             var self = this;
+            self.setCookie("token", 1, 1);
+            var user = self.checkCookie();
+            
+            
             this.configuration = App.Utils.loadComponentConfiguration('wishListMaster');
             App.Model.WishListMasterModel.prototype.urlRoot = this.configuration.context;
             this.componentId = App.Utils.randomInteger();
@@ -15,8 +19,12 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
             this.masterComponent.initialize();
             
             this.childComponents = [];
-			
-			this.initializeChildComponents();
+
+            this.whishListItemComponent = new whishListItemComponent();
+            this.whishListItemComponent.initialize();
+            this.whishListItemComponent.toolbarComponent.display(true);
+            
+            //this.initializeChildComponents();
             
             Backbone.on(this.masterComponent.componentId + '-post-wishList-create', function(params) {
                 self.renderChilds(params);
@@ -59,17 +67,42 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
 				}
             });
         },
-
+        getCookie: function(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)===' ') c = c.substring(1);
+                if (c.indexOf(name) !== -1) return c.substring(name.length, c.length);
+            }
+            return "";            
+        },
+        setCookie: function(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            var path = "; path=/";
+            document.cookie = cname + "=" + cvalue + "; " + expires + path ;      
+        },
+        checkCookie: function() {
+            var user = this.getCookie('token');
+            if (user !== "") {
+                return user;
+            } else {
+                window.location = "/user.web";
+            }
+        },
         render: function(domElementId){
-			if (domElementId) {
-				var rootElementId = $("#"+domElementId);
-				this.masterElement = this.componentId + "-master";
-				this.tabsElement = this.componentId + "-tabs";
+            if (domElementId) {
+                var rootElementId = $("#" + domElementId);
+                this.masterElement = this.componentId + "-master";
+                rootElementId.append("<div id='" + this.masterElement + "'></div>");
+                //rootElement.append("<div id='cart' class='col-md-4'></div>");
+                
+                this.whishListItemComponent.render(this.masterElement);
+            }
+                
 
-				rootElementId.append("<div id='" + this.masterElement + "'></div>");
-				rootElementId.append("<div id='" + this.tabsElement + "'></div>");
-			}
-			this.masterComponent.render(this.masterElement);
 		},
 		initializeChildComponents: function () {
 			this.tabModel = new App.Model.TabModel({tabs: [

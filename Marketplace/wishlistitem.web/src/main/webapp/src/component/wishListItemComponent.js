@@ -41,18 +41,7 @@ define(['component/_wishListItemComponent'], function() {
             {
                 alert("Publicar la lista de deseos");
             }, this);
-            this.listComponent.removeAction('edit');
-            this.listComponent.addAction(
-            { 
-                name: 'agregarCarrito',
-                displayName: 'Agregar a carrito',
-                show: true,
-                icon: ''
-            }, 
-            function()
-            {
-                alert("Se agregó el item al carrito");
-            }, this);		
+            this.listComponent.removeAction('edit');	
         }
     });
     return App.Component.WishListItemComponent;
