@@ -16,6 +16,12 @@
         </dependency>
         <dependency>
             <groupId>co.edu.uniandes.csw.miso4204</groupId>
+            <artifactId>shoppingcart.web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>co.edu.uniandes.csw.miso4204</groupId>
             <artifactId>buyer.web</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>war</type>
@@ -23,12 +29,6 @@
         <dependency>
             <groupId>co.edu.uniandes.csw.miso4204</groupId>
             <artifactId>wishlistitem.web</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>shoppingcartitem.web</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>war</type>
         </dependency>

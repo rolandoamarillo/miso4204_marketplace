@@ -1,14 +1,18 @@
-define(['component/wishListMasterComponent', 'component/shoppingCartItemComponent'], 
+define(['component/wishListMasterComponent', 'component/wishListItemComponent'], 
 function (wishListMasterCp, shoppingCartCp) 
 {
-    App.Component.wishListIntegrator = App.Component.BasicComponent.extend(
+    App.Component.wishListIntegratorItem = App.Component.BasicComponent.extend(
     {
         initialize: function () 
         {
+            var self = this;
+            self.setCookie("token", 1, 1);
+            var user = self.checkCookie();
+            
             this.componentId = App.Utils.randomInteger();
             this.name = "WishListIntegrator";
-            this.setupShoppingCartComponent();
             this.setupWishListMasterComponent();
+            this.setupShoppingCartComponent({buyerId : user});
         },
         render: function (domElementId) {
             if (domElementId) {
@@ -33,29 +37,50 @@ function (wishListMasterCp, shoppingCartCp)
             this.shoppingCartItemComponent.renderRecords();
             //this.wishListMasterComponent.renderChild('item');
         },
+        getCookie: function(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)===' ') c = c.substring(1);
+                if (c.indexOf(name) !== -1) return c.substring(name.length, c.length);
+            }
+            return "";            
+        },
+        setCookie: function(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            var path = "; path=/";
+            document.cookie = cname + "=" + cvalue + "; " + expires + path ;      
+        },
+        checkCookie: function() {
+            var user = this.getCookie('token');
+            if (user !== "") {
+                return user;
+            } else {
+                window.location = "/user.web";
+            }
+        },
         viewWishList: function (domElementId) {
             window.location = "wishListMaster.html";
         },
-        setupShoppingCartComponent: function () 
+        setupShoppingCartComponent: function (params) 
         {
+            var listadoItems;
             this.shoppingCartItemComponent = new shoppingCartCp();
-            this.shoppingCartItemComponent.initialize();
+            this.wishListMasterComponent.masterComponent.componentController.searchWishListBuyer(function (data) {
+                        listadoItems = data;
+                    }, {buyerId:params.buyerId});
+            this.shoppingCartItemComponent.initialize({cache: {data: listadoItems, mode: "memory"},pagination: false});
             this.shoppingCartItemComponent.setReadOnly(true);
             this.shoppingCartItemComponent.addRecordAction({
-                name: 'addToWishList',
+                name: 'addToCart',
                 icon: '',
-                displayName: 'Add to Wish',
+                displayName: 'Add to cart',
                 show: true
             },
-            this.buyOne, this);
-            this.shoppingCartItemComponent.addGlobalAction({
-                name: 'WishList',
-                icon: 'glyphicon-list',
-                displayName: 'WishList',
-                show: true
-            },
-            this.viewWishList,
-                    this);
+            this.addCart, this);
             this.shoppingCartItemComponent.toolbarComponent.removeButton("search");
         },
         setupWishListMasterComponent: function () 
@@ -63,21 +88,13 @@ function (wishListMasterCp, shoppingCartCp)
             this.wishListMasterComponent = new wishListMasterCp();
             this.wishListMasterComponent.initialize();
             this.wishListMasterComponent.masterComponent.clearGlobalActions();
-            this.wishListMasterComponent.masterComponent.addGlobalAction({
-                name: 'Confirm',
-                icon: 'glyphicon-shopping-cart',
-                displayName: 'Confirm',
-                show: true
-            },
-            this.buy,
-                    this);
             this.wishListMasterComponent.masterComponent.toolbarComponent.removeButton("Cart");
             this.wishListMasterComponent.whishListItemComponent.listComponent.hideAction("agregarCarrito");
             this.wishListMasterComponent.whishListItemComponent.setGlobalActionsVisible(false);
             this.wishListMasterComponent.whishListItemComponent.disableEdit();
             this.wishListMasterComponent.hideChilds();
         },
-        addItem: function (params) {      
+        addCart: function (params) {      
             var list = this.shoppingCartItemComponent.getRecords();
             var model = _.findWhere(list, {id: params.id});
             if (model) {
@@ -85,40 +102,7 @@ function (wishListMasterCp, shoppingCartCp)
             }
             this.render();
             this.wishListMasterComponent.whishListItemComponent.listComponent.render();
-        },
-        buy: function () {
-            //this.wishListMasterComponent.masterComponent.save();
-            if (this.wishListMasterComponent.whishListItemComponent.getRecords().length > 0)
-            {
-                this.wishListMasterComponent.masterComponent.componentController.saveGenModel({buyerId:1});
-                //this.wishListMasterComponent.masterComponent.save();
-                this.wishListMasterComponent.whishListItemComponent.setRecords();
-                this.wishListMasterComponent.whishListItemComponent.listComponent.render();
-            }
-            else
-            {
-                console.log('Agrega productos al carrito');
-                Backbone.trigger(this.wishListMasterComponent.masterComponent.componentId + '-error', {event: 'shoppingCart-master-save', view: this.wishListMasterComponent.masterComponent, message: 'Debes agregar al menos un producto al listado'});
-            }
-        },
-        buyOne: function (params) {
-            var list = this.shoppingCartItemComponent.getRecords();
-            var model = _.findWhere(list, {id: params.id});
-            if (model) {
-                this.wishListMasterComponent.addItems([{productId: model.productshoppingcartitemId}]);
-            }
-            if (this.wishListMasterComponent.whishListItemComponent.getRecords().length > 0)
-            {
-                this.wishListMasterComponent.masterComponent.componentController.saveGenModel({buyerId:2});
-                //this.wishListMasterComponent.masterComponent.save();
-                this.wishListMasterComponent.whishListItemComponent.setRecords();
-                this.wishListMasterComponent.whishListItemComponent.listComponent.render();
-            }
-            else
-            {
-                Backbone.trigger(this.wishListMasterComponent.masterComponent.componentId + '-error', {event: 'shoppingCart-master-save', view: this.wishListMasterComponent.masterComponent, message: 'Debes agregar al menos un producto a la lista'});
-            }
         }
     });
-    return App.Component.wishListIntegrator;
+    return App.Component.wishListIntegratorItem;
 });
