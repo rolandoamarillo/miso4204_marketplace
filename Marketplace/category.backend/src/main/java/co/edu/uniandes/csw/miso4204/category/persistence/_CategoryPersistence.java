@@ -64,7 +64,7 @@ public abstract class _CategoryPersistence{
 
 	@SuppressWarnings("unchecked")
 	public CategoryPageDTO getCategorys(Integer page, Integer maxRecords) {
-		entityManager.getTransaction().begin();
+//		entityManager.getTransaction().begin();
 		Query count = entityManager.createQuery("select count(u) from CategoryEntity u");
 		Long regCount = 0L;
 		regCount = Long.parseLong(count.getSingleResult().toString());
@@ -76,7 +76,7 @@ public abstract class _CategoryPersistence{
 		CategoryPageDTO response = new CategoryPageDTO();
 		response.setTotalRecords(regCount);
 		response.setRecords(CategoryConverter.entity2PersistenceDTOList(q.getResultList()));
-		entityManager.getTransaction().commit();
+//		entityManager.getTransaction().commit();
 		return response;
 	}
 
