@@ -34,6 +34,8 @@
  <value>
  /webresources/Auth/** = anon
  /webresources/feature/** = securityFilter
+ /webresources/features/** = securityFilter
+/webresources/feature* = securityFilter     
  </value>
  </property>
  </bean>    
