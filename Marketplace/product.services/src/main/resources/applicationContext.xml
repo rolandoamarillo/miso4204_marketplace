@@ -34,6 +34,8 @@
  <property name="filterChainDefinitions">
  <value>
  /webresources/Auth/** = anon
+ /webresources/product* = securityFilter
+ /webresources/products/** = securityFilter
  /webresources/product/** = securityFilter
  </value>
  </property>

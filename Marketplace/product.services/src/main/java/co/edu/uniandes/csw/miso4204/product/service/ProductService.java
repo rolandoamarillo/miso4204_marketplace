@@ -50,18 +50,21 @@ public class ProductService extends _ProductService {
     @GET
     @Path("search")
     public List<ProductDTO> getProductsSearch(
+            @QueryParam("name") String name,
             @QueryParam("categoryId") Long categoryId,
             @DefaultValue("0") @QueryParam("min_price") Double minPrice,
-            @DefaultValue("" + 999999999) @QueryParam("max_price") Double maxPrice,
-            @QueryParam("feature") Long feature,
+            @DefaultValue("" + 9999999) @QueryParam("max_price") Double maxPrice,
+            @QueryParam("feature") String feature,
             @QueryParam("searchText") String searchText,
             @DefaultValue("" + 999999999) @QueryParam("max_records") Integer maxRecords,
             @DefaultValue("0") @QueryParam("first_record") Integer firstRecord) {
         
-        return productLogicService.getProductsSearch(categoryId, 
+        return productLogicService.getProductsSearch(
+                                               name,
+                                               categoryId, 
                                                feature,
                                                minPrice,
-                                             maxPrice,
+                                               maxPrice,
                                                searchText, 
                                                maxRecords, 
                                                firstRecord);
