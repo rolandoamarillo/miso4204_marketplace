@@ -59,6 +59,7 @@ public abstract class _PictureEntity {
 	private String name;
 	private String url;
 
+
 	public Long getId(){
 		return id;
 	}
