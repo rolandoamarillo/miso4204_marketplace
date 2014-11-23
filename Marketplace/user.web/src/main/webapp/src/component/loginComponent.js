@@ -21,9 +21,9 @@ $(document).ready(function () {
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
             var expires = "expires=" + d.toUTCString();
             var path = "; path=/";
-            document.cookie = cname + "=" + cvalue + "; " + expires + path ;
+            document.cookie = cname + "=" + cvalue + "; " + expires + path;
         }
-        var json = {username: username, password: pass, tenantID: document.domain, levelAccess:"user"};
+        var json = {username: username, password: pass, tenantID: document.domain, levelAccess: "user"};
         $.ajax({
             type: "POST",
             url: "http://localhost:8084/user.services/webresources/auth/login",
@@ -36,8 +36,6 @@ $(document).ready(function () {
             alert('USUARIO AUTENTICADO');
             setCookie("token", data, 1);
             window.location.href = '../address.web';
-
-
         }, this)).error(_.bind(function (data) {
             console.log("data");
             alert('USUARIO NO AUTENTICADO : ' + data["responseText"]);
@@ -46,29 +44,4 @@ $(document).ready(function () {
         }, this));
     });
 
-
 });
-
-
-
-
-
-
-//define(['component/_CRUDComponent', 'model/loginModel', 'controller/loginController'], function(a,b,c) {
-//    App.Component.LoginComponent = App.Component.BasicComponent.extend({
-//        initialize: function(options) {
-//            var self = this;
-//			this.loginTemplate = _.template($('#login-form').html());
-//			this.render();
-//		},
-//		render: function() {
-//		var self = this;
-//		this.$el.slideUp("fast", function() {
-//			self.$el.html(self.loginTemplate({login: b}));
-//			self.$el.slideDown("fast");
-//		});
-//	}
-//    
-//		});	
-//		return App.Component.LoginComponent;
-//});
