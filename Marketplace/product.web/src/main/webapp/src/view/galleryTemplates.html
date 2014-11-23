@@ -20,10 +20,16 @@
         <div class="panel-body">
    <% for( col in columns) { %>
        <% if(item.get(columns[col].name)){ %>
-                        <strong><%= htmlEncode(columns[col].displayName) %>:</strong>
-       <%= htmlEncode(item.getDisplay(columns[col].name)) %> 
-                        </br>
-       <% } %>
+              <% if(htmlEncode(columns[col].displayName)=="Name"){ %>
+                  <div><img with="40px" height="40px" src="    <%= htmlEncode(item.getDisplay(columns[col].name)) %> " /></div>
+                  
+                     <% }else{ %>
+                     <div>
+                     <strong><%= htmlEncode(columns[col].displayName) %>:</strong>
+                  <%= htmlEncode(item.getDisplay(columns[col].name)) %> 
+                        </div>
+                            <% } %>
+       <% }%>
             <% } %> 
         <% _.each(actions, function(action){ %>
             <% if(action.get('show')){ %>
