@@ -73,6 +73,16 @@ public abstract class _WishListMasterLogicService {
         return wishlistMasterPersistance.getWishList(id);
     }
 
+    public WishListMasterDTO getWishListBuyer(Long buyerId) {
+        Long idWishList;
+        WishListMasterDTO wishListMaster = new WishListMasterDTO();
+        idWishList = wishlistPersistance.getWishListIdBuyerId(buyerId);
+        if (idWishList != null) {
+            return getMasterWishList(idWishList);    
+        }
+        return wishListMaster;
+    }
+    
     public void deleteMasterWishList(Long id) {
         wishlistPersistance.deleteWishList(id);
     }

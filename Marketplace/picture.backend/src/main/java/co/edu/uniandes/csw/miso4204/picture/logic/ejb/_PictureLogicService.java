@@ -48,6 +48,10 @@ public abstract class _PictureLogicService {
 		return persistance.getPictures(); 
 	}
 
+	public List<PictureDTO> getPicturesSearch(Long productId){
+		return persistance.getPicturesSearch(productId); 
+	}
+        
 	public PicturePageDTO getPictures(Integer page, Integer maxRecords){
 		return persistance.getPictures(page, maxRecords); 
 	}

@@ -5,11 +5,13 @@
  */
 package co.edu.uniandes.csw.miso4204.security.persistence;
 
-import co.edu.uniandes.csw.miso4204.security.logic.dto.UserSessionDTO;
-import co.edu.uniandes.csw.miso4204.security.persistence.converter.UserSessionConverter;
-import co.edu.uniandes.csw.miso4204.security.persistence.entity.UserSessionEntity;
+import co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO;
+import co.edu.uniandes.csw.miso4204.security.persistence.converter.UserConverter;
+import co.edu.uniandes.csw.miso4204.security.persistence.entity.UserEntity;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 /**
@@ -18,62 +20,117 @@ import javax.persistence.Query;
  */
 public abstract class _SecurityPersistence {
 
+    protected EntityManagerFactory emf;
     protected EntityManager entityManager;
 
-    public UserSessionDTO createUserSession(UserSessionDTO user) {
-        UserSessionEntity entity = UserSessionConverter.persistenceDTO2Entity(user);
-        entityManager.getTransaction().begin();
-        entityManager.persist(entity);
-        entityManager.getTransaction().commit();
-        return UserSessionConverter.entity2PersistenceDTO(entity);
+    public UserDTO createUserSession(UserDTO user) {
+        entityManager = emf.createEntityManager();
+        UserEntity entity = UserConverter.persistenceDTO2Entity(user);
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return UserConverter.entity2PersistenceDTO(entity);
     }
 
     @SuppressWarnings("unchecked")
-    public List<UserSessionDTO> getUserSessions() {
-        entityManager.getTransaction().begin();
-        Query q = entityManager.createQuery("select u from UserSessionEntity u");
-        List<UserSessionDTO> result = UserSessionConverter.entity2PersistenceDTOList(q.getResultList());
-        entityManager.getTransaction().commit();
-        return result;
-    }
-
-    public UserSessionDTO getUserSession(Long id) {
-        entityManager.getTransaction().begin();
-        UserSessionDTO result = UserSessionConverter.entity2PersistenceDTO(entityManager.find(UserSessionEntity.class, id));
-        entityManager.getTransaction().commit();
-        return result;
-    }
-
-    public UserSessionDTO getUserSession(String userName) {
-        UserSessionDTO result = null;
+    public List<UserDTO> getUserSessions() {
+        entityManager = emf.createEntityManager();
+        List<UserDTO> result;
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("SELECT u FROM UserSessionEntity u WHERE u.userName = '"+userName+"'");
-            List<UserSessionEntity> records = query.getResultList();
+            Query q = entityManager.createQuery("select u from UserEntity u");
+            result = UserConverter.entity2PersistenceDTOList(q.getResultList());
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new LinkedList<>();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return result;
+    }
+
+    public UserDTO getUserSession(Long id) {
+        entityManager = emf.createEntityManager();
+        UserDTO result;
+        try {
+            entityManager.getTransaction().begin();
+            result = UserConverter.entity2PersistenceDTO(entityManager.find(UserEntity.class, id));
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = null;
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return result;
+    }
+
+    public UserDTO getUserSession(String userName) {
+        entityManager = emf.createEntityManager();
+        UserDTO result = null;
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("SELECT u FROM UserEntity u WHERE u.username = '" + userName + "'");
+            List<UserEntity> records = query.getResultList();
             if (!records.isEmpty()) {
-                result = UserSessionConverter.entity2PersistenceDTO(records.get(0));
+                result = UserConverter.entity2PersistenceDTO(records.get(0));
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
-            entityManager.getTransaction().commit();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
         }
         return result;
     }
 
     public void deleteUserSession(Long id) {
-        entityManager.getTransaction().begin();
-        UserSessionEntity entity = entityManager.find(UserSessionEntity.class, id);
-        entityManager.remove(entity);
-        entityManager.getTransaction().commit();
+        entityManager = emf.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            UserEntity entity = entityManager.find(UserEntity.class, id);
+            entityManager.remove(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
     }
 
-    public void updateUserSession(UserSessionDTO detail) {
-        entityManager.getTransaction().begin();
-        UserSessionEntity entity = entityManager.merge(UserSessionConverter.persistenceDTO2Entity(detail));
-        UserSessionConverter.entity2PersistenceDTO(entity);
-        entityManager.getTransaction().commit();
+    public void updateUserSession(UserDTO detail) {
+        entityManager = emf.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            UserEntity entity = entityManager.merge(UserConverter.persistenceDTO2Entity(detail));
+            UserConverter.entity2PersistenceDTO(entity);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
     }
 
 }

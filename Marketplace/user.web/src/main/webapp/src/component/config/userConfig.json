@@ -4,7 +4,6 @@
     "templateName" : "user",
     "url" : "user.html",
     "server": "localhost:8084",
-	"context": "/user.services/webresources/users",
-      
+    "context": "http://localhost:8084/user.services/webresources/users",
     "el" : "#main"
 }

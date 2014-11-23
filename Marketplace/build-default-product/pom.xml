@@ -9,42 +9,65 @@
     <modules>
     	  <module>../product.services</module>
     	  <module>../product.backend</module>
+    	  <module>../product.web</module>
     	  <module>../category.services</module>
     	  <module>../category.backend</module>
+    	  <module>../category.web</module>
     	  <module>../shoppingcart.services</module>
     	  <module>../shoppingcart.backend</module>
+    	  <module>../shoppingcart.web</module>
     	  <module>../shoppingcartitem.services</module>
     	  <module>../shoppingcartitem.backend</module>
+    	  <module>../shoppingcartitem.web</module>
     	  <module>../buyer.services</module>
     	  <module>../buyer.backend</module>
+    	  <module>../buyer.web</module>
     	  <module>../user.services</module>
     	  <module>../user.backend</module>
+    	  <module>../user.web</module>
     	  <module>../address.services</module>
     	  <module>../address.backend</module>
+    	  <module>../address.web</module>
     	  <module>../paymentmode.services</module>
     	  <module>../paymentmode.backend</module>
+    	  <module>../paymentmode.web</module>
     	  <module>../purchase.services</module>
     	  <module>../purchase.backend</module>
+    	  <module>../purchase.web</module>
     	  <module>../purchaseitem.services</module>
     	  <module>../purchaseitem.backend</module>
+    	  <module>../purchaseitem.web</module>
     	  <module>../creditcard.services</module>
     	  <module>../creditcard.backend</module>
+    	  <module>../creditcard.web</module>
     	  <module>../picture.services</module>
     	  <module>../picture.backend</module>
+    	  <module>../picture.web</module>
     	  <module>../score.services</module>
     	  <module>../score.backend</module>
+    	  <module>../score.web</module>
     	  <module>../bonus.services</module>
     	  <module>../bonus.backend</module>
+    	  <module>../bonus.web</module>
     	  <module>../reward.services</module>
     	  <module>../reward.backend</module>
+    	  <module>../reward.web</module>
     	  <module>../feature.services</module>
     	  <module>../feature.backend</module>
+    	  <module>../feature.web</module>
     	  <module>../payment.services</module>
     	  <module>../payment.backend</module>
+    	  <module>../payment.web</module>
     	  <module>../wishlist.services</module>
     	  <module>../wishlist.backend</module>
+    	  <module>../wishlist.web</module>
     	  <module>../wishlistitem.services</module>
     	  <module>../wishlistitem.backend</module>
+    	  <module>../wishlistitem.web</module>
 		  <module>../crudmaker.web</module>
+		  <module>../security.subsystem</module>
+    	  <module>../tenantcontrol.services</module>
+    	  <module>../tenantcontrol.backend</module>
+    	  <module>../tenantcontrol.web</module>
     </modules>
 </project>

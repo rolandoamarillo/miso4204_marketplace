@@ -31,15 +31,15 @@ define(['controller/_productController','delegate/productDelegate'], function() 
     App.Controller.ProductController = App.Controller._ProductController.extend({
         postInit: function(){
 	    //Escribir en este servicio las instrucciones que desea ejecutar al inicializar el componente
-	    this.searchTemplate = _.template($('#productSearch').html());
+	    this.searchTemplate = _.template($('#productSearch').html());            
         },
         productSearch: function (callback,context) {
              var self = this;
-             var model = $('#' + this.componentId + '-userForm').serializeObject();
+             var model = $('#' + this.componentId + '-productForm').serializeObject();
              this.currentModel.set(model);
              var delegate = new App.Delegate.ProductDelegate();
              delegate.search(self.currentModel, function (data) {
-                 self.currentList.reset(data.records);
+                 self.currentList.reset(data);
                  callback.call(context,{data: self.currentList, page: 1, pages: 1, totalRecords: self.currentList.lenght})            }, function (data) {
                  Backbone.trigger(self.componentId + '-' + 'error', {event: 'product-search', view: self, id: '', data: data, error: 'Error in product search'});            });
          },

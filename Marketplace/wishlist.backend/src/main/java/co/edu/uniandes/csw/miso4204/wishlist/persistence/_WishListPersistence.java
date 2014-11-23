@@ -43,13 +43,21 @@ import co.edu.uniandes.csw.miso4204.wishlist.persistence.entity.WishListEntity;
 public abstract class _WishListPersistence{
 
   	protected EntityManager entityManager;
-	
+        
 	public WishListDTO createWishList(WishListDTO wishList) {
-		WishListEntity entity=WishListConverter.persistenceDTO2Entity(wishList);
-		entityManager.getTransaction().begin();
-		entityManager.persist(entity);
-		entityManager.getTransaction().commit();
-		return WishListConverter.entity2PersistenceDTO(entity);
+            entityManager.getTransaction().begin();
+                WishListDTO persistedWishListDTO = existWishListBuyer(wishList.getBuyerId());
+                if (persistedWishListDTO != null){
+                    entityManager.getTransaction().commit();
+                    return persistedWishListDTO;
+                }
+                else {
+                    WishListEntity entity=WishListConverter.persistenceDTO2Entity(wishList);
+                    entityManager.persist(entity);
+                    entityManager.getTransaction().commit();
+                    return WishListConverter.entity2PersistenceDTO(entity);   
+                    
+                }
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -93,7 +101,31 @@ public abstract class _WishListPersistence{
 		entityManager.remove(entity);
 		entityManager.getTransaction().commit();
 	}
-
+        
+        public WishListDTO existWishListBuyer(Long wishBuyerId) {               
+                List<WishListDTO> wishListDTO;
+                Query q = entityManager.createQuery("select u from WishListEntity u where u.buyerId = '" + wishBuyerId + "'" );
+                wishListDTO = WishListConverter.entity2PersistenceDTOList(q.getResultList());
+                if (wishListDTO != null){
+                    if (wishListDTO.size() > 0){
+                        return wishListDTO.get(0);
+                    }
+                }                
+                return null;
+        }
+        
+        public Long getWishListIdBuyerId(Long wishBuyerId) {               
+                List<WishListDTO> wishListDTO;
+                Query q = entityManager.createQuery("select u from WishListEntity u where u.buyerId = '" + wishBuyerId + "'" );
+                wishListDTO = WishListConverter.entity2PersistenceDTOList(q.getResultList());
+                if (wishListDTO != null){
+                    if (wishListDTO.size() > 0){
+                        return wishListDTO.get(0).getId();
+                    }
+                }                
+                return null;
+        }
+        
 	public void updateWishList(WishListDTO detail) {
 		entityManager.getTransaction().begin();
 		WishListEntity entity=entityManager.merge(WishListConverter.persistenceDTO2Entity(detail));

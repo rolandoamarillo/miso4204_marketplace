@@ -3,7 +3,7 @@
     "name" : "purchase",
     "templateName" : "purchase",
     "url" : "user.html",
-    "server": "localhost:8080",
+    "server": "localhost:8084",
 	"context": "/purchase.services/webresources/purchases",
       
     "el" : "#main"

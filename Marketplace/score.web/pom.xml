@@ -7,15 +7,35 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <dependencies>
-    	<!-- embedded glassfish 3.1.2 --> 
-
-        
 		<dependency>
+            <groupId>co.edu.uniandes.csw.miso4204</groupId>
+            <artifactId>purchase.web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>co.edu.uniandes.csw.miso4204</groupId>
+            <artifactId>product.web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>co.edu.uniandes.csw.miso4204</groupId>
+            <artifactId>buyer.web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>co.edu.uniandes.csw.miso4204</groupId>
+            <artifactId>category.web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
             <groupId>co.edu.uniandes.csw</groupId>
             <artifactId>crudmaker.web</artifactId>
             <version>1.1.5</version>
             <type>war</type>
         </dependency>
- 	
     </dependencies> 
 </project>

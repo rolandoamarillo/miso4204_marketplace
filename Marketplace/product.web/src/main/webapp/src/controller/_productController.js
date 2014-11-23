@@ -151,7 +151,7 @@ define(['model/productModel'], function(productModel) {
             }    
                 listReady();
             };
-				App.Utils.getComponentList('categoryComponent',listDataReady,'categoryComponent');
+            App.Utils.getComponentList('categoryComponent',listDataReady,'categoryComponent');
         },
         save: function() {
             var self = this;

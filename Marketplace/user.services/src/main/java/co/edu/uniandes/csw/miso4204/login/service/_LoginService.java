@@ -32,19 +32,12 @@ package co.edu.uniandes.csw.miso4204.login.service;
 import co.edu.uniandes.csw.miso4204.security.jwt.api.JsonWebToken;
 import co.edu.uniandes.csw.miso4204.security.jwt.api.JwtHashAlgorithm;
 import co.edu.uniandes.csw.miso4204.security.logic.SecurityLogic;
-import co.edu.uniandes.csw.miso4204.security.logic.dto.UserSessionDTO;
-import co.edu.uniandes.csw.miso4204.user.logic.dto.LoginDTO;
-import co.edu.uniandes.csw.miso4204.user.logic.dto.UserDTO;
-import co.edu.uniandes.csw.miso4204.user.logic.dto.UserPageDTO;
-import co.edu.uniandes.csw.miso4204.user.logic.ejb.UserLogicService;
+import co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO;
 import com.google.gson.Gson;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,22 +48,28 @@ public abstract class _LoginService {
     @Autowired
     protected SecurityLogic securityLogic;
 
+    @Path("/login")
+    @OPTIONS
+    public Response cors(@javax.ws.rs.core.Context HttpHeaders requestHeaders) {
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS").header("Access-Control-Allow-Headers", "AUTHORIZATION, content-type, accept,x_rest_user").build();
+    }
+
     @POST
     @Path("/login")
-    public Response login(UserSessionDTO login) {
+    public Response login(UserDTO login) {
         String token = "Usuario y contraseña errado. Por favor, vuelva a intentarlo";
 
         try {
-            UserSessionDTO db = securityLogic.getUserSession(login.getUserName());
+            UserDTO db = securityLogic.getUserSession(login.getUsername());
             if (db != null) {
-                if (db.getUserName().equals(login.getUserName()) && db.getPassword().equals(login.getPassword()) && db.getTenantID().equals(login.getTenantID())) {
-                    token = new Gson().toJson(JsonWebToken.encode(db, "Ejemplo", JwtHashAlgorithm.HS256));
+                if (db.getUsername().equals(login.getUsername()) && db.getPassword().equals(login.getPassword()) && db.getTenantID().equals(login.getTenantID())) {
+                    token = new Gson().toJson(JsonWebToken.encode(db, "Un14nd3s2014@", JwtHashAlgorithm.HS256));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Response.ok().entity(token).build();
+        return Response.ok().header("Access-Control-Allow-Origin", "*").entity(token).build();
     }
 
     public SecurityLogic getSecurityLogic() {
