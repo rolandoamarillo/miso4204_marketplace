@@ -73,6 +73,12 @@ public abstract class _WishListItemService {
 	public WishListItemDTO getWishListItem(@PathParam("id") Long id){
 		return wishListItemLogicService.getWishListItem(id);
 	}
+        
+	@GET
+	@Path("get_top_5")
+	public List<WishListItemDTO> getTop5(){
+		return wishListItemLogicService.getTop5();
+	}
 	
 	@PUT
 	public void updateWishListItem(@PathParam("id") Long id, WishListItemDTO wishListItem){

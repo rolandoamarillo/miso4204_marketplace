@@ -34,7 +34,8 @@ define(['model/wishListModel'], function(wishListModel) {
             this.listModelClass = options.listModelClass;
             this.showEdit = true;
             this.showDelete = true;
-            this.editTemplate = _.template($('#wishList').html());
+            this.editTemplate = _.template($('#wishList2').html());    
+            
             if (!options || !options.componentId) {
                 this.componentId = _.random(0, 100) + "";
             }else{
@@ -199,12 +200,26 @@ define(['model/wishListModel'], function(wishListModel) {
             if (!this.searchModel) {
 		this.searchModel = {buyerId : params.buyerId};
             } 
-            var listadoBuyer = delegate.searchWishListBuyer(
+            delegate.searchWishListBuyer(
                     this.searchModel, function (data) {
 
                         callback(data);
                     }, function (data) {
-                        console.log("error dcs");
+                        Backbone.trigger(self.componentId + '-' + 'error', {event: 'wishlist-search', view: self, id: '', data: data, error: 'Error in wishlist search'});
+                    });
+
+            //return listadoBuyer;
+        },
+        searchTop5: function(callback,params) {
+            var delegate = new App.Delegate.WishListDelegate();
+            if (!this.searchModel) {
+		this.searchModel = {buyerId : params.buyerId};
+            } 
+            delegate.searchTop5(
+                    this.searchModel, function (data) {
+
+                        callback(data);
+                    }, function (data) {
                         Backbone.trigger(self.componentId + '-' + 'error', {event: 'wishlist-search', view: self, id: '', data: data, error: 'Error in wishlist search'});
                     });
 
@@ -212,12 +227,11 @@ define(['model/wishListModel'], function(wishListModel) {
         },
         addToCart: function(callback,params) {
             var delegate = new App.Delegate.WishListDelegate();
-            var listadoBuyer = delegate.addToCart(
+            delegate.addToCart(
                     params, function (data) {
-
                         callback(data);
                     }, function (data) {
-                        console.log("error dcs");
+                        
                         Backbone.trigger(self.componentId + '-' + 'error', {event: 'wishlist-search', view: self, id: '', data: data, error: 'Error in addToCart'});
                     });
 

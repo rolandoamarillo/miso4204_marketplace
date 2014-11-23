@@ -41,6 +41,7 @@ import java.util.logging.Logger;
 import co.edu.uniandes.csw.miso4204.wishlistitem.logic.dto.WishListItemDTO;
 import co.edu.uniandes.csw.miso4204.wishlistitem.persistence.entity.WishListItemEntity;
 
+
 public abstract class _WishListItemConverter {
 
 	public static WishListItemDTO entity2PersistenceDTO(WishListItemEntity entity){
@@ -72,6 +73,21 @@ public abstract class _WishListItemConverter {
 		for(WishListItemEntity entity:entities){
 			dtos.add(entity2PersistenceDTO(entity));
 		}
+		return dtos;
+	}
+        
+	public static List<WishListItemDTO> entity2PersistenceDTOTopList( List entities){
+		List<WishListItemDTO> dtos=new ArrayList<WishListItemDTO>();
+                Long i = Long.parseLong("0");
+            for (Object entitie : entities) {
+                WishListItemEntity entityWishList = new WishListItemEntity();
+                Object[] fila = (Object[]) entitie;
+                entityWishList.setId(i);
+                entityWishList.setProductId(Long.parseLong(fila[0].toString()));
+                dtos.add(entity2PersistenceDTO(entityWishList));
+                i++;
+            }
+                
 		return dtos;
 	}
 	
