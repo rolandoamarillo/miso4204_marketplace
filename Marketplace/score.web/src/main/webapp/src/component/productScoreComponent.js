@@ -31,7 +31,7 @@ define(['controller/selectionController', 'model/cacheModel', 'component/_CRUDCo
         },
         productScore : function(){
             var items = this.productComponent.getSelectedRecords();
-            document.location.href = "http://localhost:8080/score.web/listScore.html";
+            document.location.href = "listScore.html";
         }
     });
 
