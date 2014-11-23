@@ -72,8 +72,9 @@ public class PaymentModePersistence extends _PaymentModePersistence {
         return result;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<PaymentModeDTO> getPaymentMode() {
+    public List<PaymentModeDTO> getPaymentModes() {
         List<PaymentModeDTO> result;
         try {
             getEntityManager();
@@ -89,6 +90,7 @@ public class PaymentModePersistence extends _PaymentModePersistence {
         return result;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public PaymentModePageDTO getPaymentModes(Integer page, Integer maxRecords) {
         PaymentModePageDTO result;

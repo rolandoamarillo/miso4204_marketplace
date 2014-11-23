@@ -72,8 +72,9 @@ public class PaymentPersistence extends _PaymentPersistence {
         return result;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<PaymentDTO> getPayment() {
+    public List<PaymentDTO> getPayments() {
         List<PaymentDTO> result;
         try {
             getEntityManager();
@@ -89,8 +90,9 @@ public class PaymentPersistence extends _PaymentPersistence {
         return result;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public PaymentPageDTO getPayment(Integer page, Integer maxRecords) {
+    public PaymentPageDTO getPayments(Integer page, Integer maxRecords) {
         PaymentPageDTO result;
         try {
             getEntityManager();
