@@ -45,10 +45,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import co.edu.uniandes.csw.miso4204.product.logic.ejb.ProductLogicService;
 import co.edu.uniandes.csw.miso4204.product.logic.dto.ProductDTO;
 import co.edu.uniandes.csw.miso4204.product.logic.dto.ProductPageDTO;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 
 public abstract class _ProductService {
 
+    
 	@Autowired
 	protected ProductLogicService productLogicService;
 	

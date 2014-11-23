@@ -21,6 +21,9 @@
 			<label for="categoryidId">Categoria</label> 
             <select class="form-control" id="categoryId" name="categoryId">
 			  <option value="">None</option>
+            <% category.each(function(categoryid) { %> 
+              <option value="<%=categoryid.get('id')%>" <% if(product.get('categoryId')==categoryid.get('id')) {%>selected<%}%> ><%=categoryid.get('name')%></option>
+            <% }); %>                
             </select>  
 		</div>
     </form>
@@ -38,6 +41,9 @@
 	  <label for="categoryId">Categoria</label> 
             <select class="form-control" id="categoryId" name="categoryId">
 			  <option value="">None</option>
+            <% category.each(function(categoryid) { %> 
+              <option value="<%=categoryid.get('id')%>" <% if(product.get('categoryId')==categoryid.get('id')) {%>selected<%}%> ><%=categoryid.get('name')%></option>
+            <% }); %>                
             </select>  
 		</div>
             

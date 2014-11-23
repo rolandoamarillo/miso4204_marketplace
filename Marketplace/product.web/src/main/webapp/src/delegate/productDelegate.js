@@ -31,7 +31,7 @@ define(['delegate/_productDelegate'], function() {
     App.Delegate.ProductDelegate = App.Delegate._ProductDelegate.extend({
         search: function(model, callback, callbackError){
             $.ajax({
-                  url: '/product.services/webresources/products/search/',
+                  url: '/product.services/webresources/products/search',
                   type: 'GET',
                   data: $.param(model.toJSON()),
                   contentType: 'application/json'
@@ -43,6 +43,21 @@ define(['delegate/_productDelegate'], function() {
                  console.log("callback error");                 
              }, this));
         },
+        searchPictures: function(productId, callback, callbackError){
+            $.ajax({
+                  url: '/picture.services/webresources/pictures/search/'+productId,
+                  type: 'GET',
+                  data: {},
+                  contentType: 'application/json'
+             }).done(_.bind(function(data) {
+                 console.log("_bind");
+                 callback.call(callback, data);
+             }, this)).error(_.bind(function(data) {
+                 callbackError(data);
+                 console.log("callback error");                 
+             }, this));
+        },
+
         searchById: function(productId, callback, callbackError){
             $.ajax({
                   url: '/product.services/products/' + productId,

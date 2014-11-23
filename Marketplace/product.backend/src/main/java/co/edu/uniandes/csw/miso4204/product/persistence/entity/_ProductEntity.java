@@ -61,6 +61,7 @@ public abstract class _ProductEntity {
 	private Double price;
 	private Long categoryId;
 
+
 	public Long getId(){
 		return id;
 	}
