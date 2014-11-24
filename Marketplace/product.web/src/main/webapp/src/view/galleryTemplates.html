@@ -15,22 +15,30 @@
    <div class="wrapper-product">
     <% _.each(data, function(item) { %>
     <div class="panel panel-primary item-product">
-        <div class="panel-heading">Producto
+        <div class="panel-heading">
+          <% if(select){ %>
+	     <% var check = _.find(selectedItems,function(i){return i[idField] === item[idField]})?true:false; %>
+	        <input type="checkbox" <%= check?'checked':'' %> 
+                       onclick="Backbone.trigger('<%= componentId %>-<%= name %>-select',{id: <%= item[idField] %>, isChecked: checked });">
+	  <% } %>
+           Producto
         </div>
         <div class="panel-body">
+
    <% for( col in columns) { %>
        <% if(item.get(columns[col].name)){ %>
               <% if(htmlEncode(columns[col].displayName)=="Name"){ %>
-                  <div><img with="40px" height="40px" src="    <%= htmlEncode(item.getDisplay(columns[col].name)) %> " /></div>
+                     <div><img with="40px" height="40px" 
+                           src="<%= htmlEncode(item.getDisplay(columns[col].name)) %> " /></div>
                   
-                     <% }else{ %>
+              <% }else{ %>
                      <div>
                      <strong><%= htmlEncode(columns[col].displayName) %>:</strong>
-                  <%= htmlEncode(item.getDisplay(columns[col].name)) %> 
-                        </div>
-                            <% } %>
+                             <%= htmlEncode(item.getDisplay(columns[col].name)) %> 
+                     </div>
+              <% } %>
        <% }%>
-            <% } %> 
+   <% } %> 
         <% _.each(actions, function(action){ %>
             <% if(action.get('show')){ %>
       <a class="btn btn-xs" onclick="Backbone.trigger('<%= componentId %>-<%= name %>-<%= action.get('name') %>', {id: <%= item.id %> }); return false" ><%= action.get('displayName') %></a>
