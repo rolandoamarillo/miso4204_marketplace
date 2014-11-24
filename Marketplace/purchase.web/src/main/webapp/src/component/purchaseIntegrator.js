@@ -18,9 +18,9 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
             this.addressComponent.clearGlobalActions();
             this.addressComponent.clearRecordActions();
             this.addressComponent.addGlobalAction({
-                name: 'cancelar',
+                name: 'cancel',
                 icon: '',
-                displayName: 'Cancelar',
+                displayName: 'Cancel',
                 show: true
             }, this.cancel, this);
             this.addressComponent.addRecordAction({
@@ -56,9 +56,9 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
             this.creditCardComponent.clearGlobalActions();
             this.creditCardComponent.clearRecordActions();            
             this.creditCardComponent.addGlobalAction({
-                name: 'cancelar',
+                name: 'cancel',
                 icon: '',
-                displayName: 'Cancelar',
+                displayName: 'Cancel',
                 show: true
             }, this.cancel, this);
             this.creditCardComponent.addRecordAction({
@@ -94,7 +94,7 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
                         
             $('#main').html('');
             this.billComponent = new billCp();
-            this.billComponent.initialize({addressList:this.selectedAddress, paymentList:this.selectedPayment, purchaseIntegrator:this});
+            this.billComponent.initialize({addressList:this.selectedAddress, creditCardList:this.selectedPayment, purchaseIntegrator:this});
             $('.breadcrumb').html('');
             this.billComponent.render('main');
             $('.breadcrumb').append('<li>Shopping Address</li>');
@@ -177,12 +177,19 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
            
         },
         
-        useBonus: function(){
-            
+        cancel: function(){
+            document.location.href="http://localhost:8084/purchase.web/";
         },
         
-        cancel: function(){
-            document.location.href="http://localhost:8080/purchase.web";
+        loadButtonsByName: function(param){
+            $.each(param, function(key, value){
+                value.toolbar.addButton({
+                    name: value.name,
+                    icon: '',
+                    displayName: value.displayName,
+                    show: true
+                }, value.callback, value.that);
+            });
         }
     });
     return App.Component.PurchaseIntegrator;
