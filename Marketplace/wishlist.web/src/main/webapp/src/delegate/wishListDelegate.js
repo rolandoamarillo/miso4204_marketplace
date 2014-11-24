@@ -35,7 +35,7 @@ define(['delegate/_wishListDelegate'], function() {
               $.ajax({
                   async: false,
                   url: '/wishlist.services/webresources/master/wish_lists/search/' + id,
-                  type: 'POST',
+                  type: 'GET',
                   data: '',
                   contentType: 'application/json'
              }).done(_.bind(function(data) {
@@ -54,19 +54,43 @@ define(['delegate/_wishListDelegate'], function() {
                     callbackError(data);
              }, this));
          },
-        addToCart: function(params, callback, callbackError) {
+        searchTop5: function(params, callback, callbackError) {
               var id = params.buyerId;              
               
               $.ajax({
                   async: false,
-                  url: '/wishlist.services/webresources/master/shopping_carts',
-                  type: 'POST',
+                  url: '/wishlistitem.services/webresources/wish_list_items/get_top_5',
+                  type: 'GET',
                   data: '',
                   contentType: 'application/json'
              }).done(_.bind(function(data) {
-                 if (data.listwhishListItem){
+                 if (data){
                      
-                     callback(data.listwhishListItem);
+                     callback(data);
+                 }
+                 else{
+                     
+                     callback({});
+                 }
+                 //console.log("_bind");
+                 
+             }, this)).error(_.bind(function(data) {
+                //console.log("callback error"); 
+                    callbackError(data);
+             }, this));
+         },
+        addToCart: function(params, callback, callbackError) {            
+              
+              $.ajax({
+                  async: false,
+                  url: '/shoppingcart.services/webresources/master/shopping_carts',
+                  type: 'POST',
+                  data: JSON.stringify(params),
+                  contentType: 'application/json'
+             }).done(_.bind(function(data) {
+                 if (data){
+                     
+                     callback(data);
                  }
                  else{
                      

@@ -6,13 +6,12 @@ function (wishListMasterCp, shoppingCartCp)
         initialize: function () 
         {
             var self = this;
-            self.setCookie("token", 2, 2);
+            self.setCookie("token", 1, 1);
             var user = self.checkCookie();
             
             this.componentId = App.Utils.randomInteger();
             this.name = "WishListIntegrator";
             this.buyerId = user;
-
             this.setupWishListMasterComponent();
             this.setupShoppingCartComponent({buyerId : user});
         },
@@ -23,16 +22,13 @@ function (wishListMasterCp, shoppingCartCp)
                 //rootElement.append("<div id='cart' class='col-md-4'></div>");
                 $("#cart").append("<div id='master'></div>");
                 //$("#cart").append("<div id='items'></div>");
-                this.wishListMasterComponent.renderMaster('main1');
+                this.wishListMasterComponent.renderMaster('master');
                 this.wishListMasterComponent.masterComponent.create();
-                //this.wishListMasterComponent.masterComponent.initialize({cache: {data: [{}], mode: "memory"},pagination: false});
                 this.wishListMasterComponent.masterComponent.listComponent.display(false);
-                //this.wishListMasterComponent.masterComponent.listComponent.render();
                 //this.wishListMasterComponent.renderChild('item', 'items');
                 //this.wishListMasterComponent.whishListItemComponent.render('cart');
                 //console.log(Object.getOwnPropertyNames(this.wishListMasterComponent.whishListItemComponent));
-                //this.wishListMasterComponent.masterComponent.toolbarComponent.display(true);
-//                this.wishListMasterComponent.whishListItemComponent.toolbarComponent.display(false);
+                this.wishListMasterComponent.whishListItemComponent.toolbarComponent.display(false);
                 //this.wishListMasterComponent.whishListItemComponent.listComponent.render();
                 this.shoppingCartItemComponent.render('main1');
                 
@@ -67,28 +63,8 @@ function (wishListMasterCp, shoppingCartCp)
                 window.location = "/user.web";
             }
         },
-        viewTop5: function (params) {
-            var listadoItems;
-            this.wishListMasterComponent.masterComponent.componentController.searchTop5(function (data) {
-                        listadoItems = data;
-                    }, {buyerId:this.buyerId});
-            
-            this.shoppingCartItemComponent.setRecords(listadoItems);   
-
-            //this.shoppingCartItemComponent.initialize({cache: {data: listadoItems, mode: "memory"},pagination: false});
-            this.render();
-            this.wishListMasterComponent.whishListItemComponent.listComponent.render();
-        },
-        wishList: function (params) {
-            
-            var listadoItems;
-            this.wishListMasterComponent.masterComponent.componentController.searchWishListBuyer(function (data) {
-                
-                        listadoItems = data;
-                    }, {buyerId:this.buyerId});
-            this.shoppingCartItemComponent.setRecords(listadoItems);
-            this.render();
-            this.wishListMasterComponent.whishListItemComponent.listComponent.render();
+        viewWishList: function (domElementId) {
+            window.location = "wishListMaster.html";
         },
         setupShoppingCartComponent: function (params) 
         {
@@ -103,10 +79,9 @@ function (wishListMasterCp, shoppingCartCp)
                 name: 'addToCart',
                 icon: '',
                 displayName: 'Add to cart',
-                show: true
+                show: true,
             },
             this.addCart, this);
-            this.shoppingCartItemComponent.toolbarComponent.display(false);
             this.shoppingCartItemComponent.toolbarComponent.removeButton("search");
         },
         setupWishListMasterComponent: function () 
@@ -118,22 +93,6 @@ function (wishListMasterCp, shoppingCartCp)
             this.wishListMasterComponent.whishListItemComponent.listComponent.hideAction("agregarCarrito");
             this.wishListMasterComponent.whishListItemComponent.setGlobalActionsVisible(false);
             this.wishListMasterComponent.whishListItemComponent.disableEdit();
-            this.wishListMasterComponent.masterComponent.addGlobalAction({
-                name: 'wishList',
-                icon: 'glyphicon-list',
-                displayName: 'Wish List',
-                show: true
-            },
-            this.wishList,
-                    this);
-            this.wishListMasterComponent.masterComponent.addGlobalAction({
-                name: 'top5',
-                icon: 'glyphicon-list',
-                displayName: 'Top 5',
-                show: true
-            },
-            this.viewTop5,
-                    this);
             this.wishListMasterComponent.hideChilds();
         },
         addCart: function (params) {                 
@@ -154,7 +113,6 @@ function (wishListMasterCp, shoppingCartCp)
             if (model) {
                 this.wishListMasterComponent.addItems([{productId: model.productshoppingcartitemId}]);
                 this.wishListMasterComponent.masterComponent.componentController.addToCart(function (data) {
-                    //Backbone.trigger(this.componentId + '-' + 'error', {event: 'get logged user', view: self, id: '', data: data, error: {textResponse: 'Error in getting logged user'}});
                         
                     }, {"shoppingCartEntity":{"name":"Shopping cart " + buyerId,"buyerId":buyerId},"listshoppingCartItem":[],"createshoppingCartItem":[{"productshoppingcartitemId":model.productId,"quantity":1,"name":modelProduct.name,"unitPrice":modelProduct.price}],"updateshoppingCartItem":[],"deleteshoppingCartItem":[]});
             }
