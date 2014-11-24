@@ -31,6 +31,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
                 Backbone.trigger(uComponent.componentId + '-' + 'error', {event: 'wishList-master-save', view: self, message: error});
             });
             Backbone.on(this.masterComponent.componentId + '-instead-wishList-save', function(params) {
+                
                 self.model.set('wishListEntity', params.model);
                 if (params.model) {
                     self.model.set('id', params.model.id);
@@ -154,7 +155,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
                 this.viewCart,
                         this);
                 this.masterComponent.toolbarComponent.removeButton("search");
-                this.masterComponent.toolbarComponent.removeButton("create");
+                //this.masterComponent.toolbarComponent.removeButton("create");
         },
         viewCart: function (domElementId) {
             window.location = "wishListIntegrator.html";

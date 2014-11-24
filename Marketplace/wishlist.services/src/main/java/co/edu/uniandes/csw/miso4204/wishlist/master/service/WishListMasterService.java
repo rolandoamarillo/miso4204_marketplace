@@ -45,9 +45,5 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class WishListMasterService extends _WishListMasterService {
-    @GET
-    @Path("search/{id_buyer}")
-    public WishListMasterDTO getWishListBuyer(@PathParam("id_buyer") Long buyerId) {
-        return wishlistMasterLogicService.getWishListBuyer(buyerId);
-    }
+
 }

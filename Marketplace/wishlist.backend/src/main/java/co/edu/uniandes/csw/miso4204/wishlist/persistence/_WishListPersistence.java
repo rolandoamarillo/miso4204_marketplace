@@ -45,16 +45,48 @@ public abstract class _WishListPersistence{
   	protected EntityManager entityManager;
         
 	public WishListDTO createWishList(WishListDTO wishList) {
+            System.out.println("createWl2");
             entityManager.getTransaction().begin();
-                WishListDTO persistedWishListDTO = existWishListBuyer(wishList.getBuyerId());
+            System.out.println("createWl3");
+                WishListDTO persistedWishListDTO = null;// = existWishListBuyer(wishList.getBuyerId());
+            System.out.println("createWl33");    
+                List<WishListDTO> wishListDTO;
+                System.out.println("createWl34");    
+                Query q = entityManager.createQuery("select u from WishListEntity u where u.buyerId = '" + wishList.getBuyerId() + "'" );
+                System.out.println("createWl35");    
+                wishListDTO = WishListConverter.entity2PersistenceDTOList(q.getResultList());
+                System.out.println("createWl36");
+                if (wishListDTO != null){
+                    System.out.println("createWl37");
+                    if (wishListDTO.size() > 0){
+                        System.out.println("createWl38");
+                        persistedWishListDTO = wishListDTO.get(0);
+                        System.out.println("createWl39");
+                    }
+                    else {
+                        persistedWishListDTO = null;
+                    }
+                    System.out.println("createWl40");
+                }                
+                System.out.println("createWl41");
+                
+                System.out.println("createWl42");
+                
+                System.out.println("createWl4");
                 if (persistedWishListDTO != null){
+                    System.out.println("createWl5");
                     entityManager.getTransaction().commit();
+                    System.out.println("createWl6");
                     return persistedWishListDTO;
                 }
                 else {
+                    System.out.println("createWl7");
                     WishListEntity entity=WishListConverter.persistenceDTO2Entity(wishList);
+                    System.out.println("createWl8");
                     entityManager.persist(entity);
+                    System.out.println("createWl9");
                     entityManager.getTransaction().commit();
+                    System.out.println("createWl0");
                     return WishListConverter.entity2PersistenceDTO(entity);   
                     
                 }
@@ -89,9 +121,13 @@ public abstract class _WishListPersistence{
 	}
 
 	public WishListDTO getWishList(Long id) {
+            System.out.println("enPersisdewih1");
 		entityManager.getTransaction().begin();
+                System.out.println("enPersisdewih2");
 		WishListDTO result = WishListConverter.entity2PersistenceDTO(entityManager.find(WishListEntity.class, id));
+                System.out.println("enPersisdewih3");
 		entityManager.getTransaction().commit();
+                System.out.println("enPersisdewih4");
 		return result;
 	}
 
@@ -114,15 +150,25 @@ public abstract class _WishListPersistence{
                 return null;
         }
         
-        public Long getWishListIdBuyerId(Long wishBuyerId) {               
+        public Long getWishListIdBuyerId(Long wishBuyerId) {  
+            entityManager.getTransaction().begin();
+            System.out.println("wlidb1");
                 List<WishListDTO> wishListDTO;
+                System.out.println("wlidb2");
                 Query q = entityManager.createQuery("select u from WishListEntity u where u.buyerId = '" + wishBuyerId + "'" );
+                System.out.println("wlidb3");
                 wishListDTO = WishListConverter.entity2PersistenceDTOList(q.getResultList());
+                System.out.println("wlidb3");
                 if (wishListDTO != null){
+                    System.out.println("wlidb4");
                     if (wishListDTO.size() > 0){
+                        System.out.println("wlidb5 " + wishListDTO.get(0).getId());
+                        entityManager.getTransaction().commit();
                         return wishListDTO.get(0).getId();
                     }
-                }                
+                    System.out.println("wlidb7");
+                }     
+                entityManager.getTransaction().commit();
                 return null;
         }
         

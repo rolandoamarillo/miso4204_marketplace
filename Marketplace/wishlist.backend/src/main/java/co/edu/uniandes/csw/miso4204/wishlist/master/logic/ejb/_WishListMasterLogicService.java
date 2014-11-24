@@ -50,12 +50,19 @@ public abstract class _WishListMasterLogicService {
     protected WishListItemPersistence wishListItemPersistance;
 
     public WishListMasterDTO createMasterWishList(WishListMasterDTO wishlist) {
+        System.out.println("create");
         WishListDTO persistedWishListDTO = wishlistPersistance.createWishList(wishlist.getWishListEntity());
+        System.out.println("create2");
         if (wishlist.getCreatewhishListItem() != null) {
+            System.out.println("create3");
             for (WishListItemDTO wishListItemDTO : wishlist.getCreatewhishListItem()) {
+                System.out.println("create4");
                 WishListItemDTO createdWishListItemDTO = wishListItemPersistance.createWishListItem(wishListItemDTO);
+                System.out.println("create5");
                 WishListwhishListItemEntity wishlistWishListItemEntity = new WishListwhishListItemEntity(persistedWishListDTO.getId(), createdWishListItemDTO.getId());
+                System.out.println("create6");
                 wishlistMasterPersistance.createWishListwhishListItemEntity(wishlistWishListItemEntity);
+                System.out.println("create7");
             }
         }
         // update wishListItem
@@ -76,7 +83,9 @@ public abstract class _WishListMasterLogicService {
     public WishListMasterDTO getWishListBuyer(Long buyerId) {
         Long idWishList;
         WishListMasterDTO wishListMaster = new WishListMasterDTO();
+        System.out.println("voy a sacar wishlistbuyer");
         idWishList = wishlistPersistance.getWishListIdBuyerId(buyerId);
+        System.out.println("voy a sacar wishlistbuyer " + idWishList);
         if (idWishList != null) {
             return getMasterWishList(idWishList);    
         }

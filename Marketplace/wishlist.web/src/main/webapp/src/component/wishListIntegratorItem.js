@@ -6,15 +6,29 @@ function (wishListMasterCp, shoppingCartCp)
         initialize: function () 
         {
             var self = this;
-            self.setCookie("token", 2, 2);
+            //self.setCookie("token", 2, 2);
             var user = self.checkCookie();
-            
-            this.componentId = App.Utils.randomInteger();
-            this.name = "WishListIntegrator";
-            this.buyerId = user;
+            if (user){
+                $.ajax({
+                    async: false,
+                    url: '/wishlistitem.services/webresources/wish_list_items/validate/' + user,
+                    type: 'GET',
+                    data: user,
+                    contentType: 'application/json'
+                }).done(_.bind(function(data) {
+                    this.buyerId = data;
+                }, this)).error(_.bind(function(data) {
+                    alert('Ha ocurrido un error validando el usuario');
+                    window.location = "/user.web/login.html";
+                }, this));
 
-            this.setupWishListMasterComponent();
-            this.setupShoppingCartComponent({buyerId : user});
+                this.componentId = App.Utils.randomInteger();
+                this.name = "WishListIntegrator";
+                
+
+                this.setupWishListMasterComponent();
+                this.setupShoppingCartComponent({buyerId : this.buyerId});   
+            }
         },
         render: function (domElementId) {
             if (domElementId) {
@@ -64,7 +78,8 @@ function (wishListMasterCp, shoppingCartCp)
             if (user !== "") {
                 return user;
             } else {
-                window.location = "/user.web";
+                alert('Debe iniciar sesion.');
+                window.location = "/user.web/login.html";
             }
         },
         viewTop5: function (params) {
@@ -97,7 +112,13 @@ function (wishListMasterCp, shoppingCartCp)
             this.wishListMasterComponent.masterComponent.componentController.searchWishListBuyer(function (data) {
                         listadoItems = data;
                     }, {buyerId:params.buyerId});
-            this.shoppingCartItemComponent.initialize({cache: {data: listadoItems, mode: "memory"},pagination: false});
+            if (!listadoItems){
+                this.shoppingCartItemComponent.initialize({cache: {data: listadoItems, mode: "memory"},pagination: false});    
+            }
+            else {
+                this.shoppingCartItemComponent.initialize({cache: {data: {}, mode: "memory"},pagination: false});    
+            }
+            
             this.shoppingCartItemComponent.setReadOnly(true);
             this.shoppingCartItemComponent.addRecordAction({
                 name: 'addToCart',
@@ -155,7 +176,7 @@ function (wishListMasterCp, shoppingCartCp)
                 this.wishListMasterComponent.addItems([{productId: model.productshoppingcartitemId}]);
                 this.wishListMasterComponent.masterComponent.componentController.addToCart(function (data) {
                     //Backbone.trigger(this.componentId + '-' + 'error', {event: 'get logged user', view: self, id: '', data: data, error: {textResponse: 'Error in getting logged user'}});
-                        
+                      alert('Producto adicionado al carrito exitosamente');
                     }, {"shoppingCartEntity":{"name":"Shopping cart " + buyerId,"buyerId":buyerId},"listshoppingCartItem":[],"createshoppingCartItem":[{"productshoppingcartitemId":model.productId,"quantity":1,"name":modelProduct.name,"unitPrice":modelProduct.price}],"updateshoppingCartItem":[],"deleteshoppingCartItem":[]});
             }
             this.render();

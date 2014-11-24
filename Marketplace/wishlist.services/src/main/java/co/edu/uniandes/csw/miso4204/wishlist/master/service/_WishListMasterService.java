@@ -68,5 +68,11 @@ public abstract class _WishListMasterService {
     public void updateWishList(@PathParam("id") Long id, WishListMasterDTO wishlist) {
         wishlistMasterLogicService.updateMasterWishList(wishlist);
     }
+    
+    @GET
+    @Path("search/{id_buyer}")
+    public WishListMasterDTO getWishListBuyer(@PathParam("id_buyer") Long buyerId) {
+        return wishlistMasterLogicService.getWishListBuyer(buyerId);
+    }
 
 }
