@@ -23,23 +23,18 @@ function render() {
         'clientid': '890157117447-g0qh02in87s9kqc2behljc94hlp61vbu.apps.googleusercontent.com',
         'cookiepolicy': 'single_host_origin',
         'requestvisibleactions': 'http://schemas.google.com/AddActivity',
-        'scope': 'https://www.googleapis.com/auth/plus.login'
+        'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
     });
-
 
 }
 
 function signinCallback(authResult) {
 
     if (authResult['access_token']) {
-        //alert(authResult);
+        
         gapi.auth.setToken(authResult);
         onloadInitialization();
         makeGoogleApiCalls();
-        // Almacena el token recuperado.
-        //                    toggleElement('signin-button'); // Oculta el inicio de sesión si se ha accedido correctamente.
-        // Activa la solicitud para obtener la dirección de correo electrónico
-        // Autorizado correctamente
         // Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
         document.getElementById('signinButton').setAttribute('style', 'display: none');
     } else if (authResult['error']) {
@@ -63,8 +58,10 @@ function onloadInitialization() {
 // make Google API calls: obtain logged-in member info and activity of friends
 function makeGoogleApiCalls() {
     gapi.client.load('plus', 'v1', function () {
-
-        // Request1: obtain logged-in member info
+        
+        
+      
+        // Request1: obtain logged-in user info
         var request = gapi.client.plus.people.get({
             'userId': 'me'
         });
@@ -72,19 +69,15 @@ function makeGoogleApiCalls() {
 
         request.execute(function (aInfo) {
 
-            // prepare author info array for rendering
+            // prepare user info array for rendering Login
             var userInfo =
                     {
-                        'username': aInfo.id,
+                        'username': aInfo.emails[0].value,
                         'password': aInfo.id,
                         'tenantID': document.domain,
                         'levelAccess': 'user'
 
                     };
-            // and render it using 'gplusTemplate' template
-//                        $('#author').html(
-//                                $('#gplusTemplate').render(authorInfo)
-//                                );
 
             var full = location.hostname + (location.port ? ':' + location.port : '');
             $.ajax({
@@ -104,7 +97,6 @@ function makeGoogleApiCalls() {
             }, this)).error(_.bind(function (data) {
                 console.log("data");
                 alert('USUARIO NO AUTENTICADO : ' + data["responseText"]);
-//			   window.location.href = '../Sport_web/error.html';
 
             }, this));
 
@@ -119,4 +111,4 @@ function setCookie(cname, cvalue, exdays) {
     var expires = "expires=" + d.toUTCString();
     var path = "; path=/";
     document.cookie = cname + "=" + cvalue + "; " + expires + path;
-}        
+}
