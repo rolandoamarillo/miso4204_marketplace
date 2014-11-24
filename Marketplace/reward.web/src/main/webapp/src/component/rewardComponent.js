@@ -34,9 +34,12 @@ define(['component/_rewardComponent'], function() {
                 self.componentController.setPage(params.page);
                 self.componentController.listFunction(null, self.list, self);
                 });
+			this.listComponent.removeAction('edit');
+			this.listComponent.removeAction('delete');
+			this.toolbarComponent.removeButton('create');
 			this.toolbarComponent.removeButton("refresh");
 			this.toolbarComponent.removeButton("print");
-                        this.toolbarComponent.removeButton("search");
+      this.toolbarComponent.removeButton("search");
 			this.toolbarComponent.addButton({
 				name: 'showsearch',
 				displayName: 'Search',

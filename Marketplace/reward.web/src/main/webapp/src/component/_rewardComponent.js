@@ -35,7 +35,7 @@ define(['component/_CRUDComponent', 'model/rewardModel', 'controller/rewardContr
         	this.listComponent.addColumn('points','Points');
         	this.listComponent.addColumn('name','Name');
         	this.listComponent.addColumn('date','Date');
-        	this.listComponent.addColumn('totalPoints','Total Points');
+        	this.listComponent.addColumn('totalPoints','Total Accumulated Points');
         	this.listComponent.addColumn('purchaseId','Purchase Id');
         	this.listComponent.addColumn('buyerId','Buyer Id');
         }

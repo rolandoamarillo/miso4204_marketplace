@@ -40,6 +40,7 @@ import javax.persistence.Query;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.NoResultException;
 import org.apache.shiro.SecurityUtils;
 public class RewardPersistence extends _RewardPersistence{
     
@@ -65,10 +66,14 @@ public class RewardPersistence extends _RewardPersistence{
 			reward.setPoints(Integer.valueOf(reward.getValue().intValue()/1000));
 		}
 		entityManager.getTransaction().begin();
-		Query query = entityManager.createQuery("SELECT u.totalPoints FROM RewardEntity u WHERE u.buyerId = "+reward.getBuyerId()+" ORDER BY u.date DESC").setMaxResults(1);
-		Integer accumulatedPoints = 0;
-		accumulatedPoints = Integer.parseInt(query.getSingleResult().toString());
-		reward.setTotalPoints(accumulatedPoints+reward.getPoints());
+		Integer accumulatedPoints;
+		try {
+			Query query = entityManager.createQuery("SELECT u.totalPoints FROM RewardEntity u WHERE u.buyerId = "+reward.getBuyerId()+" ORDER BY u.date DESC").setMaxResults(1);
+			accumulatedPoints = Integer.parseInt(query.getSingleResult().toString());
+			reward.setTotalPoints(accumulatedPoints+reward.getPoints());
+		} catch(NoResultException e) {
+			accumulatedPoints = 0;
+    }
 		RewardEntity entity=RewardConverter.persistenceDTO2Entity(reward);
                 
             try {

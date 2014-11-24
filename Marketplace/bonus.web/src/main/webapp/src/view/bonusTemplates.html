@@ -4,47 +4,21 @@
     <% if(bonus.id) {%>
     <input type="hidden" name="id" value="<%= bonus.id %>"/>
     <% }%>
-    <div class="form-group" >
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= bonus.get('name') %>"/>	
-    </div>
-    <div class="form-group" >
-    <label for="description">Description</label>
-    <input type="text" class="form-control" id="description" name="description" placeholder="Enter value" value="<%= bonus.get('description') %>"/>	
-    </div>
-    <div class="form-group" >
-    <label for="value">Value</label>
-    <input type="text" class="form-control" id="value" name="value" placeholder="Enter value" value="<%= bonus.get('value') %>"/>	
-    </div>
-    <div class="form-group" >
-    <label for="status">Status</label>
-    <input type="text" class="form-control" id="status" name="status" placeholder="Enter value" value="<%= bonus.get('status') %>"/>	
-    </div>
-    <div class="form-group" >
-    <label for="date">Date</label>
-    <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="date"  name="date" placeholder="Enter value" />
-    <%= '<scr'+'ipt>' %>
-    $('#date').datepicker({autoclose:true});
-    $('#date').datepicker('setDate',App.Utils.Converter.date.toDate("<%= bonus.get('date') %>"));
-    <%= '</scr'+'ipt>' %>
-    </div>
-    <div class="form-group" >
-    <label for="expiration">Expiration</label>
-    <input type="text" data-converter="date" data-date-format="yyyy/mm/dd" class="form-control" id="expiration"  name="expiration" placeholder="Enter value" />
-    <%= '<scr'+'ipt>' %>
-    $('#expiration').datepicker({autoclose:true});
-    $('#expiration').datepicker('setDate',App.Utils.Converter.date.toDate("<%= bonus.get('expiration') %>"));
-    <%= '</scr'+'ipt>' %>
-    </div>
-    <div class="form-group" >
-
-    <label for="buyeridId">Buyer Id</label> 
-    <select class="form-control" id="buyerId" name="buyerId">
+		<div class="form-group" >
+    <label for="availableBonus">Available Bonuses</label> 
+    <select class="form-control" id="availableBonus" name="availableBonus">
     <option value="">None</option>
-    <% buyer.each(function(buyerid) { %> 
-    <option value="<%=buyerid.get('id')%>" <% if(bonus.get('buyerId')==buyerid.get('id')) {%>selected<%}%> ><%=buyerid.get('name')%></option>
-    <% }); %>                
-    </select>  
+    <option value="Bonos especial 1|Descuento especial por compras de temporada|10|2016/12/31|5000">Bono especial 1 con grandes promociones de temporada, 10% de descuento redimiendo 5000 puntos. Vence diciembre 2016.</option>
+		<option value="Bonos especial 2|Descuento especial por compras de temporada|15|2015/12/31|8000">Bono especial 2 con grandes promociones de temporada, 15% de descuento redimiendo 8000 puntos. Vence diciembre 2015.</option>
+		<option value="Bonos especial 3|Descuento especial por compras de temporada|5|2017/12/31|2000">Bono especial 3 con grandes promociones de temporada, 15% de descuento redimiendo 2000 puntos. Vence diciembre 2017.</option>
+		<option value="Bonos especial 4|Descuento especial por compras de temporada|10|2015/12/31|5000">Bono especial 4 con grandes promociones de temporada, 10% de descuento redimiendo 5000 puntos. Vence diciembre 2015.</option>
+		<option value="Bonos especial 5|Descuento especial por compras de temporada|20|2016/12/31|30000">Bono especial 5 con grandes promociones de temporada, 20% de descuento redimiendo 30000 puntos. Vence diciembre 2016.</option>
+		<option value="Bonos especial 6|Descuento especial por compras de temporada|25|2016/12/31|50000">Bono especial 6 con grandes promociones de temporada, 25% de descuento redimiendo 50000 puntos. Vence diciembre 2016.</option>
+		<option value="Bonos especial 7|Descuento especial por compras de temporada|5|2015/12/31|2000">Bono especial 7 con grandes promociones de temporada, 5% de descuento redimiendo 2000 puntos. Vence diciembre 2015.</option>
+		<option value="Bonos especial 8|Descuento especial por compras de temporada|5|2018/12/31|2000">Bono especial 8 con grandes promociones de temporada, 5% de descuento redimiendo 2000 puntos. Vence diciembre 2018.</option>
+		<option value="Bonos especial 9|Descuento especial por compras de temporada|15|2015/12/31|10000">Bono especial 9 con grandes promociones de temporada, 15% de descuento redimiendo 10000 puntos. Vence diciembre 2015.</option>
+		<option value="Bonos especial 10|Descuento especial por compras de temporada|20|2016/12/31|40000">Bono especial 10 con grandes promociones de temporada, 20% de descuento redimiendo 40000 puntos. Vence diciembre 2016.</option>
+    </select>
     </div>
     </form>
     </div>

@@ -35,9 +35,19 @@ define(['component/_bonusComponent'], function() {
                 self.componentController.setPage(params.page);
                 self.componentController.listFunction(null, self.list, self);
                 });
+			this.listComponent.removeAction('edit');
+			this.listComponent.removeAction('delete');
+			//this.toolbarComponent.addButton({name: "create", displayName: 'Cambiar puntos por bono'});
+			this.toolbarComponent.removeButton("create");
 			this.toolbarComponent.removeButton("refresh");
 			this.toolbarComponent.removeButton("print");
-                        this.toolbarComponent.removeButton("search");
+      this.toolbarComponent.removeButton("search");
+			this.toolbarComponent.addButton({
+				name: 'create',
+				icon: 'glyphicon-plus',
+				displayName: 'Redeem Points',
+				show: true
+			}, this.create, this);
 			this.toolbarComponent.addButton({
 				name: 'showsearch',
 				displayName: 'Search',
