@@ -70,7 +70,10 @@ define(['component/_rewardComponent'], function() {
 			this.componentController.list(null, this.list, this);
                         this.componentController.search(this.list,this);
 
-		}
+		},
+                saveReward: function () {
+                    
+                }
 		
 		
 
