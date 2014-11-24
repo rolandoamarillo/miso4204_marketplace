@@ -6,5 +6,5 @@
     "server": "localhost:8084",
     "context": "/product.services/webresources/products",  
     "el" : "#main",
-    "catalogVariant" : "normal"
+    "catalogVariant" : "gallery"
 }

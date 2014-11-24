@@ -31,6 +31,7 @@ define(['component/_productComponent'], function() {
     App.Component.ProductComponent = App.Component._ProductComponent.extend({
         postInit: function(){
             this.listComponent.enableMultipleSelection(true);
+            //this.listComponent.addColumn('urlImg');
             
             // Galeria
             this.configuration = App.Utils.loadComponentConfiguration('product');

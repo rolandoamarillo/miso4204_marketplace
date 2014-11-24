@@ -38,10 +38,15 @@ define(['controller/_productController','delegate/productDelegate'], function() 
              var model = $('#' + this.componentId + '-productForm').serializeObject();
              this.currentModel.set(model);
              var delegate = new App.Delegate.ProductDelegate();
-             delegate.search(self.currentModel, function (data) {
-                 self.currentList.reset(data);
-                 callback.call(context,{data: self.currentList, page: 1, pages: 1, totalRecords: self.currentList.lenght})            }, function (data) {
-                 Backbone.trigger(self.componentId + '-' + 'error', {event: 'product-search', view: self, id: '', data: data, error: 'Error in product search'});            });
+             delegate.search(self.currentModel, 
+                 function (data) {
+                    self.currentList.reset(data);
+                    callback.call(context,{data: self.currentList, page: 1, pages: 1, totalRecords: self.currentList.lenght})            
+                 }, 
+                 function (data) {
+                   Backbone.trigger(self.componentId + '-' + 'error', {event: 'product-search', view: self, id: '', data: data, error: 'Error in product search'});            
+                 }
+             );
          },
         search: function() {
             if (App.Utils.eventExists(this.componentId + '-' +'instead-product-search')) {

@@ -76,6 +76,10 @@ define(['model/productModel'], function(productModel) {
 						this.currentList.setPageSize(this.pageSize);
 					}
 				}
+                                
+                //var delegate = new App.Delegate.ProductDelegate();
+                //this.currentList = delegate.addPictures(this.currentList);
+                
                 this.currentList.fetch({
                     data: data,
                     success: function(resp) {
