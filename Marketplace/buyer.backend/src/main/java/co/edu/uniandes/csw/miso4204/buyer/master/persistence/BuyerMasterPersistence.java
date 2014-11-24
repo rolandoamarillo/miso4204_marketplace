@@ -19,7 +19,7 @@ public class BuyerMasterPersistence extends _BuyerMasterPersistence{
     private EntityManagerFactory emf;
     
     public BuyerMasterPersistence() {
-		emf = Persistence.createEntityManagerFactory("BuyerPU");		
+		emf = Persistence.createEntityManagerFactory("BuyerMasterPU");		
     }
     
     public void getEntityManager() {
