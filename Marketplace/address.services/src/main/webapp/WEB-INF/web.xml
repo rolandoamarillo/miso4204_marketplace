@@ -25,7 +25,6 @@
     </session-config>
   
     <!-- ================ Inicio de Configuración de Seguridad =================== -->
-  
     <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -34,12 +33,9 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
-  
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/webresources/*</url-pattern>
     </filter-mapping>
-    
     <!-- ================ Fin de Configuración de Seguridad =================== -->
-  
 </web-app>
