@@ -42,8 +42,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn; 
 import org.eclipse.persistence.annotations.JoinFetch;
+import org.eclipse.persistence.annotations.Multitenant;
+import org.eclipse.persistence.annotations.TenantDiscriminatorColumn;
 
 @Entity
+@Multitenant
+@TenantDiscriminatorColumn(name="tenantID")
 @IdClass(WishListwhishListItemEntityId.class)
 @NamedQueries({
     @NamedQuery(name = "WishListwhishListItemEntity.getByMasterId", query = "SELECT  u FROM WishListwhishListItemEntity u WHERE u.wishListId=:wishListId"),

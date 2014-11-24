@@ -32,12 +32,128 @@ package co.edu.uniandes.csw.miso4204.creditcard.persistence;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import co.edu.uniandes.csw.miso4204.creditcard.logic.dto.CreditCardDTO;
+import co.edu.uniandes.csw.miso4204.creditcard.logic.dto.CreditCardPageDTO;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.apache.shiro.SecurityUtils;
 
 public class CreditCardPersistence extends _CreditCardPersistence{
 
-	public CreditCardPersistence(){
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("CreditCardPU");
-		entityManager = emf.createEntityManager();
-	}
+	private EntityManagerFactory emf;
+    
+    public CreditCardPersistence() {
+		emf = Persistence.createEntityManagerFactory("CreditCardPU");		
+    }
+    
+    public void getEntityManager() {
+        co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO buyerS = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
+        String tenant = buyerS.getTenantID();
+        Map<String, Object> emProperties = new HashMap<String, Object>();
+        emProperties.put("eclipselink.tenant-id", tenant);//Asigna un valor al multitenant
+        entityManager = emf.createEntityManager(emProperties);
+    }
+    
+    @Override
+    public CreditCardDTO createCreditCard(CreditCardDTO creditCard) {
+	CreditCardDTO creditCard2 = null;
+        try {
+            getEntityManager();
+            creditCard2 = super.createCreditCard(creditCard);
+        } catch (Exception e) {
+            e.printStackTrace();
+            creditCard2 = null;
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return creditCard2;
+    }
+	
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<CreditCardDTO> getCreditCards() {
+        List<CreditCardDTO> list;
+        try {
+            getEntityManager();
+            list = super.getCreditCards();
+        } catch (Exception e) {
+            e.printStackTrace();
+            list = new ArrayList<CreditCardDTO>();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return list;
+    }
+        
+    @Override
+    @SuppressWarnings("unchecked")
+    public CreditCardPageDTO getCreditCards(Integer page, Integer maxRecords) {
+        CreditCardPageDTO pages;
+        try {
+            getEntityManager();
+            pages = super.getCreditCards(page, maxRecords);
+        } catch (Exception e) {
+            e.printStackTrace();
+            pages = null;
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return pages;
+    }
+        
+    @Override
+    public CreditCardDTO getCreditCard(Long id) {
+        CreditCardDTO creditCard;
+        try {
+            getEntityManager();
+            creditCard = super.getCreditCard(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            creditCard = null;
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return creditCard;
+    }
+        
+    @Override
+    public void deleteCreditCard(Long id) {
+        try {
+            getEntityManager();
+            super.deleteCreditCard(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+    }
+
+    @Override
+    public void updateCreditCard(CreditCardDTO detail) {
+        try {
+            getEntityManager();
+            super.updateCreditCard(detail);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+    }
 
 }

@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.miso4204.security.jwt.api;
 
-import co.edu.uniandes.csw.miso4204.security.logic.dto.UserSessionDTO;
+import co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,12 +15,12 @@ import com.google.gson.GsonBuilder;
  */
 public class VerifyToken {
 
-    public UserSessionDTO getDataUser(String token) {
+    public UserDTO getDataUser(String token) {
 
         try {
-            String userToken = JsonWebToken.decode(token, "localhost", true);
+            String userToken = JsonWebToken.decode(token, "Un14nd3s2014@", true);
             Gson gson = new GsonBuilder().serializeNulls().create();
-            UserSessionDTO res = gson.fromJson(userToken, UserSessionDTO.class);
+            UserDTO res = gson.fromJson(userToken, UserDTO.class);
             return res;
         } catch (Throwable t) {
             t.printStackTrace();

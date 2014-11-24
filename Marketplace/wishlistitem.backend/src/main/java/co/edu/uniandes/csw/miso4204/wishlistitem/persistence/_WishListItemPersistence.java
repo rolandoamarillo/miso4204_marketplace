@@ -53,6 +53,23 @@ public abstract class _WishListItemPersistence{
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<WishListItemDTO> getTop5() {
+            try {
+		entityManager.getTransaction().begin();
+		//Query q = entityManager.createQuery("select u.productId as id, u.productId AS productId, COUNT(u) AS total from WishListItemEntity u GROUP BY u.productId ORDER BY total DESC");
+                Query q = entityManager.createQuery("select u.productId AS productId, COUNT(u) AS total from WishListItemEntity u GROUP BY u.productId ORDER BY total DESC");
+                q.setMaxResults(5);
+		List<WishListItemDTO> result = WishListItemConverter.entity2PersistenceDTOTopList(q.getResultList());
+		entityManager.getTransaction().commit();
+		return result;   
+            } catch (Exception e) {
+                entityManager.getTransaction().commit();
+                return null;
+            }
+		
+	}
+        
+	@SuppressWarnings("unchecked")
 	public List<WishListItemDTO> getWishListItems() {
 		entityManager.getTransaction().begin();
 		Query q = entityManager.createQuery("select u from WishListItemEntity u");

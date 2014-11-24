@@ -78,5 +78,10 @@ public abstract class _ScoreService {
 	public void updateScore(@PathParam("id") Long id, ScoreDTO score){
 		scoreLogicService.updateScore(score);
 	}
-	
+        
+        @GET
+        @Path("/score")
+	public ScorePageDTO getProductScores(@QueryParam("productId") Long id){
+		return scoreLogicService.getProductScores(id);
+	}	
 }

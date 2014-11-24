@@ -31,10 +31,14 @@ define(['component/_productComponent'], function() {
     App.Component.ProductComponent = App.Component._ProductComponent.extend({
         postInit: function(){
             this.listComponent.enableMultipleSelection(true);
+            //this.listComponent.addColumn('urlImg');
             
             // Galeria
-  	    //App.Utils.loadTemplate('gallery');
-	    //this.listComponent.setTemplate('gallery-template');
+            this.configuration = App.Utils.loadComponentConfiguration('product');
+            if (this.configuration.catalogVariant == 'gallery' ) {
+    	      App.Utils.loadTemplate('gallery');
+	      this.listComponent.setTemplate('gallery-template');  
+            }
             // fin Galeria
             
              this.toolbarComponent.addButton({

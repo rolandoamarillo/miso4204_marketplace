@@ -9,6 +9,7 @@
   http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="addressLogicService" class="co.edu.uniandes.csw.miso4204.address.logic.ejb.AddressLogicService" />
+    
     <!-- Configuración de Seguridad -->
     <bean id="securityLogic" class="co.edu.uniandes.csw.miso4204.security.logic.SecurityLogic" />
     <bean id="securityRealm" class="co.edu.uniandes.csw.miso4204.security.SecurityRealm">
@@ -32,7 +33,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /webresources/Auth/** = anon
-                /webresources/addresss/** = securityFilter
+                /webresources/addresses/** = securityFilter
             </value>
         </property>
     </bean>

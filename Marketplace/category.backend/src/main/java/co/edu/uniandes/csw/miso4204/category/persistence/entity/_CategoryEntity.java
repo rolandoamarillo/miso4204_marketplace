@@ -44,7 +44,7 @@ public abstract class _CategoryEntity {
 	
 	@Transient
 	private Long componentId;
-	
+        
 	public Long getComponentId() {
 		return componentId;
 	}

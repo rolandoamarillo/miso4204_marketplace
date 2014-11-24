@@ -125,3 +125,7 @@ Temporary Items
 /Marketplace/wishlist.backend/target/
 /Marketplace/wishlistitem.services/target/
 /Marketplace/wishlist.services/target/
+/Marketplace/security.subsystem/target/
+/Marketplace/tenantcontrol.services/target/
+/Marketplace/tenantcontrol.web/target/
+/Marketplace/tenantcontrol.backend/target/

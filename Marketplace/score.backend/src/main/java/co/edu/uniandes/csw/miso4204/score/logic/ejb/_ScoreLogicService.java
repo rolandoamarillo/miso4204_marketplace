@@ -63,4 +63,9 @@ public abstract class _ScoreLogicService {
 	public void updateScore(ScoreDTO score){
 	    persistance.updateScore(score); 
 	}	
+
+	public ScorePageDTO getProductScores(Long productId){
+            return persistance.getProductScores(productId); 
+	}
+
 }
