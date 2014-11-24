@@ -35,6 +35,8 @@ import co.edu.uniandes.csw.miso4204.wishlistitem.persistence.converter.WishListI
 import co.edu.uniandes.csw.miso4204.wishlist.logic.dto.WishListDTO;
 import co.edu.uniandes.csw.miso4204.wishlist.master.logic.dto.WishListMasterDTO;
 import co.edu.uniandes.csw.miso4204.wishlist.persistence.WishListPersistence;
+import co.edu.uniandes.csw.miso4204.wishlist.persistence.converter.WishListConverter;
+import co.edu.uniandes.csw.miso4204.wishlist.persistence.entity.WishListEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +50,27 @@ public class _WishListMasterPersistence{
     protected WishListPersistence wishlistPersistence;  
 
     public WishListMasterDTO getWishList(Long wishlistId) {
+        System.out.println("getWishList1");
         WishListMasterDTO wishlistMasterDTO = new WishListMasterDTO();
-        WishListDTO wishlist = wishlistPersistence.getWishList(wishlistId);
+        System.out.println("getWishList2");
+        if (wishlistPersistence == null){
+            System.out.println("soy null");
+        }
+        else{
+            System.out.println("no soy null");
+        }
+           try {
+        WishListDTO wishlist = getWishListMaster(wishlistId);    
+        System.out.println("getWishList3");
         wishlistMasterDTO.setWishListEntity(wishlist);
+        System.out.println("getWishList4");
         wishlistMasterDTO.setListwhishListItem(getWishListwhishListItemEntityList(wishlistId));
+        System.out.println("getWishList5");
+        } catch (Exception e) {
+                System.out.println(e.getMessage());
+        }
+        
+
         return wishlistMasterDTO;
     }
 
@@ -69,6 +88,17 @@ public class _WishListMasterPersistence{
         q.setParameter("whishListItemId", whishListItemId);
         q.executeUpdate();
 		entityManager.getTransaction().commit();
+    }
+   
+    public WishListDTO getWishListMaster(Long id) {
+        System.out.println("enPersisdewih1m");
+            entityManager.getTransaction().begin();
+            System.out.println("enPersisdewih2m");
+            WishListDTO result = WishListConverter.entity2PersistenceDTO(entityManager.find(WishListEntity.class, id));
+            System.out.println("enPersisdewih3m");
+            entityManager.getTransaction().commit();
+            System.out.println("enPersisdewih4m");
+            return result;
     }
 
    public List<WishListItemDTO> getWishListwhishListItemEntityList(Long wishListId) {
