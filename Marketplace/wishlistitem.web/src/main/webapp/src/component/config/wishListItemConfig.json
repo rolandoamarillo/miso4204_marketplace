@@ -4,7 +4,7 @@
     "templateName" : "wishListItem",
     "url" : "user.html",
     "server": "localhost:8084",
-	"context": "/wishlistitem.services/webresources/wish_list_items",
-      
-    "el" : "#main"
+    "context": "/wishlistitem.services/webresources/wish_list_items",
+    "el" : "#main",
+    "wishListItemVariant":"publish"
 }

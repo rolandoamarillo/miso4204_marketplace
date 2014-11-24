@@ -51,6 +51,10 @@ public abstract class _WishListItemLogicService {
 	public WishListItemPageDTO getWishListItems(Integer page, Integer maxRecords){
 		return persistance.getWishListItems(page, maxRecords); 
 	}
+        
+	public List<WishListItemDTO> getTop5(){
+		return persistance.getTop5();
+	}
 
 	public WishListItemDTO getWishListItem(Long id){
 		return persistance.getWishListItem(id); 

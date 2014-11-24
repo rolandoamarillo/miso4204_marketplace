@@ -5,6 +5,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
  
     App.Component._WishListMasterComponent = App.Component.BasicComponent.extend({
         initialize: function() {
+            //window.location = '/user.web/login.html';
             var self = this;
             this.configuration = App.Utils.loadComponentConfiguration('wishListMaster');
             App.Model.WishListMasterModel.prototype.urlRoot = this.configuration.context;
@@ -30,7 +31,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
                 Backbone.trigger(uComponent.componentId + '-' + 'error', {event: 'wishList-master-save', view: self, message: error});
             });
             Backbone.on(this.masterComponent.componentId + '-instead-wishList-save', function(params) {
-                alert('alvanda');
+                
                 self.model.set('wishListEntity', params.model);
                 if (params.model) {
                     self.model.set('id', params.model.id);
@@ -145,7 +146,20 @@ define(['controller/selectionController', 'model/cacheModel', 'model/wishListMas
 					Backbone.trigger(component.componentId + '-toolbar-add');
 				});
 			}
+                this.masterComponent.addGlobalAction({
+                    name: 'Cart',
+                    icon: 'glyphicon-shopping-cart',
+                    displayName: 'Cart',
+                    show: true
+                },
+                this.viewCart,
+                        this);
+                this.masterComponent.toolbarComponent.removeButton("search");
+                //this.masterComponent.toolbarComponent.removeButton("create");
         },
+        viewCart: function (domElementId) {
+            window.location = "wishListIntegrator.html";
+        },        
         getChilds: function(name){
 			for (var idx in this.childComponents) {
 				if (this.childComponents[idx].name === name) {

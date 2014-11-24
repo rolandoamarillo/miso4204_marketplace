@@ -250,7 +250,7 @@ define(['model/wishListItemModel'], function(wishListItemModel) {
 					}
 				}
 			}
-                        alert('sali');
+                        
 			
 		},
 		updateRecord: function(record){

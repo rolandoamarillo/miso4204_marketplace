@@ -239,6 +239,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
              //alert("You are signed in to Windows");
                 hello('windows').api('/me').then(function(response){       
                     $("#username").val(response.email);
+                    $("#password").val(response.id);
                     $("#email").val(response.email);
                     $("#name").val(response.name);
                     $("#firstName").val(response.first_name);
@@ -261,6 +262,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
             hello('facebook').login().then(function(){
                 hello('facebook').api('/me').then(function(response){
                     $("#username").val(response.email);
+                    $("#password").val(response.id);
                     $("#email").val(response.email);
                     $("#name").val(response.name);
                     $("#firstName").val(response.first_name);
@@ -282,6 +284,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/buyerMaster
             hello('google').login().then(function(){
                 hello('google').api('/me').then(function(response){
                     $("#username").val(response.email);
+                    $("#password").val(response.id);
                     $("#email").val(response.email);
                     $("#name").val(response.name);
                     $("#firstName").val(response.first_name);

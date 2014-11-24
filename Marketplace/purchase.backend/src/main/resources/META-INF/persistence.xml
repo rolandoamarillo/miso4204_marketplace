@@ -5,16 +5,16 @@
     <class>co.edu.uniandes.csw.miso4204.purchaseitem.persistence.entity.PurchaseItemEntity</class>
     <class>co.edu.uniandes.csw.miso4204.payment.persistence.entity.PaymentEntity</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-	<shared-cache-mode>NONE</shared-cache-mode>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="eclipselink.target-database" value="Derby"/>            
+      <property name="eclipselink.target-database" value="Derby"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/jdbcISIS4719;create=true"/>
       <property name="javax.persistence.jdbc.user" value="APP"/>
       <property name="javax.persistence.jdbc.password" value="APP"/>
-      <property name="eclipselink.logging.level" value="FINE"/>     
-      <property name="eclipselink.logging.parameters" value="true"/>              
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.logging.parameters" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>
