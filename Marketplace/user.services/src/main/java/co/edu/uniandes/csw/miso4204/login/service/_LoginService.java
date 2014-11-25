@@ -39,6 +39,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class _LoginService {
@@ -71,6 +72,22 @@ public abstract class _LoginService {
         }
         return Response.ok().header("Access-Control-Allow-Origin", "*").entity(token).build();
     }
+    
+    @POST
+    @Path("/logout")
+    public Response logout() {
+       
+       String logout = "Error al hacer Logout "; 
+       try{ 
+       SecurityUtils.getSubject().logout(); 
+       logout = new Gson().toJson("Logout satisfactorio"); 
+       }catch(Exception e){
+           e.printStackTrace();
+       } 
+       return Response.ok().header("Access-Control-Allow-Origin", "*").entity(logout).build();
+    }
+    
+    
 
     public SecurityLogic getSecurityLogic() {
         return securityLogic;
