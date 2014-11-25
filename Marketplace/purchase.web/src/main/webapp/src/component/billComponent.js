@@ -83,6 +83,7 @@ define(['component/productComponent', 'component/toolbarComponent', 'component/_
             var v_productList = this.purchaseIntegrator.productsShoppingCart.records;
             
             var products = [];
+            var v_totalCarrito = 0;
 
             // Carga el listado de los productos a guardar y 
             // Calcula el valor y la cantidad totales de productos
@@ -94,10 +95,15 @@ define(['component/productComponent', 'component/toolbarComponent', 'component/_
                         description :v_productList[property].name,
                         totalValue : (v_productList[property].quantity * v_productList[property].unitPrice)
                     });
+                    v_totalCarrito += (v_productList[property].quantity * v_productList[property].unitPrice);
                 }
             }
+            
+            $('#totalPay').val(v_totalCarrito);
+            
             this.productComponent.listComponent.setData(products);
-            this.productComponent.toolbar.display(false);
+            this.productComponent.toolbarComponent.display(false);
+            this.productComponent.clearRecordActions();
             this.productComponent.render();
         },
         
