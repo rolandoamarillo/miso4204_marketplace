@@ -54,7 +54,8 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
             $('#totalPay').val(porcentaje);
             //this.bonusComponent.listComponent.removeAction("apply");
             //this.bonusComponent.delete();
-            this.bonusComponent.listComponent.removeItems([{bonusId: obj.id}]);
+            //this.bonusComponent.listComponent.removeItems([{bonusId: obj.id}]);
+            Backbone.trigger(this.bonusComponent.componentId + '-delete', {Id: obj.id });
             this.render();
         },
         searchBonusById: function(id){
