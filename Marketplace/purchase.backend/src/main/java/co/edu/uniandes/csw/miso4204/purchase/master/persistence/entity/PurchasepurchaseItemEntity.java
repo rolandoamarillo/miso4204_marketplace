@@ -42,8 +42,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn; 
 import org.eclipse.persistence.annotations.JoinFetch;
+import org.eclipse.persistence.annotations.Multitenant;
+import org.eclipse.persistence.annotations.TenantDiscriminatorColumn;
 
 @Entity
+@Multitenant
+@TenantDiscriminatorColumn(name="tenantID")
 @IdClass(PurchasepurchaseItemEntityId.class)
 @NamedQueries({
     @NamedQuery(name = "PurchasepurchaseItemEntity.getByMasterId", query = "SELECT  u FROM PurchasepurchaseItemEntity u WHERE u.purchaseId=:purchaseId"),
