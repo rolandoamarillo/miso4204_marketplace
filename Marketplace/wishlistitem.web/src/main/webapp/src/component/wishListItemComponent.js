@@ -85,18 +85,7 @@ define(['component/_wishListItemComponent'], function()
             this.toolbarComponent.removeButton('refresh');
             this.toolbarComponent.removeButton('search');
             this.toolbarComponent.removeButton('print');
-            this.listComponent.removeAction('edit');
-            this.listComponent.addAction(
-            { 
-                name: 'agregarCarrito',
-                displayName: 'Agregar a carrito',
-                show: true,
-                icon: ''
-            }, 
-            function()
-            {
-                alert("Se agregó el item al carrito");
-            }, this);		
+            this.listComponent.removeAction('edit');		
         },
         facebook:function()
         {
