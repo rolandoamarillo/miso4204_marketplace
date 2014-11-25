@@ -19,7 +19,7 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
 			if (domElementId) {
 				var rootElement = $("#"+domElementId)
                                 //rootElement.append("<div id='main1' class='col-md-6'></div>");
-				//rootElement.append("<div id='bonus' class='col-md-6'></div>");
+				rootElement.append("<div id='bonus' class='col-md-6'></div>");
 
 				//this.purchaseIntegrator.render("main1");
                                 this.bonusComponent.render("bonus");
@@ -44,10 +44,6 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
             _.bind(function(evt){ this.selectBonus(evt); }, this), this);
            
         },
-        applyBonus: function() {
-            
-            
-        },
         selectBonus: function(obj) {
             var selectedId = obj.id;
             this.selectedBonus = this.searchBonusById(selectedId); 
@@ -65,8 +61,7 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
                     return bonuss[i];
                 }
             }
-        },
-        
+        }        
 
     });
     return App.Component.BonusPaymentIntegratorComponent;
