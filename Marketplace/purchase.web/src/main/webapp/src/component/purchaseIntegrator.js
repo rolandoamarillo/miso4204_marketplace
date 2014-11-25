@@ -10,6 +10,20 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
             this.name = "Purchase";
 
             this.setupAdressComponent();
+            
+            $.ajax({
+                url: '/shoppingcartitem.services/webresources/shopping_cart_items/',
+                type: 'GET',
+                //data: JSON.stringify(purchaseMaster),
+                contentType: 'application/json'
+            }).done(_.bind(function(data) {
+                console.log("_bind"); //callback(data);
+                //alert('COMPRA GUARDADA!!' +  data );    // Continuar con ciclo de compra
+                this.productsShoppingCart = data;
+            }, this)).error(_.bind(function(data) {
+                console.log("callback error"); //callback(data);
+                //alert('ERROR REALIZANDO LA COMPRA - INTENTE MAS TARDE'); // Continuar con ciclo de compra
+            }, this));
         },
                       
         setupAdressComponent: function() {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-define(['component/productComponent', 'component/toolbarComponent' ], function(productCp, toolbarCP) {
+define(['component/productComponent', 'component/toolbarComponent', 'component/_CRUDComponent' ], function(productCp, toolbarCP) {
     App.Component.Bill = App.Component.BasicComponent.extend({
         initialize: function(options) {
             this.componentId = App.Utils.randomInteger();
@@ -77,9 +77,26 @@ define(['component/productComponent', 'component/toolbarComponent' ], function(p
         productList: function(){
             this.productComponent = new productCp();
             this.productComponent.initialize();
-            this.productComponent.toolbar.disabled();
-            this.productComponent.addColumn('totalValue', 'Total Value');
-            this.productComponent.removeColumn('categoryId');
+            this.productComponent.listComponent.addColumn('totalValue', 'Total Value');
+            this.productComponent.listComponent.removeColumn('categoryId');
+            
+            var v_productList = this.purchaseIntegrator.productsShoppingCart.records;
+            
+            var products = [];
+
+            // Carga el listado de los productos a guardar y 
+            // Calcula el valor y la cantidad totales de productos
+            for (var property in v_productList) {
+                if (v_productList.hasOwnProperty(property)) {
+                    products.push({
+                        price :v_productList[property].unitPrice,  
+                        name :v_productList[property].name,
+                        description :v_productList[property].name,
+                        totalValue : (v_productList[property].quantity * v_productList[property].unitPrice)
+                    });
+                }
+            }
+            this.productComponent.listComponent.setData(products);
             this.productComponent.render();
         },
         
