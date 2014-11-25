@@ -34,10 +34,14 @@ import co.edu.uniandes.csw.miso4204.shoppingcartitem.logic.dto.ShoppingCartItemD
 import co.edu.uniandes.csw.miso4204.shoppingcartitem.logic.dto.ShoppingCartItemPageDTO;
 import co.edu.uniandes.csw.miso4204.shoppingcartitem.persistence.converter.ShoppingCartItemConverter;
 import co.edu.uniandes.csw.miso4204.shoppingcartitem.persistence.entity.ShoppingCartItemEntity;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import org.apache.shiro.SecurityUtils;
 
 public class ShoppingCartItemPersistence extends _ShoppingCartItemPersistence{
     
@@ -78,7 +82,7 @@ public class ShoppingCartItemPersistence extends _ShoppingCartItemPersistence{
         ArrayList<ShoppingCartItemDTO> list;
         try {
             getEntityManager();
-            list = super.getShoppingCartItems();
+            list = (ArrayList<ShoppingCartItemDTO>) super.getShoppingCartItems();
 
         } catch (Exception e) {
             e.printStackTrace();

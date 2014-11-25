@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.HashMap;
 import co.edu.uniandes.csw.miso4204.shoppingcart.logic.dto.ShoppingCartDTO;
 import co.edu.uniandes.csw.miso4204.shoppingcart.logic.dto.ShoppingCartPageDTO;
+import org.apache.shiro.SecurityUtils;
 
 
 
@@ -84,7 +85,7 @@ public class ShoppingCartPersistence extends _ShoppingCartPersistence{
         ArrayList<ShoppingCartDTO> list;
         try{
             getEntityManager();
-            list = super.getShoppingCarts();
+            list = (ArrayList<ShoppingCartDTO>) super.getShoppingCarts();
             
         }
         catch (Exception e){
@@ -101,7 +102,7 @@ public class ShoppingCartPersistence extends _ShoppingCartPersistence{
     @Override
     @SuppressWarnings("unchecked")
     public ShoppingCartPageDTO getShoppingCarts(Integer page, Integer maxRecords) {
-        ShoppinCartPageDTO pages;
+        ShoppingCartPageDTO pages;
         try{
             getEntityManager();
             pages = super.getShoppingCarts(page, maxRecords);
@@ -115,18 +116,18 @@ public class ShoppingCartPersistence extends _ShoppingCartPersistence{
                 entityManager.close();
             }
         }
-        return pages
+        return pages;
     }
     @Override
     public ShoppingCartDTO getShoppingCart(Long id) {
-        ShoppingCartDto shoppingcart;
+        ShoppingCartDTO shoppingcart;
         try{
             getEntityManager();
             shoppingcart = super.getShoppingCart(id);
         }
         catch (Exception e){
             e.printStackTrace();
-            shoppingcat = null;
+            shoppingcart = null;
         }
         finally{
             if (entityManager.isOpen()) {
