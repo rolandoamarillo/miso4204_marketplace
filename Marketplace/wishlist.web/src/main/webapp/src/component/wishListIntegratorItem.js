@@ -113,10 +113,10 @@ function (wishListMasterCp, shoppingCartCp)
                         listadoItems = data;
                     }, {buyerId:params.buyerId});
             if (!listadoItems){
-                this.shoppingCartItemComponent.initialize({cache: {data: listadoItems, mode: "memory"},pagination: false});    
+                this.shoppingCartItemComponent.initialize({cache: {data: {}, mode: "memory"},pagination: false});    
             }
             else {
-                this.shoppingCartItemComponent.initialize({cache: {data: {}, mode: "memory"},pagination: false});    
+                this.shoppingCartItemComponent.initialize({cache: {data: listadoItems, mode: "memory"},pagination: false});    
             }
             
             this.shoppingCartItemComponent.setReadOnly(true);

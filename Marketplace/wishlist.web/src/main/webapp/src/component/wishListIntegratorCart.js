@@ -32,8 +32,9 @@ function (wishListMasterCp, shoppingCartCp)
         render: function (domElementId) {
             if (domElementId) {
                 var rootElement = $("#" + domElementId);
-                this.wishListMasterComponent.renderMaster('master');
+                
                 this.wishListMasterComponent.masterComponent.create();
+                this.wishListMasterComponent.renderMaster('master');
                 this.wishListMasterComponent.masterComponent.listComponent.display(false);
                 this.wishListMasterComponent.whishListItemComponent.toolbarComponent.display(false);
                 this.CompositeComponentShopping.render('main');
