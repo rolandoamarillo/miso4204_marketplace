@@ -63,6 +63,11 @@ public class PurchasePersistence extends _PurchasePersistence {
         PurchaseDTO result;
         try {
             getEntityManager();
+
+            co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO user = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
+            Long tenant = user.getId();
+            purchase.setBuyerId(tenant);
+
             result = super.createPurchase(purchase);
         } catch (Exception e) {
             e.printStackTrace();
@@ -215,25 +220,32 @@ public class PurchasePersistence extends _PurchasePersistence {
             response.setTotalRecords(regCount);
             response.setRecords(PurchaseConverter.entity2PersistenceDTOList(q.getResultList()));
             entityManager.getTransaction().commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             response = null;
-        }
-        
-        finally{
-            if(entityManager.isOpen()){
+        } finally {
+            if (entityManager.isOpen()) {
                 entityManager.close();
             }
         }
         return response;
     }
-    
+
     public PurchaseDTO getLastPurchaseByBuyer(Long idBuyer) {
-
-        Query query = entityManager.createQuery("select u from PurchaseEntity u where u.id = (select max(r.id) from PurchaseEntity r where r.buyerId = :idBuyer) ");
-        query.setParameter("idBuyer", idBuyer);
-
-        PurchaseDTO result = PurchaseConverter.entity2PersistenceDTO((PurchaseEntity)query.getSingleResult());
+        PurchaseDTO result = null;
+        try {
+            getEntityManager();
+            Query query = entityManager.createQuery("select u from PurchaseEntity u where u.id = (select max(r.id) from PurchaseEntity r where r.buyerId = :idBuyer) ");
+            query.setParameter("idBuyer", idBuyer);
+            result = PurchaseConverter.entity2PersistenceDTO((PurchaseEntity) query.getSingleResult());
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = null;
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
         return result;
     }
 }

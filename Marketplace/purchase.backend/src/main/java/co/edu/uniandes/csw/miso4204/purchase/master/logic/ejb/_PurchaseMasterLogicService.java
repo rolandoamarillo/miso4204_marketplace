@@ -43,7 +43,6 @@ import co.edu.uniandes.csw.miso4204.purchase.master.persistence.entity.Purchasep
 import co.edu.uniandes.csw.miso4204.purchase.persistence.PurchasePersistence;
 import co.edu.uniandes.csw.miso4204.purchase.master.persistence.PurchaseMasterPersistence;
 
-
 public abstract class _PurchaseMasterLogicService {
 
  
@@ -55,6 +54,7 @@ public abstract class _PurchaseMasterLogicService {
     protected PaymentPersistence paymentPersistance;
 
     public PurchaseMasterDTO createMasterPurchase(PurchaseMasterDTO purchase) {
+        
         PurchaseDTO persistedPurchaseDTO = purchasePersistance.createPurchase(purchase.getPurchaseEntity());
         if (purchase.getCreatepurchaseItem() != null) {
             for (PurchaseItemDTO purchaseItemDTO : purchase.getCreatepurchaseItem()) {
