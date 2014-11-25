@@ -97,6 +97,7 @@ define(['component/productComponent', 'component/toolbarComponent', 'component/_
                 }
             }
             this.productComponent.listComponent.setData(products);
+            this.productComponent.toolbar.display(false);
             this.productComponent.render();
         },
         
