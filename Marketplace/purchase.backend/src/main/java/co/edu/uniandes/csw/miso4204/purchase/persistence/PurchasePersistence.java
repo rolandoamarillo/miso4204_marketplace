@@ -29,11 +29,10 @@
  */
 package co.edu.uniandes.csw.miso4204.purchase.persistence;
 
-import co.edu.uniandes.csw.miso4204.paymentmode.logic.dto.PaymentModeDTO;
-import co.edu.uniandes.csw.miso4204.paymentmode.logic.dto.PaymentModePageDTO;
 import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchaseDTO;
 import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchasePageDTO;
 import co.edu.uniandes.csw.miso4204.purchase.persistence.converter.PurchaseConverter;
+import co.edu.uniandes.csw.miso4204.purchase.persistence.entity.PurchaseEntity;
 import co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO;
 import java.util.HashMap;
 import java.util.List;
@@ -227,5 +226,14 @@ public class PurchasePersistence extends _PurchasePersistence {
             }
         }
         return response;
+    }
+    
+    public PurchaseDTO getLastPurchaseByBuyer(Long idBuyer) {
+
+        Query query = entityManager.createQuery("select u from PurchaseEntity u where u.id = (select max(r.id) from PurchaseEntity r where r.buyerId = :idBuyer) ");
+        query.setParameter("idBuyer", idBuyer);
+
+        PurchaseDTO result = PurchaseConverter.entity2PersistenceDTO((PurchaseEntity)query.getSingleResult());
+        return result;
     }
 }
