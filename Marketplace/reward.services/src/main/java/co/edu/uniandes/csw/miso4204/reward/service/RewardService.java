@@ -34,6 +34,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.File;
+import java.net.URI;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -46,6 +47,7 @@ import javax.ws.rs.core.MediaType;
 import org.glassfish.jersey.client.ClientConfig;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 @Path("/rewards")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -53,8 +55,12 @@ import javax.ws.rs.core.Context;
 public class RewardService extends _RewardService {
 
     //private static String URL_SERVICIO = System.getenv("URL1");
+    @Context
+    private static UriInfo uriInfo;
+    private static URI uri = uriInfo.getBaseUri();
     
-    private static String URL_SERVICIO =  "http://localhost:8084/purchase.services/webresources/purchases/last";
+    //private static String URL_SERVICIO =  "http://localhost:8084/purchase.services/webresources/purchases/last";
+    private static String URL_SERVICIO =  "http://"+uri.getHost()+":"+uri.getPort()+"/purchase.services/webresources/purchases/last";
 
     @GET
     @Path("/total")
