@@ -30,7 +30,7 @@ define(['model/_bonusModel'], function() {
 
  		validate: function(attrs,options){
             var validationMessage = "";
-            if(!attrs.availableBonus){
+            if(!attrs.name){
                 validationMessage = "You must select a bonus.";
             }
             if(validationMessage.length>0){

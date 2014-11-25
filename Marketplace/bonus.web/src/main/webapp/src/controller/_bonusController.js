@@ -158,7 +158,13 @@ define(['model/bonusModel'], function(bonusModel) {
                 Backbone.trigger(this.componentId + '-' + 'instead-bonus-save', {view: this, model : model});
             } else {
                 Backbone.trigger(this.componentId + '-' + 'pre-bonus-save', {view: this, model : model});
-                this.currentModel.set(model);
+                //this.currentModel.set(model);
+								var data = model.availableBonus.split("|");
+								var today = new Date();
+								var dd = today.getDate();
+								var mm = today.getMonth()+1; //January is 0!
+								var yyyy = today.getFullYear();
+								this.currentModel.set({name: data[0], description: data[1], value: data[2], status: 'active', date: yyyy+'/'+mm+'/'+dd, expiration: data[3], spentPoints: data[4], buyerId: model.buyerId});
                 this.currentModel.save({},
                         {
                             success: function(model) {
