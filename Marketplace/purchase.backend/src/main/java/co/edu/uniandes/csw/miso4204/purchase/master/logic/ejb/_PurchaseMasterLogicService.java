@@ -42,6 +42,7 @@ import co.edu.uniandes.csw.miso4204.purchase.master.persistence.entity.Purchasep
 import co.edu.uniandes.csw.miso4204.purchase.master.persistence.entity.PurchasepaymentEntity;
 import co.edu.uniandes.csw.miso4204.purchase.persistence.PurchasePersistence;
 import co.edu.uniandes.csw.miso4204.purchase.master.persistence.PurchaseMasterPersistence;
+import org.apache.shiro.SecurityUtils;
 
 
 public abstract class _PurchaseMasterLogicService {
@@ -55,6 +56,11 @@ public abstract class _PurchaseMasterLogicService {
     protected PaymentPersistence paymentPersistance;
 
     public PurchaseMasterDTO createMasterPurchase(PurchaseMasterDTO purchase) {
+        
+        co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO user = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
+        Long tenant = user.getId();
+        purchase.SetIdBuyer(tenant);
+        
         PurchaseDTO persistedPurchaseDTO = purchasePersistance.createPurchase(purchase.getPurchaseEntity());
         if (purchase.getCreatepurchaseItem() != null) {
             for (PurchaseItemDTO purchaseItemDTO : purchase.getCreatepurchaseItem()) {
