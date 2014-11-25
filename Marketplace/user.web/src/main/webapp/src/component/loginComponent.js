@@ -41,7 +41,7 @@ $(document).ready(function () {
         }, this)).error(_.bind(function (data) {
             console.log("data");
             alert('USUARIO NO AUTENTICADO : ' + data["responseText"]);
-//			   window.location.href = '../Sport_web/error.html';
+
 
         }, this));
     });
