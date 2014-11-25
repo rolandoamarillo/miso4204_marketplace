@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-define(['component/listComponent', 'component/toolbarComponent' ], function(listCp, toolbarCP) {
+define(['component/productComponent', 'component/toolbarComponent' ], function(productCp, toolbarCP) {
     App.Component.Bill = App.Component.BasicComponent.extend({
         initialize: function(options) {
             this.componentId = App.Utils.randomInteger();
@@ -75,17 +75,16 @@ define(['component/listComponent', 'component/toolbarComponent' ], function(list
         },
         
         productList: function(){
-            this.listComponent = new listCp({componentId: "list", name: "Products"});
-            this.listComponent.initialize({componentId: "list", name: "Products"});
-            this.listComponent.addColumn('productName', 'Product Name');
-            this.listComponent.addColumn('unitValue', 'Unit Value');
-            this.listComponent.addColumn('amount', 'Amount');
-            this.listComponent.addColumn('totalValue', 'Total Value');
-            this.listComponent.render();
-            $('#list').html(this.listComponent.listController.$el);
+            this.productComponent = new productCp();
+            this.productComponent.initialize();
+            this.productComponent.toolbar.disabled();
+            this.productComponent.addColumn('totalValue', 'Total Value');
+            this.productComponent.removeColumn('categoryId');
+            this.productComponent.render();
         },
         
         render: function(parent){
+            this.productComponent.render('list');
             $('#'+parent).append($('#bill').show());
         }
     });
