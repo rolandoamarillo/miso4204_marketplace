@@ -33,6 +33,7 @@ import co.edu.uniandes.csw.miso4204.reward.logic.dto.RewardDTO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.io.File;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -43,8 +44,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import org.glassfish.jersey.client.ClientConfig;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.Context;
 
 @Path("/rewards")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -52,7 +53,8 @@ import javax.ws.rs.core.HttpHeaders;
 public class RewardService extends _RewardService {
 
     //private static String URL_SERVICIO = System.getenv("URL1");
-    private static String URL_SERVICIO = "http://localhost:8084/address.services/webresources/addresss";
+    
+    private static String URL_SERVICIO =  "http://localhost:8084/purchase.services/webresources/purchases/last";
 
     @GET
     @Path("/total")
@@ -63,13 +65,19 @@ public class RewardService extends _RewardService {
     @POST
     @Path("/save")
     public RewardDTO saveReward(@Context HttpHeaders httpHeaders, RewardDTO reward) {
-
+        try
+        {
+        String path = new File(".").getCanonicalPath();
+        }
+        catch(Exception e)
+                {
+        }
         String token = httpHeaders.getRequestHeader("X_REST_USER").get(0);
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
         
         String entity = client.target(URL_SERVICIO)
-                .path("51")
+                .path(reward.getBuyerId().toString())
                 .request(MediaType.APPLICATION_JSON)
                 .header("X_REST_USER", token)
                 .get(String.class);
@@ -80,9 +88,11 @@ public class RewardService extends _RewardService {
         JsonElement column = object.get("id");        
         String id = column.getAsString();
         System.out.println(id);
-        reward.setId(Long.parseLong(id));        
+        reward.setBuyerId(Long.parseLong(id));        
         createReward(reward);
         return reward;
     }
+    
+    
 
 }
