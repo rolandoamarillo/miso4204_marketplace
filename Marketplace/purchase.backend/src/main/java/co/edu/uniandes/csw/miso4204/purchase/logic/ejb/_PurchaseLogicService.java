@@ -34,11 +34,12 @@ import java.util.List;
 
 import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchaseDTO;
 import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchasePageDTO;
-import co.edu.uniandes.csw.miso4204.purchase.master.persistence.PurchaseMasterPersistence;
+import co.edu.uniandes.csw.miso4204.purchase.persistence.PurchasePersistence;
+import java.util.Date;
 
 public abstract class _PurchaseLogicService {
 
-	protected PurchaseMasterPersistence persistance;
+	protected PurchasePersistence persistance;
 
 	public PurchaseDTO createPurchase(PurchaseDTO purchase){
 		return persistance.createPurchase( purchase); 

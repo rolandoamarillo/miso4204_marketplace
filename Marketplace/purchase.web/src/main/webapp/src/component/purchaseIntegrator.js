@@ -10,9 +10,24 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
             this.name = "Purchase";
 
             this.setupAdressComponent();
+            
+            $.ajax({
+                url: '/shoppingcartitem.services/webresources/shopping_cart_items/',
+                type: 'GET',
+                //data: JSON.stringify(purchaseMaster),
+                contentType: 'application/json'
+            }).done(_.bind(function(data) {
+                console.log("_bind"); //callback(data);
+                //alert('COMPRA GUARDADA!!' +  data );    // Continuar con ciclo de compra
+                this.productsShoppingCart = data;
+            }, this)).error(_.bind(function(data) {
+                console.log("callback error"); //callback(data);
+                //alert('ERROR REALIZANDO LA COMPRA - INTENTE MAS TARDE'); // Continuar con ciclo de compra
+            }, this));
         },
                       
         setupAdressComponent: function() {
+            
             this.addressComponent = new adressCp();
             this.addressComponent.initialize();
             this.addressComponent.clearGlobalActions();
@@ -104,6 +119,29 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
         
         pay: function(){
             
+            
+            var v_productList = this.purchaseIntegrator.productsShoppingCart.records;
+            
+            var products = new Array();
+
+            var v_totalCarrito = 0;
+            var v_totalItem = 0;
+            
+            // Carga el listado de los productos a guardar y 
+            // Calcula el valor y la cantidad totales de productos
+            for (var property in v_productList) {
+                if (v_productList.hasOwnProperty(property)) {
+                    products.push({
+                        unitPrice :v_productList[property].unitPrice,  
+                        quantity :v_productList[property].quantity,  
+                        name :v_productList[property].name,
+                        productId:v_productList[property].productshoppingcartitemId
+                    });
+                    v_totalItem += (v_productList[property].quantity * 1);
+                    v_totalCarrito += (v_productList[property].quantity * v_productList[property].unitPrice);
+                }
+            }
+            
             // Obtenci{on de Fecha
             var today = new Date();
             var dd = today.getDate();
@@ -123,15 +161,15 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
                 //id: '',
                 name:'purchase',
                 purchaseDate:today,
-                totalValue:0,
-                totalItems:0,
+                totalValue: v_totalCarrito,
+                totalItems: v_totalItem,
                 points:0,
                 buyerId:0,
                 addressId: this.purchaseIntegrator.selectedAddress.id
             };
-
+            
             var purchaseMaster = {
-                id: 0,
+                id: 0, // EL ID ES calculado automaticamente
                 purchaseEntity: {
                     id: purchase.id,
                     name:  purchase.name,
@@ -142,14 +180,7 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
                     buyerId:purchase.buyerId,
                     addressId:purchase.addressId
                 },
-                createpurchaseItem: [
-                    {
-                        unitPrice :0,  
-                        quantity :0,  
-                        name :'purchaseItem',
-                        productId:'' 
-                    }
-                ],
+                createpurchaseItem: JSON.parse(JSON.stringify(products)),
                 createpayment:[{
                         value:purchase.totalValue,
                         tokenBank:'',
@@ -173,12 +204,10 @@ define(['component/addressComponent', 'component/creditCardComponent', 'componen
                 alert('ERROR REALIZANDO LA COMPRA - INTENTE MAS TARDE'); // Continuar con ciclo de compra
                 document.location.href="/purchase.web";
             }, this));
-            
-           
         },
         
         cancel: function(){
-            document.location.href="http://localhost:8084/purchase.web/";
+            document.location.href="/purchase.web";
         },
         
         loadButtonsByName: function(param){

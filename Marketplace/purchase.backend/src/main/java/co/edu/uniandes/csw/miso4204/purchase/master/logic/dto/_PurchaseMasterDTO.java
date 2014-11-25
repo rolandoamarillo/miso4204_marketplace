@@ -57,7 +57,7 @@ public abstract class _PurchaseMasterDTO {
     public PurchaseDTO getPurchaseEntity() {
         return purchaseEntity;
     }
-
+    
     public void setPurchaseEntity(PurchaseDTO purchaseEntity) {
         this.purchaseEntity = purchaseEntity;
     }

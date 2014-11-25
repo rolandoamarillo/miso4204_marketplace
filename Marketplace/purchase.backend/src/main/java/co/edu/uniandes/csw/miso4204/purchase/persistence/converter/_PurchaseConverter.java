@@ -39,8 +39,7 @@ import java.util.logging.Logger;
 
 
 import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchaseDTO;
-import co.edu.uniandes.csw.miso4204.purchase.master.persistence.entity.PurchaseEntity;
-
+import co.edu.uniandes.csw.miso4204.purchase.persistence.entity.PurchaseEntity;
 
 public abstract class _PurchaseConverter {
 
