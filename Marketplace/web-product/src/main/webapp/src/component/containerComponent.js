@@ -9,10 +9,17 @@ define(['component/_CRUDComponent'], function (CRUDCp) {
 
 	App.Component.ContainerComponent = App.Component.BasicComponent.extend({
 		initialize: function (options) {
-			var cookies = this.parseCookies();
-			if(!cookies['rememberMe']){
-				$('#userName').text('Logout');
-			}
+			var self = this;
+			Backbone.on('iframe-load', function () {
+				cookies = self.parseCookies();
+				if (cookies['token']) {
+					$('#userName').text('Logout');
+					$('#loginButton').attr('onclick', "redirectFrame('/user.web/logout.html');return false;");
+				}else {
+					$('#userName').text('Login');
+					$('#loginButton').attr('onclick', "redirectFrame('/user.web/login.html');return false;");
+				}
+			});
 		},
 		parseCookies: function () {
 			var cookies = {};

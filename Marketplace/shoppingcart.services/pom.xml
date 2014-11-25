@@ -7,12 +7,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <dependencies>
-		<dependency>
-            <groupId>co.edu.uniandes.csw</groupId>
-            <artifactId>crudmaker.web</artifactId>
-            <version>1.1.5</version>
-            <type>war</type>
-        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -29,11 +23,7 @@
 			<version>7.0.34.1</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>shoppingcart.backend</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+		
         
         <!-- Jersey -->
         <dependency>
@@ -81,14 +71,11 @@
             <artifactId>jersey-spring3</artifactId>
             <version>2.13</version>
         </dependency>
- 	
-		<dependency>
-            <groupId>co.edu.uniandes.csw.miso4204</groupId>
-            <artifactId>shoppingcartitem.services</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>war</type>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>shoppingcart.backend</artifactId>
+            <version>${project.version}</version>
         </dependency>
-	
     </dependencies>
     <build>
 		<plugins>

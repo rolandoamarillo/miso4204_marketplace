@@ -54,21 +54,22 @@ define(['component/productComponent', 'component/toolbarComponent', 'component/_
                 show: true
             });
 
-            this.purchaseIntegrator.loadButtonsByName([{
+            this.toolbarComponent.addButton([{
                 name: 'pay',
                 displayName: 'Pay',
-                callback: this.purchaseIntegrator.pay,
-                toolbar: this.toolbarComponent,
-                that: this
-            }]);
+                icon: '',
+				show: true
+            },
+			this.purchaseIntegrator.pay,
+			this]);
         
-            this.purchaseIntegrator.loadButtonsByName([{
+            this.toolbarComponent.addButton([{
                 name: 'cancel',
                 displayName: 'Cancel',
-                callback: this.purchaseIntegrator.cancel,
-                toolbar: this.toolbarComponent,
-                that: this
-            }]);
+				icon: '',
+				show: true
+            },this.purchaseIntegrator.cancel,
+			this]);
         
             this.toolbarComponent.render();
             $('#toolbar').html(this.toolbarComponent.toolbarController.$el);            
@@ -80,7 +81,7 @@ define(['component/productComponent', 'component/toolbarComponent', 'component/_
             this.productComponent.listComponent.addColumn('totalValue', 'Total Value');
             this.productComponent.listComponent.removeColumn('categoryId');
             
-            var v_productList = this.purchaseIntegrator.productsShoppingCart.records;
+            var v_productList = []; //this.purchaseIntegrator.productsShoppingCart.records;
             
             var products = [];
             var v_totalCarrito = 0;

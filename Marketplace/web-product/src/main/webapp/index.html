@@ -36,7 +36,7 @@
 			<div class="col-md-8" style="padding-top: 30px;">
 				<nav>
 					<ul class="nav nav-pills nav-justified">
-						<li><a class="btn btn-default" onclick="redirectFrame('/shoppingcart.web/shoppingCartMaster.html');
+						<li><a class="btn btn-default" onclick="redirectFrame('/wishlist.web/wishListIntegratorCart.html');
 							return false;"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 						<li><a class="btn btn-default" onclick="redirectFrame('/wishlist.web');
 							return false;"><span class="glyphicon glyphicon-list-alt"></span> Wishlist</a></li>
@@ -48,12 +48,12 @@
 				</nav>
 			</div>
 			<div class="col-md-2">
-				<button class="btn btn-default pull-right" onclick="redirectFrame('/user.web/login.html');
+				<button id="loginButton" class="btn btn-default pull-right" onclick="redirectFrame('/user.web/login.html');
 					return false;"><span class="glyphicon glyphicon-user"></span><em id='userName'>Login</em></button>
 			</div>
         </div>
 		<div id="container">
-			<iframe id="content" src="/shoppingcart.web/shoppingCartMaster.html" style="width: 100%; height: 100%; border: 0px; margin: 0px;"></iframe>
+			<iframe id="content" src="/wishlist.web/wishListIntegratorCart.html" onLoad="Backbone.trigger('iframe-load');" style="width: 100%; height: 100%; border: 0px; margin: 0px;"></iframe>
 		</div>
 		<script>$('#content').css('height', ($(window).height() - $('#header').height() - 30) + 'px');</script>
     </body>

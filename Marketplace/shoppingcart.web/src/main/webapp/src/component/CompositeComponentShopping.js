@@ -7,19 +7,18 @@ define(['component/shoppingCartMasterComponent', 'component/productComponent'], 
             this.setupCartMasterComponent();
         }, render: function (domElementId) {
             if (domElementId) {
-                var rootElement
-                        = $("#" + domElementId)
-                rootElement.append("<div id='main' class='col-md-8'></div>");
+                var rootElement = $("#" + domElementId);
+                rootElement.append("<div id='main1' class='col-md-8'></div>");
                 rootElement.append("<div id='cart' class='col-md-4'></div>");
                 $("#cart").append("<div id='master'></div>");
                 $("#cart").append("<div id='items'></div>");
-                this.productComponent.render("main");
+                this.productComponent.render("main1");
                 this.cartMasterComponent.renderMaster('master');
                 this.cartMasterComponent.masterComponent.create();
                 this.cartMasterComponent.masterComponent.listComponent.display(false);
                 this.cartMasterComponent.renderChild('item', 'items');
                 this.cartMasterComponent.shoppingCartItemComponent.render('cart');
-                console.log(Object.getOwnPropertyNames(this.cartMasterComponent.shoppingCartItemComponent));
+                //console.log(Object.getOwnPropertyNames(this.cartMasterComponent.shoppingCartItemComponent));
                 this.cartMasterComponent.shoppingCartItemComponent.toolbarComponent.display(false);
                 this.cartMasterComponent.shoppingCartItemComponent.listComponent.render();
                 //Backbone.trigger(this.cartMasterComponent.shoppingCartItemComponent.componentId + '-' + 'post-shoppingCartItem-save', {model: this.cartMasterComponent.shoppingCartItemComponent.currentModel});

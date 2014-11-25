@@ -51,7 +51,7 @@ public class ScorePersistence extends _ScorePersistence{
 		
 	}
     public void getEntityManager() {
-        co.edu.uniandes.csw.miso4204.security.logic.dto.UserSessionDTO usrDto = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserSessionDTO) SecurityUtils.getSubject().getPrincipal();
+        co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO usrDto = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
         String tenant = usrDto.getTenantID();
         Map<String, Object> emProperties = new HashMap<String, Object>();
         emProperties.put("eclipselink.tenant-id", tenant);//Asigna un valor al multitenant

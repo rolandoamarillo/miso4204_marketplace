@@ -16,7 +16,7 @@ function (wishListMasterCp, shoppingCartCp)
                 }).done(_.bind(function(data) {
                     this.buyerId = data;
                 }, this)).error(_.bind(function(data) {
-                    window.location = "/user.web/login.html";
+                    //window.location = "/user.web/login.html";
                 }, this));
 
                 this.componentId = App.Utils.randomInteger();
