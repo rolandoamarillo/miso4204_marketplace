@@ -57,11 +57,6 @@ public abstract class _PurchaseMasterDTO {
     public PurchaseDTO getPurchaseEntity() {
         return purchaseEntity;
     }
-
-    public void SetIdBuyer(Long idBuyer)
-    {
-        purchaseEntity.setBuyerId(idBuyer);
-    }
     
     public void setPurchaseEntity(PurchaseDTO purchaseEntity) {
         this.purchaseEntity = purchaseEntity;

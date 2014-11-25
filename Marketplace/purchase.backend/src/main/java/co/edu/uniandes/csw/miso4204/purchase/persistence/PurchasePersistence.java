@@ -63,6 +63,11 @@ public class PurchasePersistence extends _PurchasePersistence {
         PurchaseDTO result;
         try {
             getEntityManager();
+            
+            co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO user = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
+            Long tenant = user.getId();
+            purchase.setBuyerId(tenant);
+            
             result = super.createPurchase(purchase);
         } catch (Exception e) {
             e.printStackTrace();
