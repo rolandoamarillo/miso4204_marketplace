@@ -6,11 +6,11 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/datepicker.css">
-        <link rel="stylesheet" href="src/css/purchase.css">
+        <link rel="stylesheet" href="css/purchase.css">
         <script>
             loadComponents = [
                 {
-                    name: 'component/purchaseIntegrator',
+                    name: 'component/billComponent',
                     render: true,
                     domElementId: 'main'
                 }
@@ -33,61 +33,53 @@
         <div class="container">
             <ul class="breadcrumb">                
             </ul>
-            <div id="main" ></div>
-            <div id="bill" style="display: none;">
-                <div id="toolbar"></div>
+            <div id="main" >
                 <div class="billInfo">
                     <p> 
-                        <label>Order N°</label>
-                        <input type="text" disabled id="order" class="form-control"/>
+                        <label>Purchase Date</label>
+                        <input type="text" id="actualDate" />
                     </p>
                     <p> 
                         <label>Total to pay</label>
-                        <input type="text" disabled id="totalPay" class="form-control"/>
+                        <input type="text" id="totalPay" />
                     </p>
                 </div>
                 <div id="list"></div>
                 <div class="twoColumns">
                     <div>
-                        <p class="title">
-                            Send Data
-                        </p>
                         <p> 
                             <label>Name</label>
-                            <input type="text" disabled id="sendName" class="form-control" />
+                            <input type="text" disabled id="sendName" />
                         </p>
                         <p> 
                             <label>Address</label>
-                            <input type="text" disabled id="sendAddress" class="form-control"/>
+                            <input type="text" disabled id="sendAddress" />
                         </p>
                         <p> 
                             <label>City</label>
-                            <input type="text" disabled id="sendCity" class="form-control"/>
+                            <input type="text" disabled id="sendCity" />
                         </p>
                         <p> 
                             <label>Country</label>
-                            <input type="text" disabled id="sendCountry" class="form-control"/>
+                            <input type="text" disabled id="sendCountry" />
                         </p>
                     </div>
                     <div>
-                        <p class="title">
-                            Payment Data
-                        </p>
                         <p> 
                             <label>Payment mode</label>
-                            <input type="text" disabled id="payMode" class="form-control"/>
+                            <input type="text" disabled id="sendName" />
                         </p>
                         <p> 
                             <label>Number</label>
-                            <input type="text" disabled id="payNumber" class="form-control"/>
+                            <input type="text" disabled id="sendAddress" />
                         </p>
                         <p> 
                             <label>Earned points by purchase</label>
-                            <input type="text" disabled id="payPoints" class="form-control"/>
+                            <input type="text" disabled id="sendCity" />
                         </p>
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>
     </body>
 </html>

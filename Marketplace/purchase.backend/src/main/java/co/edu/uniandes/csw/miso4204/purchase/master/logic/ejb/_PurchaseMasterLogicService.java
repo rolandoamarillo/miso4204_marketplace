@@ -40,12 +40,14 @@ import co.edu.uniandes.csw.miso4204.purchase.logic.dto.PurchaseDTO;
 import co.edu.uniandes.csw.miso4204.purchase.master.logic.dto.PurchaseMasterDTO;
 import co.edu.uniandes.csw.miso4204.purchase.master.persistence.entity.PurchasepurchaseItemEntity;
 import co.edu.uniandes.csw.miso4204.purchase.master.persistence.entity.PurchasepaymentEntity;
+import co.edu.uniandes.csw.miso4204.purchase.persistence.PurchasePersistence;
 import co.edu.uniandes.csw.miso4204.purchase.master.persistence.PurchaseMasterPersistence;
 
 
 public abstract class _PurchaseMasterLogicService {
 
  
+    protected PurchasePersistence purchasePersistance;
 
     protected PurchaseMasterPersistence purchaseMasterPersistance;
    
@@ -53,7 +55,7 @@ public abstract class _PurchaseMasterLogicService {
     protected PaymentPersistence paymentPersistance;
 
     public PurchaseMasterDTO createMasterPurchase(PurchaseMasterDTO purchase) {
-        PurchaseDTO persistedPurchaseDTO = purchaseMasterPersistance.createPurchase(purchase.getPurchaseEntity());
+        PurchaseDTO persistedPurchaseDTO = purchasePersistance.createPurchase(purchase.getPurchaseEntity());
         if (purchase.getCreatepurchaseItem() != null) {
             for (PurchaseItemDTO purchaseItemDTO : purchase.getCreatepurchaseItem()) {
                 PurchaseItemDTO createdPurchaseItemDTO = purchaseItemPersistance.createPurchaseItem(purchaseItemDTO);
@@ -88,15 +90,15 @@ public abstract class _PurchaseMasterLogicService {
     }
 
     public PurchaseMasterDTO getMasterPurchase(Long id) {
-        return purchaseMasterPersistance.getMasterPurchase(id);
+        return purchaseMasterPersistance.getPurchase(id);
     }
 
     public void deleteMasterPurchase(Long id) {
-        purchaseMasterPersistance.deletePurchase(id);
+        purchasePersistance.deletePurchase(id);
     }
 
     public void updateMasterPurchase(PurchaseMasterDTO purchase) {
-        purchaseMasterPersistance.updatePurchase(purchase.getPurchaseEntity());
+        purchasePersistance.updatePurchase(purchase.getPurchaseEntity());
 
         //---- FOR RELATIONSHIP
         // persist new purchaseItem
