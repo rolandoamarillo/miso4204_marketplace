@@ -10,7 +10,7 @@
         <script>
             loadComponents = [
                 {
-                    name: 'component/bonusPaymentIntegratorComponent',
+                    name: 'component/purchaseIntegrator',
                     render: true,
                     domElementId: 'main'
                 }
@@ -34,18 +34,18 @@
             <ul class="breadcrumb">                
             </ul>
             <div id="main" ></div>
-            <div id="bill"  style="display: none;">
-                <div class="billInfo col-md-5">
+            <div id="bill" style="display: none;">
+                <div id="toolbar"></div>
+                <div class="billInfo">
                     <p> 
-                        <label>Order N°</label>
-                        <input type="text" disabled id="order" class="form-control"/>
+                        <label>Purchase date</label>
+                        <input type="text" disabled id="purchaseDate" class="form-control"/>
                     </p>
                     <p> 
                         <label>Total to pay</label>
                         <input type="text" disabled id="totalPay" class="form-control"/>
                     </p>
                 </div>
-                <div id="bonus" class='col-md-7'></div>
                 <div id="list"></div>
                 <div class="twoColumns">
                     <div>
@@ -82,13 +82,16 @@
                             <input type="text" disabled id="payNumber" class="form-control"/>
                         </p>
                         <p> 
+                            <label>Branch</label>
+                            <input type="text" disabled id="branch" class="form-control"/>
+                        </p>
+                        <p> 
                             <label>Earned points by purchase</label>
                             <input type="text" disabled id="payPoints" class="form-control"/>
                         </p>
                     </div>
                 </div>
             </div>
-            
         </div>
     </body>
 </html>

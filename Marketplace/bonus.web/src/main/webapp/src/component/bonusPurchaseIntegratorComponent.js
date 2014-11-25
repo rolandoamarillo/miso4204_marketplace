@@ -19,7 +19,7 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
 			if (domElementId) {
 				var rootElement = $("#"+domElementId)
                                 //rootElement.append("<div id='main1' class='col-md-6'></div>");
-				rootElement.append("<div id='bonus' class='col-md-6'></div>");
+				//rootElement.append("<div id='bonus' class='col-md-6'></div>");
 
 				//this.purchaseIntegrator.render("main1");
                                 this.bonusComponent.render("bonus");
@@ -54,7 +54,7 @@ define(['component/bonusComponent', 'component/purchaseIntegrator'], function(bo
             $('#totalPay').val(porcentaje);
             //this.bonusComponent.listComponent.removeAction("apply");
             //this.bonusComponent.delete();
-            this.bonusComponent.listComponent.removeItems([{bonusId: obj.id}]);
+            this.bonusComponent.remove(selectedId);
             this.render();
         },
         searchBonusById: function(id){
