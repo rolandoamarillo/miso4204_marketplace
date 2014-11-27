@@ -1,0 +1,262 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 3672 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (memory/allocation.inline.hpp:62), pid=5288, tid=6708
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_20-b26) (build 1.8.0_20-b26)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.20-b23 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000058c3f000):  JavaThread "C1 CompilerThread2" daemon [_thread_in_vm, id=6708, stack(0x0000000059270000,0x0000000059370000)]
+
+Stack: [0x0000000059270000,0x0000000059370000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x3152fa]
+V  [jvm.dll+0x265d03]
+V  [jvm.dll+0x266943]
+V  [jvm.dll+0x25e265]
+V  [jvm.dll+0x80afe]
+V  [jvm.dll+0x8103b]
+V  [jvm.dll+0x8db73]
+V  [jvm.dll+0x8f612]
+V  [jvm.dll+0x27e0e]
+V  [jvm.dll+0x3eb409]
+V  [jvm.dll+0x3ec3b4]
+V  [jvm.dll+0x3ec55e]
+V  [jvm.dll+0x3ec75f]
+V  [jvm.dll+0x97b62]
+V  [jvm.dll+0x98353]
+V  [jvm.dll+0x22aac4]
+V  [jvm.dll+0x283f5a]
+C  [msvcr100.dll+0x21d9f]
+C  [msvcr100.dll+0x21e3b]
+C  [kernel32.dll+0x159ed]
+C  [ntdll.dll+0x2c541]
+
+
+Current CompileTask:
+C1:  24630 1384   !   3       org.codehaus.plexus.util.xml.pull.MXParser::parseComment (485 bytes)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x0000000058c42800 JavaThread "Service Thread" daemon [_thread_blocked, id=3520, stack(0x00000000586f0000,0x00000000587f0000)]
+=>0x0000000058c3f000 JavaThread "C1 CompilerThread2" daemon [_thread_in_vm, id=6708, stack(0x0000000059270000,0x0000000059370000)]
+  0x0000000058c38800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=8976, stack(0x0000000059170000,0x0000000059270000)]
+  0x00000000573f6000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=7900, stack(0x0000000058310000,0x0000000058410000)]
+  0x00000000573f2800 JavaThread "Attach Listener" daemon [_thread_blocked, id=9624, stack(0x0000000058af0000,0x0000000058bf0000)]
+  0x00000000573ef800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3148, stack(0x0000000058940000,0x0000000058a40000)]
+  0x000000005738e800 JavaThread "Finalizer" daemon [_thread_blocked, id=7668, stack(0x0000000058830000,0x0000000058930000)]
+  0x000000005738b000 JavaThread "Reference Handler" daemon [_thread_blocked, id=2564, stack(0x00000000585f0000,0x00000000586f0000)]
+  0x0000000001c6f000 JavaThread "main" [_thread_blocked, id=6504, stack(0x0000000002240000,0x0000000002340000)]
+
+Other Threads:
+  0x0000000057385000 VMThread [stack: 0x0000000058420000,0x0000000058520000] [id=4744]
+  0x0000000058c45800 WatcherThread [stack: 0x0000000059410000,0x0000000059510000] [id=3692]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0000000001c6c3d0] CodeCache_lock - owner thread: 0x0000000058c3f000
+[0x0000000001c6da80] Compile_lock - owner thread: 0x0000000058c3f000
+[0x0000000001c6db80] MethodCompileQueue_lock - owner thread: 0x0000000058c3f000
+
+Heap:
+ PSYoungGen      total 71680K, used 12087K [0x00000000d5580000, 0x00000000da080000, 0x0000000100000000)
+  eden space 66560K, 10% used [0x00000000d5580000,0x00000000d5c55b20,0x00000000d9680000)
+  from space 5120K, 99% used [0x00000000d9b80000,0x00000000da078338,0x00000000da080000)
+  to   space 5120K, 0% used [0x00000000d9680000,0x00000000d9680000,0x00000000d9b80000)
+ ParOldGen       total 87552K, used 1391K [0x0000000080000000, 0x0000000085580000, 0x00000000d5580000)
+  object space 87552K, 1% used [0x0000000080000000,0x000000008015bc98,0x0000000085580000)
+ Metaspace       used 12152K, capacity 12458K, committed 12672K, reserved 1060864K
+  class space    used 1489K, capacity 1548K, committed 1664K, reserved 1048576K
+
+Card table byte_map: [0x00000000119d0000,0x0000000011de0000] byte_map_base: 0x00000000115d0000
+
+Marking Bits: (ParMarkBitMap*) 0x000000006e4eb460
+ Begin Bits: [0x0000000012600000, 0x0000000014600000)
+ End Bits:   [0x0000000014600000, 0x0000000016600000)
+
+Polling page: 0x0000000000340000
+
+CodeCache: size=245760Kb used=4734Kb max_used=4734Kb free=241025Kb
+ bounds [0x0000000002610000, 0x0000000002ac0000, 0x0000000011610000]
+ total_blobs=1699 nmethods=1383 adapters=229
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 24.137 Thread 0x0000000058c3f000 nmethod 1381 0x0000000002aa9ed0 code [0x0000000002aaa060, 0x0000000002aaa410]
+Event: 24.137 Thread 0x0000000058c3f000 1382       3       java.util.HashMap$KeySet::iterator (12 bytes)
+Event: 24.138 Thread 0x0000000058c3f000 nmethod 1382 0x0000000002aa9a10 code [0x0000000002aa9b80, 0x0000000002aa9de8]
+Event: 24.146 Thread 0x0000000058c38800 nmethod 1351 0x0000000002aaea90 code [0x0000000002aaee00, 0x0000000002ab07f0]
+Event: 24.146 Thread 0x0000000058c38800 1372       4       java.util.LinkedHashMap::get (33 bytes)
+Event: 24.148 Thread 0x00000000573f6000 nmethod 1368 0x0000000002ab2510 code [0x0000000002ab27c0, 0x0000000002ab3030]
+Event: 24.150 Thread 0x0000000058c38800 nmethod 1372 0x0000000002aa7e10 code [0x0000000002aa7f80, 0x0000000002aa8268]
+Event: 24.256 Thread 0x0000000058c3f000 1383       3       org.sonatype.aether.util.artifact.DefaultArtifact::emptify (11 bytes)
+Event: 24.256 Thread 0x0000000058c3f000 nmethod 1383 0x0000000002aa7a90 code [0x0000000002aa7be0, 0x0000000002aa7d70]
+Event: 24.258 Thread 0x0000000058c3f000 1384   !   3       org.codehaus.plexus.util.xml.pull.MXParser::parseComment (485 bytes)
+
+GC Heap History (4 events):
+Event: 7.154 GC heap before
+{Heap before GC invocations=1 (full 0):
+ PSYoungGen      total 38400K, used 33280K [0x00000000d5580000, 0x00000000d8000000, 0x0000000100000000)
+  eden space 33280K, 100% used [0x00000000d5580000,0x00000000d7600000,0x00000000d7600000)
+  from space 5120K, 0% used [0x00000000d7b00000,0x00000000d7b00000,0x00000000d8000000)
+  to   space 5120K, 0% used [0x00000000d7600000,0x00000000d7600000,0x00000000d7b00000)
+ ParOldGen       total 87552K, used 0K [0x0000000080000000, 0x0000000085580000, 0x00000000d5580000)
+  object space 87552K, 0% used [0x0000000080000000,0x0000000080000000,0x0000000085580000)
+ Metaspace       used 7835K, capacity 8058K, committed 8192K, reserved 1056768K
+  class space    used 977K, capacity 1023K, committed 1024K, reserved 1048576K
+Event: 7.527 GC heap after
+Heap after GC invocations=1 (full 0):
+ PSYoungGen      total 38400K, used 4670K [0x00000000d5580000, 0x00000000da080000, 0x0000000100000000)
+  eden space 33280K, 0% used [0x00000000d5580000,0x00000000d5580000,0x00000000d7600000)
+  from space 5120K, 91% used [0x00000000d7600000,0x00000000d7a8fa68,0x00000000d7b00000)
+  to   space 5120K, 0% used [0x00000000d9b80000,0x00000000d9b80000,0x00000000da080000)
+ ParOldGen       total 87552K, used 8K [0x0000000080000000, 0x0000000085580000, 0x00000000d5580000)
+  object space 87552K, 0% used [0x0000000080000000,0x0000000080002000,0x0000000085580000)
+ Metaspace       used 7835K, capacity 8058K, committed 8192K, reserved 1056768K
+  class space    used 977K, capacity 1023K, committed 1024K, reserved 1048576K
+}
+Event: 22.075 GC heap before
+{Heap before GC invocations=2 (full 0):
+ PSYoungGen      total 38400K, used 37950K [0x00000000d5580000, 0x00000000da080000, 0x0000000100000000)
+  eden space 33280K, 100% used [0x00000000d5580000,0x00000000d7600000,0x00000000d7600000)
+  from space 5120K, 91% used [0x00000000d7600000,0x00000000d7a8fa68,0x00000000d7b00000)
+  to   space 5120K, 0% used [0x00000000d9b80000,0x00000000d9b80000,0x00000000da080000)
+ ParOldGen       total 87552K, used 8K [0x0000000080000000, 0x0000000085580000, 0x00000000d5580000)
+  object space 87552K, 0% used [0x0000000080000000,0x0000000080002000,0x0000000085580000)
+ Metaspace       used 12099K, capacity 12318K, committed 12672K, reserved 1060864K
+  class space    used 1487K, capacity 1546K, committed 1664K, reserved 1048576K
+Event: 22.115 GC heap after
+Heap after GC invocations=2 (full 0):
+ PSYoungGen      total 71680K, used 5088K [0x00000000d5580000, 0x00000000da080000, 0x0000000100000000)
+  eden space 66560K, 0% used [0x00000000d5580000,0x00000000d5580000,0x00000000d9680000)
+  from space 5120K, 99% used [0x00000000d9b80000,0x00000000da078338,0x00000000da080000)
+  to   space 5120K, 0% used [0x00000000d9680000,0x00000000d9680000,0x00000000d9b80000)
+ ParOldGen       total 87552K, used 1391K [0x0000000080000000, 0x0000000085580000, 0x00000000d5580000)
+  object space 87552K, 1% used [0x0000000080000000,0x000000008015bc98,0x0000000085580000)
+ Metaspace       used 12099K, capacity 12318K, committed 12672K, reserved 1060864K
+  class space    used 1487K, capacity 1546K, committed 1664K, reserved 1048576K
+}
+
+Deoptimization events (10 events):
+Event: 7.888 Thread 0x0000000001c6f000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000296bf30 method=java.lang.reflect.Executable.getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation; @ 11
+Event: 7.901 Thread 0x0000000001c6f000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000296bf30 method=java.lang.reflect.Executable.getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation; @ 11
+Event: 8.288 Thread 0x0000000001c6f000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000298092c method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 8.288 Thread 0x0000000001c6f000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000298092c method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 8.288 Thread 0x0000000001c6f000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000298092c method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 8.288 Thread 0x0000000001c6f000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000298092c method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 9.327 Thread 0x0000000001c6f000 Uncommon trap: reason=predicate action=maybe_recompile pc=0x00000000028b0a38 method=java.nio.charset.CharsetDecoder.decode(Ljava/nio/ByteBuffer;Ljava/nio/CharBuffer;Z)Ljava/nio/charset/CoderResult; @ 54
+Event: 21.702 Thread 0x0000000001c6f000 Uncommon trap: reason=unreached action=reinterpret pc=0x00000000028ad1e0 method=java.util.HashMap.hash(Ljava/lang/Object;)I @ 1
+Event: 21.702 Thread 0x0000000001c6f000 Uncommon trap: reason=unreached action=reinterpret pc=0x0000000002928464 method=java.util.HashMap.hash(Ljava/lang/Object;)I @ 1
+Event: 22.578 Thread 0x0000000001c6f000 Uncommon trap: reason=null_check action=make_not_entrant pc=0x0000000002a70a58 method=org.apache.maven.model.io.xpp3.MavenXpp3Reader.checkFieldWithDuplicate(Lorg/codehaus/plexus/util/xml/pull/XmlPullParser;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set√qÀ’å@
+
+Internal exceptions (10 events):
+Event: 21.698 Thread 0x0000000001c6f000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d75ac788) thrown at [D:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u20\1074\hotspot\src\share\vm\prims\jvm.cpp, line 1275]
+Event: 21.700 Thread 0x0000000001c6f000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d75b8940) thrown at [D:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u20\1074\hotspot\src\share\vm\prims\jvm.cpp, line 1275]
+Event: 21.700 Thread 0x0000000001c6f000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d75b9300) thrown at [D:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u20\1074\hotspot\src\share\vm\prims\jvm.cpp, line 1275]
+Event: 21.700 Thread 0x0000000001c6f000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d75bfe48) thrown at [D:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u20\1074\hotspot\src\share\vm\prims\jvm.cpp, line 1275]
+Event: 21.700 Thread 0x0000000001c6f000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d75c0768) thrown at [D:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u20\1074\hotspot\src\share\vm\prims\jvm.cpp, line 1275]
+Event: 21.701 Thread 0x0000000001c6f000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d75c54c8) thrown at [D:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u20\1074\hotspot\src\share\vm\prims\jvm.cpp, line 1275]
+Event: 21.701 Thread 0x0000000001c6f000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d75c5ac8) thrown at [D:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u20\1074\hotspot\src\share\vm\prims\jvm.cpp, line 1275]
+Event: 21.702 Thread 0x0000000001c6f000 Implicit null exception at 0x00000000028ad005 to 0x00000000028ad1d1
+Event: 21.702 Thread 0x0000000001c6f000 Implicit null exception at 0x00000000029283ef to 0x0000000002928455
+Event: 22.578 Thread 0x0000000001c6f000 Implicit null exception at 0x0000000002a70672 to 0x0000000002a70a45
+
+Events (10 events):
+Event: 22.129 loading class java/io/FileOutputStream$1 done
+Event: 22.129 Executing VM operation: RevokeBias
+Event: 22.129 Executing VM operation: RevokeBias done
+Event: 22.130 Executing VM operation: RevokeBias
+Event: 22.130 Executing VM operation: RevokeBias done
+Event: 22.132 Executing VM operation: RevokeBias
+Event: 22.132 Executing VM operation: RevokeBias done
+Event: 22.578 Thread 0x0000000001c6f000 Uncommon trap: trap_request=0xfffffff4 fr.pc=0x0000000002a70a58
+Event: 22.578 Thread 0x0000000001c6f000 DEOPT PACKING pc=0x0000000002a70a58 sp=0x000000000233dc00
+Event: 22.578 Thread 0x0000000001c6f000 DEOPT UNPACKING pc=0x000000000265556a sp=0x000000000233dbc0 mode 2
+
+
+Dynamic libraries:
+0x000000013f340000 - 0x000000013f374000 	C:\Program Files\Java\jdk1.8.0_20\bin\java.exe
+0x00000000771f0000 - 0x0000000077399000 	C:\Windows\SYSTEM32\ntdll.dll
+0x0000000076fd0000 - 0x00000000770ef000 	C:\Windows\system32\kernel32.dll
+0x000007fefd1c0000 - 0x000007fefd22c000 	C:\Windows\system32\KERNELBASE.dll
+0x000007fefd3c0000 - 0x000007fefd49b000 	C:\Windows\system32\ADVAPI32.dll
+0x000007fefde70000 - 0x000007fefdf0f000 	C:\Windows\system32\msvcrt.dll
+0x000007feff260000 - 0x000007feff27f000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007feff350000 - 0x000007feff47d000 	C:\Windows\system32\RPCRT4.dll
+0x00000000770f0000 - 0x00000000771ea000 	C:\Windows\system32\USER32.dll
+0x000007fefd4d0000 - 0x000007fefd537000 	C:\Windows\system32\GDI32.dll
+0x000007fefd540000 - 0x000007fefd54e000 	C:\Windows\system32\LPK.dll
+0x000007feff280000 - 0x000007feff349000 	C:\Windows\system32\USP10.dll
+0x000007fefb770000 - 0x000007fefb964000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac\COMCTL32.dll
+0x000007feff480000 - 0x000007feff4f1000 	C:\Windows\system32\SHLWAPI.dll
+0x000007fefe4a0000 - 0x000007fefe4ce000 	C:\Windows\system32\IMM32.DLL
+0x000007fefdf10000 - 0x000007fefe019000 	C:\Windows\system32\MSCTF.dll
+0x000000006ecf0000 - 0x000000006edc2000 	C:\Program Files\Java\jdk1.8.0_20\jre\bin\msvcr100.dll
+0x000000006dd10000 - 0x000000006e568000 	C:\Program Files\Java\jdk1.8.0_20\jre\bin\server\jvm.dll
+0x000007fefa880000 - 0x000007fefa889000 	C:\Windows\system32\WSOCK32.dll
+0x000007fefe1a0000 - 0x000007fefe1ed000 	C:\Windows\system32\WS2_32.dll
+0x000007fefd4a0000 - 0x000007fefd4a8000 	C:\Windows\system32\NSI.dll
+0x000007fefaf50000 - 0x000007fefaf8b000 	C:\Windows\system32\WINMM.dll
+0x00000000773b0000 - 0x00000000773b7000 	C:\Windows\system32\PSAPI.DLL
+0x0000000073740000 - 0x000000007374f000 	C:\Program Files\Java\jdk1.8.0_20\jre\bin\verify.dll
+0x0000000073710000 - 0x0000000073738000 	C:\Program Files\Java\jdk1.8.0_20\jre\bin\java.dll
+0x000000006f030000 - 0x000000006f046000 	C:\Program Files\Java\jdk1.8.0_20\jre\bin\zip.dll
+0x000007fefe4d0000 - 0x000007feff258000 	C:\Windows\system32\SHELL32.dll
+0x000007fefd910000 - 0x000007fefdb13000 	C:\Windows\system32\ole32.dll
+0x000007fefd000000 - 0x000007fefd00f000 	C:\Windows\system32\profapi.dll
+0x000007fefce00000 - 0x000007fefce57000 	C:\Windows\system32\apphelp.dll
+0x000000006f010000 - 0x000000006f02a000 	C:\Program Files\Java\jdk1.8.0_20\jre\bin\net.dll
+0x000007fefc6d0000 - 0x000007fefc725000 	C:\Windows\system32\mswsock.dll
+0x000007fefc970000 - 0x000007fefc977000 	C:\Windows\System32\wship6.dll
+0x000000006eff0000 - 0x000000006f001000 	C:\Program Files\Java\jdk1.8.0_20\jre\bin\nio.dll
+0x000007fef1690000 - 0x000007fef17b5000 	C:\Windows\system32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dclassworlds.conf=C:\Program Files\NetBeans 8.0.1\java\maven\bin\m2.conf -Dmaven.home=C:\Program Files\NetBeans 8.0.1\java\maven 
+java_command: org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.0.1\java\maven-nblib\netbeans-eventspy.jar install
+java_class_path (initial): C:\Program Files\NetBeans 8.0.1\java\maven\boot\plexus-classworlds-2.4.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_20
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
+USERNAME=estudiante
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 26 Stepping 4, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7601 Service Pack 1
+
+CPU:total 4 (2 cores per cpu, 1 threads per core) family 6 model 26 stepping 4, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, tsc, tscinvbit, tscinv
+
+Memory: 4k page, physical 8388152k(381060k free), swap 20759832k(256732k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.20-b23) for windows-amd64 JRE (1.8.0_20-b26), built on Jul 30 2014 13:51:23 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Tue Nov 25 19:28:42 2014
+elapsed time: 24 seconds (0d 0h 0m 24s)
+

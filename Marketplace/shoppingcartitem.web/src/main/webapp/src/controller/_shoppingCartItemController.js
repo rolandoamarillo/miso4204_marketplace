@@ -156,21 +156,6 @@ define(['model/shoppingCartItemModel'], function (shoppingCartItemModel) {
         save: function () {
             var self = this;
             var model = $('#' + this.componentId + '-shoppingCartItemForm').serializeObject();
-            if (App.Utils.eventExists(this.componentId + '-' + 'instead-shoppingCartItem-save')) {
-                Backbone.trigger(this.componentId + '-' + 'instead-shoppingCartItem-save', {view: this, model: model});
-            } else {
-                Backbone.trigger(this.componentId + '-' + 'pre-shoppingCartItem-save', {view: this, model: model});
-                this.currentModel.set(model);
-                this.currentModel.save({},
-                        {
-                            success: function (model) {
-                                Backbone.trigger(self.componentId + '-' + 'post-shoppingCartItem-save', {model: self.currentModel});
-                            },
-                            error: function (model, response, options) {
-                                Backbone.trigger(self.componentId + '-' + 'error', {event: 'shoppingCartItem-save', view: self, error: response});
-                            }
-                        });
-            }
         },
         _renderList: function () {
             var self = this;

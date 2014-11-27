@@ -64,6 +64,8 @@ public class ShoppingCartPersistence extends _ShoppingCartPersistence{
         
         try{
             getEntityManager();
+             co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO addressS = (co.edu.uniandes.csw.miso4204.security.logic.dto.UserDTO) SecurityUtils.getSubject().getPrincipal();
+             shoppingCart.setBuyerId(addressS.getId());
             shoppingcart2 = super.createShoppingCart(shoppingCart);
             
         }

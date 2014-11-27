@@ -64,6 +64,8 @@ define(['component/_shoppingCartMasterComponent'], function (_ShoppingCartMaster
                     this.shoppingCartItemComponent.addRecords({productshoppingcartitemId: productId, quantity: 1, name: 'prueba', unitPrice:'100'});
                 }
             }
+        }, saveLuck: function(params) {
+            this.shoppingCartItemComponent.save();
         }
     });
     return App.Component.ShoppingCartMasterComponent;

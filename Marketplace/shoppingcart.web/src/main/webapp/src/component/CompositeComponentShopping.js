@@ -83,8 +83,11 @@ define(['component/shoppingCartMasterComponent', 'component/productComponent'], 
             this.productComponent.clearSelectedRecords();
             this.render();
             this.cartMasterComponent.shoppingCartItemComponent.listComponent.render();
-        }, buy: function () {
-           document.location.href="http://localhost:8084/purchase.web";
+        }, buy: function ()
+        {
+            this.cartMasterComponent.masterComponent.save();
+            this.cartMasterComponent.saveLuck();
+            window.location.href = '/purchase.web';
         }
     });
     return App.Component.CompositeComponentShopping;

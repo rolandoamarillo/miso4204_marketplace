@@ -31,8 +31,8 @@ define([], function() {
     App.Model._ShoppingCartModel = Backbone.Model.extend({
         defaults: {
  
-		 'name' : '' ,  
-		 'buyerId' : ''        },
+		 'name' : 'SATANTEODIAHIJO' ,  
+		 'buyerId' : '0'        },
         initialize: function() {
           var self = this;
           this.on('invalid',function(error){
